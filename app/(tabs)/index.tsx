@@ -1,13 +1,13 @@
-import { useTranslation } from 'react-i18next';
-import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from "react-i18next";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
-	const { t } = useTranslation();
+  const { t } = useTranslation();
 
-	return (
-		<SafeAreaView className='flex justify-center items-center h-screen'>
-			<Text>{t('Dashboard')}</Text>
-		</SafeAreaView>
-	);
+  return (
+    <SafeAreaView className="flex h-screen items-center justify-center">
+      <Text>{t("Dashboard")}</Text>
+    </SafeAreaView>
+  );
 }
