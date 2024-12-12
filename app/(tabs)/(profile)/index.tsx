@@ -15,7 +15,7 @@ export default function Profile() {
   const { t, i18n } = useTranslation();
 
   return (
-    <SafeAreaView className="flex h-screen items-center bg-red-300 px-2">
+    <SafeAreaView className="flex h-screen items-center bg-red-300 px-3">
       <Center className="w-full bg-red-500 py-14">
         <Avatar size="2xl" className="mb-5">
           <AvatarFallbackText>Jane Doe</AvatarFallbackText>
@@ -30,7 +30,10 @@ export default function Profile() {
           Adrian Szabłowski
         </Text>
       </Center>
-      <Pressable onPress={() => i18n.changeLanguage("en")} className="w-full">
+      <Pressable
+        onPress={() => i18n.changeLanguage("en")}
+        className="w-full bg-primary-500"
+      >
         <Text>Zmien jezyk</Text>
       </Pressable>
     </SafeAreaView>
