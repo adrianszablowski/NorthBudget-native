@@ -11,12 +11,13 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#968",
+        tabBarActiveTintColor: "#fff",
+        tabBarInactiveTintColor: "#cbd5e1",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: Platform.select({
-          ios: { position: "absolute" },
-          default: {},
+          ios: { position: "absolute", backgroundColor: "#2563eb" },
+          default: { backgroundColor: "#2563eb" },
         }),
       }}
     >

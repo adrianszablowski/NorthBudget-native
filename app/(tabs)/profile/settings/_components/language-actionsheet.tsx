@@ -8,6 +8,7 @@ import {
   ActionsheetItemText,
 } from "@/components/ui/actionsheet";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface LanguageActionsheetProps {
   showActionsheet: boolean;
@@ -18,6 +19,8 @@ export default function LanguageActionsheet({
   showActionsheet,
   handleClose,
 }: Readonly<LanguageActionsheetProps>) {
+  const { t, i18n } = useTranslation();
+
   return (
     <Actionsheet isOpen={showActionsheet} onClose={handleClose}>
       <ActionsheetBackdrop />
@@ -25,20 +28,21 @@ export default function LanguageActionsheet({
         <ActionsheetDragIndicatorWrapper>
           <ActionsheetDragIndicator />
         </ActionsheetDragIndicatorWrapper>
-        <ActionsheetItem onPress={handleClose}>
-          <ActionsheetItemText>Edit Message</ActionsheetItemText>
+        <ActionsheetItem
+          onPress={() => {
+            handleClose();
+            i18n.changeLanguage("en");
+          }}
+        >
+          <ActionsheetItemText>{t("English")}</ActionsheetItemText>
         </ActionsheetItem>
-        <ActionsheetItem onPress={handleClose}>
-          <ActionsheetItemText>Mark Unread</ActionsheetItemText>
-        </ActionsheetItem>
-        <ActionsheetItem onPress={handleClose}>
-          <ActionsheetItemText>Remind Me</ActionsheetItemText>
-        </ActionsheetItem>
-        <ActionsheetItem onPress={handleClose}>
-          <ActionsheetItemText>Add to Saved Items</ActionsheetItemText>
-        </ActionsheetItem>
-        <ActionsheetItem isDisabled onPress={handleClose}>
-          <ActionsheetItemText>Delete</ActionsheetItemText>
+        <ActionsheetItem
+          onPress={() => {
+            handleClose();
+            i18n.changeLanguage("pl");
+          }}
+        >
+          <ActionsheetItemText>{t("Polish")}</ActionsheetItemText>
         </ActionsheetItem>
       </ActionsheetContent>
     </Actionsheet>

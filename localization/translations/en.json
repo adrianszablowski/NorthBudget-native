@@ -1,6 +1,11 @@
 {
-	"language": "English",
-	"Dashboard": "Dashboard",
-	"Expenses": "Expenses",
-	"Profile": "Profile"
+  "language": "English",
+  "Dashboard": "Dashboard",
+  "Expenses": "Expenses",
+  "Profile": "Profile",
+  "English": "English",
+  "Polish": "Polish",
+  "Settings": "Settings",
+  "My profile": "My profile",
+  "Change language": "Change language"
 }

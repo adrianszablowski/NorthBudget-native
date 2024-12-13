@@ -19,7 +19,7 @@ export default function Profile() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex h-screen items-center bg-background px-3">
+    <SafeAreaView className="flex h-screen items-center px-3">
       <Center className="w-full py-14">
         <Avatar size="2xl" className="mb-5">
           <AvatarFallbackText>Jane Doe</AvatarFallbackText>
@@ -41,7 +41,7 @@ export default function Profile() {
               className={`${pressed && "bg-muted"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
             >
               <AntDesign name="user" size={24} />
-              <Text>{t("My Profile")}</Text>
+              <Text>{t("My profile")}</Text>
             </Box>
           )}
         </Pressable>

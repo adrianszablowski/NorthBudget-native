@@ -1,6 +1,11 @@
 {
-	"language": "Polish",
-	"Dashboard": "Panel główny",
-	"Expenses": "Wydatki",
-	"Profile": "Profil"
+  "language": "Polish",
+  "Dashboard": "Panel główny",
+  "Expenses": "Wydatki",
+  "Profile": "Profil",
+  "English": "Angielski",
+  "Polish": "Polski",
+  "Settings": "Ustawienia",
+  "My profile": "Mój profil",
+  "Change language": "Zmień język"
 }
