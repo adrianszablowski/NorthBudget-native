@@ -4,9 +4,12 @@ import {
   AvatarFallbackText,
   AvatarImage,
 } from "@/components/ui/avatar";
+import { Box } from "@/components/ui/box";
 import { Center } from "@/components/ui/center";
+import { Divider } from "@/components/ui/divider";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
+import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,8 +18,8 @@ export default function Profile() {
   const { t, i18n } = useTranslation();
 
   return (
-    <SafeAreaView className="flex h-screen items-center bg-red-300 px-3">
-      <Center className="w-full bg-red-500 py-14">
+    <SafeAreaView className="bg-background flex h-screen items-center px-3">
+      <Center className="w-full py-14">
         <Avatar size="2xl" className="mb-5">
           <AvatarFallbackText>Jane Doe</AvatarFallbackText>
           <AvatarImage
@@ -30,12 +33,18 @@ export default function Profile() {
           Adrian Szabłowski
         </Text>
       </Center>
-      <Pressable
-        onPress={() => i18n.changeLanguage("en")}
-        className="w-full bg-primary-500"
-      >
-        <Text>Zmien jezyk</Text>
-      </Pressable>
+      <Box className="w-full">
+        <Pressable className="w-full">
+          {({ pressed }) => (
+            <Box
+              className={`${pressed && "bg-muted"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
+            >
+              <AntDesign name="setting" size={24} />
+              <Text>Zmien jezyk</Text>
+            </Box>
+          )}
+        </Pressable>
+      </Box>
     </SafeAreaView>
   );
 }
