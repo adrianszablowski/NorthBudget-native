@@ -1,12 +1,9 @@
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import "@/global.css";
-import "@/localization/i18n";
-import { SplashScreen, Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import "../global.css";
-
-SplashScreen.preventAutoHideAsync();
+import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import "@/localization/i18n";
+import "@/global.css";
 
 export default function RootLayout() {
   return (
