@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Expenses() {
   return (
-    <SafeAreaView>
+    <SafeAreaView className="h-screen bg-background-0 px-3">
       <Text>Expenses</Text>
     </SafeAreaView>
   );

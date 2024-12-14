@@ -12,6 +12,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Profile() {
@@ -19,8 +20,8 @@ export default function Profile() {
   const router = useRouter();
 
   return (
-    <SafeAreaView className="flex h-screen items-center px-3">
-      <Center className="w-full py-14">
+    <SafeAreaView className="flex h-screen items-center bg-background-0 px-3">
+      <Center className="relative w-full py-14">
         <Avatar size="2xl" className="mb-5">
           <AvatarFallbackText>Jane Doe</AvatarFallbackText>
           <AvatarImage
@@ -38,7 +39,7 @@ export default function Profile() {
         <Pressable className="w-full">
           {({ pressed }) => (
             <Box
-              className={`${pressed && "bg-muted"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
+              className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
             >
               <AntDesign name="user" size={24} />
               <Text>{t("My profile")}</Text>
@@ -51,7 +52,7 @@ export default function Profile() {
         >
           {({ pressed }) => (
             <Box
-              className={`${pressed && "bg-muted"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
+              className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
             >
               <AntDesign name="setting" size={24} />
               <Text>{t("Settings")}</Text>

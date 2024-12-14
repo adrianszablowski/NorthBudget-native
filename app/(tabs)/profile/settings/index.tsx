@@ -14,11 +14,11 @@ export default function Settings() {
   const handleClose = () => setShowActionsheet(false);
 
   return (
-    <SafeAreaView className="px-3">
+    <SafeAreaView className="h-screen bg-background-0 px-3">
       <Pressable className="w-full" onPress={() => setShowActionsheet(true)}>
         {({ pressed }) => (
           <Box
-            className={`${pressed && "bg-outline-0"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
+            className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
           >
             <AntDesign name="flag" size={24} />
             <Text>{t("Change language")}</Text>

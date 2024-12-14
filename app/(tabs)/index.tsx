@@ -6,7 +6,7 @@ export default function Index() {
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView className="flex h-screen items-center justify-center">
+    <SafeAreaView className="flex h-screen items-center justify-center bg-background-0">
       <Text>{t("Dashboard")}</Text>
     </SafeAreaView>
   );
