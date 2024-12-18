@@ -1,8 +1,76 @@
+import { Button } from "@/components/ui/button";
+import { Text } from "@/components/ui/text";
+import { VStack } from "@/components/ui/vstack";
+import { AntDesign } from "@expo/vector-icons";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
+import { SafeAreaView, ScrollView } from "react-native";
+import Expense from "./_components/expense";
+import { Box } from "@/components/ui/box";
+import { HStack } from "@/components/ui/hstack";
 
 export default function Expenses() {
+  const { t } = useTranslation();
+
   return (
-    <SafeAreaView className="h-screen bg-background-0 px-3"></SafeAreaView>
+    <SafeAreaView className="h-screen bg-background-0">
+      <Box className="px-3 py-2">
+        <HStack className="mb-3 justify-between">
+          <HStack space="sm" className="items-center">
+            <Button>
+              <AntDesign name="left" color="white" />
+            </Button>
+            <Text bold>December 2024</Text>
+            <Button>
+              <AntDesign name="right" color="white" />
+            </Button>
+          </HStack>
+          <Button>
+            <AntDesign name="plus" color="white" size={15} />
+            <Text className="text-typography-0">{t("Create new expense")}</Text>
+          </Button>
+        </HStack>
+        <ScrollView className="h-full">
+          <VStack space="md">
+            <Expense
+              title="expense 1"
+              amount={10}
+              dueDate="2024-10-10"
+              paid={true}
+            />
+            <Expense
+              title="expense 1"
+              amount={10}
+              dueDate="2024-10-10"
+              paid={true}
+            />
+            <Expense
+              title="expense 1"
+              amount={10}
+              dueDate="2024-10-10"
+              paid={false}
+            />
+            <Expense
+              title="expense 1"
+              amount={10}
+              dueDate="2024-10-10"
+              paid={false}
+            />
+            <Expense
+              title="expense 1"
+              amount={10}
+              dueDate="2024-10-10"
+              paid={true}
+            />
+            <Expense
+              title="expense 1"
+              amount={10}
+              dueDate="2024-10-10"
+              paid={false}
+            />
+          </VStack>
+        </ScrollView>
+      </Box>
+    </SafeAreaView>
   );
 }
