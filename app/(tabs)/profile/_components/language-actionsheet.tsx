@@ -24,7 +24,7 @@ export default function LanguageActionsheet({
   return (
     <Actionsheet isOpen={showActionsheet} onClose={handleClose}>
       <ActionsheetBackdrop />
-      <ActionsheetContent>
+      <ActionsheetContent className="pb-10">
         <ActionsheetDragIndicatorWrapper>
           <ActionsheetDragIndicator />
         </ActionsheetDragIndicatorWrapper>

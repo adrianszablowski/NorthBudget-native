@@ -1,11 +1,13 @@
-import { Box } from "@/components/ui/box";
+import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
-import { AntDesign } from "@expo/vector-icons";
+import { VStack } from "@/components/ui/vstack";
+import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
 import LanguageActionsheet from "./_components/language-actionsheet";
+import SelectCurrency from "./_components/select-currency";
 
 export default function Settings() {
   const { t } = useTranslation();
@@ -15,32 +17,38 @@ export default function Settings() {
 
   return (
     <SafeAreaView className="h-screen bg-background-0">
-      <Box className="px-3 py-2">
+      <VStack className="px-3 py-2" space="xs">
+        <HStack space="lg" className="items-center px-4 py-2">
+          <FontAwesome name="money" size={24} />
+          <SelectCurrency />
+        </HStack>
         <Pressable className="w-full" onPress={() => setShowActionsheet(true)}>
           {({ pressed }) => (
-            <Box
-              className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
+            <HStack
+              className={`${pressed && "bg-primary-50"} rounded-md px-4 py-4`}
+              space="lg"
             >
-              <AntDesign name="flag" size={24} />
+              <FontAwesome name="flag" size={24} />
               <Text>{t("Change language")}</Text>
-            </Box>
+            </HStack>
           )}
         </Pressable>
         <Pressable className="w-full">
           {({ pressed }) => (
-            <Box
-              className={`${pressed && "bg-error-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
+            <HStack
+              className={`${pressed && "bg-error-50"} rounded-md px-4 py-4`}
+              space="lg"
             >
-              <AntDesign name="logout" size={24} color="#e63535" />
+              <FontAwesome name="sign-out" size={24} color="#e63535" />
               <Text className="text-error-500">{t("Log out")}</Text>
-            </Box>
+            </HStack>
           )}
         </Pressable>
         <LanguageActionsheet
           showActionsheet={showActionsheet}
           handleClose={handleClose}
         />
-      </Box>
+      </VStack>
     </SafeAreaView>
   );
 }

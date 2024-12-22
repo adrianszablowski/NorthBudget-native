@@ -4,7 +4,7 @@ import { Heading } from "@/components/ui/heading";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, ScrollView } from "react-native";
@@ -21,15 +21,15 @@ export default function Expenses() {
         <HStack className="my-3 justify-between">
           {/* <HStack space="sm" className="items-center">
             <Button>
-              <AntDesign name="left" color="white" />
+              <FontAwesome name="left" color="white" />
             </Button>
             <Text bold>December 2024</Text>
             <Button>
-              <AntDesign name="right" color="white" />
+              <FontAwesome name="right" color="white" />
             </Button>
           </HStack> */}
           <Button>
-            <AntDesign name="plus" color="white" size={15} />
+            <FontAwesome name="plus" color="white" size={15} />
             <Text className="text-typography-0">{t("Create new expense")}</Text>
           </Button>
         </HStack>

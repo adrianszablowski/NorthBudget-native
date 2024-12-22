@@ -1,5 +1,5 @@
 import { HapticTab } from "@/components/ui/HapticTab";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ export default function TabLayout() {
         options={{
           title: t("Dashboard"),
           tabBarIcon: ({ color }) => (
-            <AntDesign name="home" color={color} size={20} />
+            <FontAwesome name="home" color={color} size={22} />
           ),
         }}
       />
@@ -35,7 +35,7 @@ export default function TabLayout() {
         options={{
           title: t("Expenses"),
           tabBarIcon: ({ color }) => (
-            <AntDesign name="creditcard" color={color} size={20} />
+            <FontAwesome name="credit-card" color={color} size={22} />
           ),
         }}
       />
@@ -44,7 +44,7 @@ export default function TabLayout() {
         options={{
           title: t("Profile"),
           tabBarIcon: ({ color }) => (
-            <AntDesign name="user" color={color} size={20} />
+            <FontAwesome name="user" color={color} size={22} />
           ),
         }}
       />

@@ -8,7 +8,7 @@ import { Box } from "@/components/ui/box";
 import { Center } from "@/components/ui/center";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -40,7 +40,7 @@ export default function Profile() {
             <Box
               className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
             >
-              <AntDesign name="user" size={24} />
+              <FontAwesome name="user" size={24} />
               <Text>{t("My profile")}</Text>
             </Box>
           )}
@@ -53,7 +53,7 @@ export default function Profile() {
             <Box
               className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
             >
-              <AntDesign name="setting" size={24} />
+              <FontAwesome name="gear" size={24} />
               <Text>{t("Settings")}</Text>
             </Box>
           )}
