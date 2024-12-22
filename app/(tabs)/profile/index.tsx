@@ -16,10 +16,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Profile() {
   const { t } = useTranslation();
-  const router = useRouter();
+  const { push } = useRouter();
 
   return (
-    <SafeAreaView className="flex h-screen items-center bg-background-0 px-3">
+    <SafeAreaView className="flex h-full items-center bg-background-0 px-3">
       <Center className="relative w-full py-14">
         <Avatar size="2xl" className="mb-5">
           <AvatarFallbackText>Jane Doe</AvatarFallbackText>
@@ -35,7 +35,10 @@ export default function Profile() {
         </Text>
       </Center>
       <Box className="w-full">
-        <Pressable className="w-full">
+        <Pressable
+          className="w-full"
+          onPress={() => push("/profile/my-profile")}
+        >
           {({ pressed }) => (
             <Box
               className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}
@@ -45,10 +48,7 @@ export default function Profile() {
             </Box>
           )}
         </Pressable>
-        <Pressable
-          className="w-full"
-          onPress={() => router.push("/profile/settings")}
-        >
+        <Pressable className="w-full" onPress={() => push("/profile/settings")}>
           {({ pressed }) => (
             <Box
               className={`${pressed && "bg-primary-50"} w-full flex-row items-center gap-4 rounded-md px-4 py-5`}

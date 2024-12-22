@@ -16,7 +16,7 @@ export default function Settings() {
   const handleClose = () => setShowActionsheet(false);
 
   return (
-    <SafeAreaView className="h-screen bg-background-0">
+    <SafeAreaView className="h-full bg-background-0">
       <VStack className="px-3 py-2" space="xs">
         <HStack space="lg" className="items-center px-4 py-2">
           <FontAwesome name="money" size={24} />
