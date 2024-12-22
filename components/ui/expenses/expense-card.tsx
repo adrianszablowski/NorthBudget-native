@@ -1,10 +1,11 @@
-import { Badge, BadgeText } from "@/components/ui/badge";
+import { Badge, BadgeIcon, BadgeText } from "@/components/ui/badge";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Card } from "../card";
 import { HStack } from "../hstack";
+import { CheckIcon, CloseIcon } from "../icon";
 
 interface ExpenseProps {
   title: string;
@@ -35,7 +36,10 @@ export default function ExpenseCard({
             {amount} PLN
           </Text>
           <Badge variant="outline" action={`${paid ? "success" : "error"}`}>
-            <BadgeText>{paid ? t("Paid") : t("Unpaid")}</BadgeText>
+            <BadgeText className="mr-1">
+              {paid ? t("Paid") : t("Unpaid")}
+            </BadgeText>
+            <BadgeIcon as={paid ? CheckIcon : CloseIcon} />
           </Badge>
         </VStack>
       </HStack>
