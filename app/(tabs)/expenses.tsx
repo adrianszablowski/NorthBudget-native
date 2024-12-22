@@ -1,5 +1,6 @@
 import { Box } from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
+import { Heading } from "@/components/ui/heading";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
@@ -7,16 +8,18 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, ScrollView } from "react-native";
-import ExpenseCard from "../../components/ui/expenses/expoense-card";
+import ExpenseCard from "../../components/ui/expenses/expense-card";
 
 export default function Expenses() {
   const { t } = useTranslation();
 
   return (
-    <SafeAreaView className="h-screen bg-background-0">
+    <SafeAreaView className="h-full bg-background-0">
       <Box className="px-3 py-2">
-        <HStack className="mb-3 justify-between">
-          <HStack space="sm" className="items-center">
+        <Heading>{t("Expenses")}</Heading>
+        <Text>{t("Below expenses")}</Text>
+        <HStack className="my-3 justify-between">
+          {/* <HStack space="sm" className="items-center">
             <Button>
               <AntDesign name="left" color="white" />
             </Button>
@@ -24,7 +27,7 @@ export default function Expenses() {
             <Button>
               <AntDesign name="right" color="white" />
             </Button>
-          </HStack>
+          </HStack> */}
           <Button>
             <AntDesign name="plus" color="white" size={15} />
             <Text className="text-typography-0">{t("Create new expense")}</Text>

@@ -8,5 +8,10 @@
   "Settings": "Settings",
   "My profile": "My profile",
   "Change language": "Change language",
-  "Log out": "Log out"
+  "Log out": "Log out",
+  "Below expenses": "Below are the expenses for the current month.",
+  "Create new expense": "Create new expense",
+  "Paid": "Paid",
+  "Unpaid": "Unpaid",
+  "Due date": "Due date"
 }

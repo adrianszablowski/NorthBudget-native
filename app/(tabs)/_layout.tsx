@@ -37,8 +37,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <AntDesign name="creditcard" color={color} size={20} />
           ),
-          headerShown: true,
-          headerTitle: t("Expenses"),
         }}
       />
       <Tabs.Screen

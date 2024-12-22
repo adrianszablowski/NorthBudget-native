@@ -8,5 +8,9 @@
   "Settings": "Ustawienia",
   "My profile": "Mój profil",
   "Change language": "Zmień język",
-  "Log out": "Wyloguj się"
+  "Log out": "Wyloguj się",
+  "Create new expense": "Utwórz nowy wydatek",
+  "Paid": "Opłacone",
+  "Unpaid": "Nieopłacone",
+  "Due date": "Termin płatności"
 }
