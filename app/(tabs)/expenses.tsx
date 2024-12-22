@@ -1,6 +1,5 @@
 import { Box } from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
-import { Heading } from "@/components/ui/heading";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
