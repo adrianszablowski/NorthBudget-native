@@ -1,13 +1,13 @@
+import { Box } from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
+import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, ScrollView } from "react-native";
-import Expense from "./_components/expense";
-import { Box } from "@/components/ui/box";
-import { HStack } from "@/components/ui/hstack";
+import ExpenseCard from "../../components/ui/expenses/expense";
 
 export default function Expenses() {
   const { t } = useTranslation();
@@ -32,37 +32,37 @@ export default function Expenses() {
         </HStack>
         <ScrollView className="h-full">
           <VStack space="md">
-            <Expense
+            <ExpenseCard
               title="expense 1"
               amount={10}
               dueDate="2024-10-10"
               paid={true}
             />
-            <Expense
+            <ExpenseCard
               title="expense 1"
               amount={10}
               dueDate="2024-10-10"
               paid={true}
             />
-            <Expense
+            <ExpenseCard
               title="expense 1"
               amount={10}
               dueDate="2024-10-10"
               paid={false}
             />
-            <Expense
+            <ExpenseCard
               title="expense 1"
               amount={10}
               dueDate="2024-10-10"
               paid={false}
             />
-            <Expense
+            <ExpenseCard
               title="expense 1"
               amount={10}
               dueDate="2024-10-10"
               paid={true}
             />
-            <Expense
+            <ExpenseCard
               title="expense 1"
               amount={10}
               dueDate="2024-10-10"

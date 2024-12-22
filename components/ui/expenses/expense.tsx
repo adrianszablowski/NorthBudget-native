@@ -11,7 +11,7 @@ interface ExpenseProps {
   paid: boolean;
 }
 
-export default function Expense({
+export default function ExpenseCard({
   title,
   amount,
   dueDate,
