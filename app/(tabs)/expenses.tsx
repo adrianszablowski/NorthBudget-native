@@ -7,7 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, ScrollView } from "react-native";
-import ExpenseCard from "../../components/ui/expenses/expense";
+import ExpenseCard from "../../components/ui/expenses/expoense-card";
 
 export default function Expenses() {
   const { t } = useTranslation();
