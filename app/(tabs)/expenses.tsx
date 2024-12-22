@@ -16,7 +16,6 @@ export default function Expenses() {
   return (
     <SafeAreaView className="h-full bg-background-0">
       <Box className="px-3 py-2">
-        <Heading>{t("Expenses")}</Heading>
         <Text>{t("Below expenses")}</Text>
         <HStack className="my-3 justify-between">
           {/* <HStack space="sm" className="items-center">
