@@ -3,9 +3,9 @@ import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Card } from "../card";
-import { HStack } from "../hstack";
-import { CheckIcon, CloseIcon } from "../icon";
+import { Card } from "../ui/card";
+import { HStack } from "../ui/hstack";
+import { CheckIcon, CloseIcon } from "../ui/icon";
 
 interface ExpenseProps {
   title: string;
