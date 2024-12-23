@@ -4,6 +4,7 @@ import { VStack } from "@/components/ui/vstack";
 import trim from "lodash/trim";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import Amount from "../ui/amount";
 import { Button, ButtonIcon, ButtonText } from "../ui/button";
 import { Card } from "../ui/card";
 import GlobalModal from "../ui/global-modal";
@@ -19,12 +20,13 @@ import { Pressable } from "../ui/pressable";
 
 interface ExpenseProps {
   expense: {
+    id: string;
     title: string;
     amount: number;
     dueDate: string;
     paid: boolean;
     standingOrder: boolean;
-    standingOrderDate: string;
+    standingOrderDate: string | null;
   };
 }
 
@@ -52,9 +54,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               )}
             </VStack>
             <VStack space="sm" className="items-end">
-              <Text size="md" bold>
-                {amount} PLN
-              </Text>
+              <Amount size="md" bold amount={amount} />
               <Badge variant="outline" action={`${paid ? "success" : "error"}`}>
                 <BadgeText className="mr-1">
                   {paid ? t("Paid") : t("Unpaid")}
