@@ -80,7 +80,9 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               }}
             >
               <ButtonIcon as={InfoIcon} />
-              <ButtonText>{t("Set as paid")}</ButtonText>
+              <ButtonText>
+                {paid ? t("Set as unpaid") : t("Set as paid")}
+              </ButtonText>
             </Button>
             <Button
               action="negative"
