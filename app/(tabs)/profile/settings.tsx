@@ -1,3 +1,5 @@
+import LanguageActionsheet from "@/components/profile/language-actionsheet";
+import SelectCurrency from "@/components/profile/select-currency";
 import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
@@ -6,8 +8,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
-import LanguageActionsheet from "./_components/language-actionsheet";
-import SelectCurrency from "./_components/select-currency";
 
 export default function Settings() {
   const { t } = useTranslation();
