@@ -20,5 +20,12 @@
   "Manage payment": "Manage payment",
   "Manage payment of": "Manage payment of",
   "Left to pay": "Left to pay",
-  "Standing order to": "Standing order to"
+  "Standing order to": "Standing order to",
+  "User details": "User details",
+  "Username": "Username",
+  "Change password": "Change password",
+  "Old password": "Old password",
+  "New password": "New password",
+  "Repeat new password": "Repeat new password",
+  "Save": "Save"
 }

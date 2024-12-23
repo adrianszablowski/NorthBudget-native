@@ -24,5 +24,12 @@
   "Delete": "Usuń",
   "Current status": "Aktualny status",
   "Left to pay": "Pozostało do zapłacenia",
-  "Standing order to": "Zlecenie stałe do"
+  "Standing order to": "Zlecenie stałe do",
+  "User details": "Dane użytkownika",
+  "Username": "Nazwa użytkownika",
+  "Change password": "Zmień hasło",
+  "Old password": "Stare hasło",
+  "New password": "Nowe hasło",
+  "Repeat new password": "Potwórz nowe hasło",
+  "Save": "Zapisz"
 }
