@@ -1,3 +1,4 @@
+import ExpenseCard from "@/components/expenses/expense-card";
 import { Box } from "@/components/ui/box";
 import { Button } from "@/components/ui/button";
 import { HStack } from "@/components/ui/hstack";
@@ -7,10 +8,16 @@ import { FontAwesome } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, ScrollView } from "react-native";
-import ExpenseCard from "../../components/ui/expenses/expense-card";
 
 export default function Expenses() {
   const { t } = useTranslation();
+
+  const expense = {
+    title: "expense 1",
+    amount: 10,
+    dueDate: "10-10-2024",
+    paid: true,
+  };
 
   return (
     <SafeAreaView className="h-full bg-background-0">
@@ -33,42 +40,10 @@ export default function Expenses() {
         </HStack>
         <ScrollView className="h-full">
           <VStack space="md">
-            <ExpenseCard
-              title="expense 1"
-              amount={10}
-              dueDate="2024-10-10"
-              paid={true}
-            />
-            <ExpenseCard
-              title="expense 1"
-              amount={10}
-              dueDate="2024-10-10"
-              paid={true}
-            />
-            <ExpenseCard
-              title="expense 1"
-              amount={10}
-              dueDate="2024-10-10"
-              paid={false}
-            />
-            <ExpenseCard
-              title="expense 1"
-              amount={10}
-              dueDate="2024-10-10"
-              paid={false}
-            />
-            <ExpenseCard
-              title="expense 1"
-              amount={10}
-              dueDate="2024-10-10"
-              paid={true}
-            />
-            <ExpenseCard
-              title="expense 1"
-              amount={10}
-              dueDate="2024-10-10"
-              paid={false}
-            />
+            <ExpenseCard expense={expense} />
+            <ExpenseCard expense={expense} />
+            <ExpenseCard expense={expense} />
+            <ExpenseCard expense={expense} />
           </VStack>
         </ScrollView>
       </Box>
