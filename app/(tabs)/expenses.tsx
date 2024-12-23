@@ -16,6 +16,8 @@ export default function Expenses() {
     amount: 10,
     dueDate: "10-10-2024",
     paid: true,
+    standingOrder: true,
+    standingOrderDate: "10-10-2026",
   };
 
   return (
