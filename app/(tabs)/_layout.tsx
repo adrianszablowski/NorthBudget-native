@@ -42,6 +42,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="goals"
+        options={{
+          title: t("Goals"),
+          tabBarIcon: ({ color }) => (
+            <FontAwesome name="trophy" color={color} size={22} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: t("Profile"),
