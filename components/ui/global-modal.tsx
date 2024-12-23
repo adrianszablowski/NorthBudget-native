@@ -1,4 +1,5 @@
 import {
+  IModalProps,
   Modal,
   ModalBackdrop,
   ModalBody,
@@ -13,21 +14,19 @@ import { CloseIcon, Icon } from "./icon";
 import { Text } from "./text";
 import { VStack } from "./vstack";
 
-interface GlobalModalProps {
+interface AdditionalProps {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
   title: string;
-  description: string;
+  description: ReactNode | string;
   actions: ReactNode;
 }
 
-export default function GlobalModal({
-  showModal,
-  setShowModal,
-  title,
-  description,
-  actions,
-}: Readonly<GlobalModalProps>) {
+type GlobalModalProps = AdditionalProps & IModalProps;
+
+export default function GlobalModal(props: GlobalModalProps) {
+  const { showModal, setShowModal, title, description, actions } = props;
+
   return (
     <Modal
       isOpen={showModal}
@@ -35,6 +34,7 @@ export default function GlobalModal({
         setShowModal(false);
       }}
       size="md"
+      {...props}
     >
       <ModalBackdrop />
       <ModalContent>

@@ -13,5 +13,14 @@
   "Paid": "Opłacone",
   "Unpaid": "Nieopłacone",
   "Due date": "Termin płatności",
-  "Current expenses": "Aktualne wydatki"
+  "Current expenses": "Aktualne wydatki",
+  "Payment options": "Opcje wydatku",
+  "for": "za",
+  "Manage payment": "Zarządzasz wydatkiem",
+  "Manage payment of": "Zarządzasz wydatkiem",
+  "Edit": "Edytuj",
+  "Set as paid": "Ustaw jako opłacone",
+  "Set as unpaid": "Ustaw jako nieopłacone",
+  "Delete": "Usuń",
+  "Current status": "Aktualny status"
 }

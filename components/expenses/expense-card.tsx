@@ -60,8 +60,8 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
       <GlobalModal
         showModal={showModal}
         setShowModal={setShowModal}
-        title="Payment options"
-        description="Manage payment of 10 PLN for Internet"
+        title={t("Payment options")}
+        description={`${t("Manage payment of")} ${amount} PLN ${t("for")} ${title}`}
         actions={
           <>
             <Button
@@ -71,7 +71,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               }}
             >
               <ButtonIcon as={EditIcon} />
-              <ButtonText>Edit payment</ButtonText>
+              <ButtonText>{t("Edit")}</ButtonText>
             </Button>
             <Button
               variant="outline"
@@ -80,7 +80,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               }}
             >
               <ButtonIcon as={InfoIcon} />
-              <ButtonText>Set as paid</ButtonText>
+              <ButtonText>{t("Set as paid")}</ButtonText>
             </Button>
             <Button
               action="negative"
@@ -89,12 +89,15 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               }}
             >
               <ButtonIcon as={TrashIcon} />
-              <ButtonText>Delete payment</ButtonText>
+              <ButtonText>{t("Delete")}</ButtonText>
             </Button>
             <Text size="sm" className="pt-5">
-              Current status:{" "}
-              <Text size="sm" className="text-red-500">
-                Paid
+              {t("Current status")}:{" "}
+              <Text
+                size="sm"
+                className={paid ? "text-success-500" : "text-error-500"}
+              >
+                {paid ? t("Paid") : t("Unpaid")}
               </Text>
             </Text>
           </>
