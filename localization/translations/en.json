@@ -16,7 +16,7 @@
   "Due date": "Due date",
   "Current expenses": "Current expenses",
   "Payment options": "Payment options",
-  "for": "for",
+  "For": "for",
   "Manage payment": "Manage payment",
   "Manage payment of": "Manage payment of",
   "Left to pay": "Left to pay",
@@ -28,5 +28,8 @@
   "New password": "New password",
   "Repeat new password": "Repeat new password",
   "Save": "Save",
-  "Goals": "Goals"
+  "Goals": "Goals",
+  "Of": "of",
+  "Completed": "Completed",
+  "Add founds": "Add founds"
 }

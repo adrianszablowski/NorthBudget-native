@@ -15,7 +15,7 @@
   "Due date": "Termin płatności",
   "Current expenses": "Aktualne wydatki",
   "Payment options": "Opcje wydatku",
-  "for": "za",
+  "For": "za",
   "Manage payment": "Zarządzasz wydatkiem",
   "Manage payment of": "Zarządzasz wydatkiem",
   "Edit": "Edytuj",
@@ -32,5 +32,8 @@
   "New password": "Nowe hasło",
   "Repeat new password": "Potwórz nowe hasło",
   "Save": "Zapisz",
-  "Goals": "Cele"
+  "Goals": "Cele",
+  "Of": "z",
+  "Completed": "Ukończone",
+  "Add founds": "Dodaj środki"
 }

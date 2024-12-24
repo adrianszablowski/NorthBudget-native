@@ -16,7 +16,7 @@ export default function TabLayout() {
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: Platform.select({
-          ios: { position: "absolute", backgroundColor: "#2563eb" },
+          ios: { position: "fixed", backgroundColor: "#2563eb" },
           default: { backgroundColor: "#2563eb" },
         }),
       }}
@@ -48,6 +48,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="trophy" color={color} size={22} />
           ),
+          headerShown: true,
+          headerTitle: t("Goals"),
         }}
       />
       <Tabs.Screen

@@ -69,7 +69,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
         showModal={showModal}
         setShowModal={setShowModal}
         title={t("Payment options")}
-        description={`${t("Manage payment of")} ${amount} PLN ${t("for")} ${title}`}
+        description={`${t("Manage payment of")} ${amount} PLN ${t("For")} ${title}`}
         actions={
           <>
             <Button
