@@ -1,3 +1,4 @@
+import calculateGoalProgress from "@/utils/calculate-goal-progress";
 import toLower from "lodash/toLower";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -25,6 +26,8 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
 
   const { title, amount, goalAmout } = goal;
 
+  const goalProgress = calculateGoalProgress(amount, goalAmout);
+
   return (
     <Card variant="outline">
       <VStack space="lg">
@@ -40,11 +43,11 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
             />
           </HStack>
         </HStack>
-        <Progress value={40}>
+        <Progress value={goalProgress}>
           <ProgressFilledTrack />
         </Progress>
         <Text className="text-center" bold>
-          {25}% {toLower(t("Completed"))}
+          {goalProgress}% {toLower(t("Completed"))}
         </Text>
         <Button>
           <ButtonIcon as={AddIcon} />
