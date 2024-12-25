@@ -1,10 +1,10 @@
 import ExpenseCard from "@/components/expenses/expense-card";
 import Amount from "@/components/ui/amount";
 import { Box } from "@/components/ui/box";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonIcon } from "@/components/ui/button";
+import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import { FontAwesome } from "@expo/vector-icons";
 import { map } from "lodash";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -63,8 +63,7 @@ export default function Expenses() {
   return (
     <SafeAreaView className="h-full bg-background-0">
       <Box className="px-3 py-2">
-        <Text>{t("Below expenses")}</Text>
-        <VStack className="my-3" space="sm">
+        <VStack space="sm">
           {/* <HStack space="sm" className="items-center">
             <Button>
               <FontAwesome name="left" color="white" />
@@ -75,8 +74,8 @@ export default function Expenses() {
             </Button>
           </HStack> */}
           <Button>
-            <FontAwesome name="plus" color="white" size={15} />
-            <Text className="text-typography-0">{t("Create new expense")}</Text>
+            <ButtonIcon as={AddIcon} />
+            <Text>{t("Create new expense")}</Text>
           </Button>
           <Text>
             {t("Left to pay")}:{" "}

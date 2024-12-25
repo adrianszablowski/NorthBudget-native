@@ -1,10 +1,18 @@
 import GoalCard from "@/components/goals/goal-card";
+import { Box } from "@/components/ui/box";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { AddIcon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Else, If, Then } from "react-if";
 import { SafeAreaView, ScrollView } from "react-native";
 
 export default function Goals() {
+  const { t } = useTranslation();
   const [goalsData] = useState([
     {
       id: "1",
@@ -46,13 +54,28 @@ export default function Goals() {
 
   return (
     <SafeAreaView className="h-full bg-background-0">
-      <ScrollView className="h-full px-3 py-2">
-        <VStack space="md" className="pb-2">
-          {map(goalsData, (goal) => (
-            <GoalCard key={goal.id} goal={goal} />
-          ))}
+      <Box className="h-full pt-2">
+        <VStack space="sm" className="h-full">
+          <Button className="mx-3">
+            <ButtonIcon as={AddIcon} />
+            <ButtonText>{t("Create new expense")}</ButtonText>
+          </Button>
+          <ScrollView className="px-3">
+            <VStack space="md" className="pb-14">
+              <If condition={!isEmpty(goalsData)}>
+                <Then>
+                  {map(goalsData, (goal) => (
+                    <GoalCard key={goal.id} goal={goal} />
+                  ))}
+                </Then>
+                <Else>
+                  <Text>Empty</Text>
+                </Else>
+              </If>
+            </VStack>
+          </ScrollView>
         </VStack>
-      </ScrollView>
+      </Box>
     </SafeAreaView>
   );
 }

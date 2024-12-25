@@ -15,10 +15,13 @@ export default function TabLayout() {
         tabBarInactiveTintColor: "#cbd5e1",
         headerShown: false,
         tabBarButton: HapticTab,
-        tabBarStyle: Platform.select({
-          ios: { position: "fixed", backgroundColor: "#2563eb" },
-          default: { backgroundColor: "#2563eb" },
-        }),
+        tabBarStyle: {
+          height: 80,
+          ...Platform.select({
+            ios: { position: "absolute", backgroundColor: "#2563eb" },
+            default: { backgroundColor: "#2563eb" },
+          }),
+        },
       }}
     >
       <Tabs.Screen
