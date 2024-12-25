@@ -9,7 +9,6 @@
   "My profile": "My profile",
   "Change language": "Change language",
   "Log out": "Log out",
-  "Below expenses": "Below are the expenses for the current month.",
   "Create new expense": "Create new expense",
   "Paid": "Paid",
   "Unpaid": "Unpaid",
@@ -19,6 +18,11 @@
   "For": "for",
   "Manage payment": "Manage payment",
   "Manage payment of": "Manage payment of",
+  "Edit": "Edit",
+  "Set as paid": "Set as paid",
+  "Set as unpaid": "Set as unpaid",
+  "Delete": "Delete",
+  "Current status": "Current status",
   "Left to pay": "Left to pay",
   "Standing order to": "Standing order to",
   "User details": "User details",
@@ -31,5 +35,6 @@
   "Goals": "Goals",
   "Of": "of",
   "Completed": "Completed",
-  "Add founds": "Add founds"
+  "Add funds": "Add funds",
+  "Goal options": "Goal options"
 }
