@@ -10,9 +10,9 @@ import {
 import { Goal } from "@/types/types";
 import React, { Dispatch, SetStateAction } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonIcon, ButtonText } from "../ui/button";
+import { Button, ButtonText } from "../ui/button";
 import { Heading } from "../ui/heading";
-import { CloseIcon, EditIcon, Icon } from "../ui/icon";
+import { CloseIcon, Icon } from "../ui/icon";
 import { Input, InputField } from "../ui/input";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
@@ -68,7 +68,6 @@ export default function AddFundsModal(props: AddFundsModalProps) {
               </Input>
             </VStack>
             <Button>
-              <ButtonIcon as={EditIcon} />
               <ButtonText>{t("Submit")}</ButtonText>
             </Button>
           </VStack>
