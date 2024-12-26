@@ -1,5 +1,4 @@
 import GoalCard from "@/components/goals/goal-card";
-import { Box } from "@/components/ui/box";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
@@ -54,28 +53,26 @@ export default function Goals() {
 
   return (
     <SafeAreaView className="h-full bg-background-0">
-      <Box className="h-full pt-2">
-        <VStack space="sm" className="h-full">
-          <Button className="mx-3">
+      <ScrollView className="px-3 py-2">
+        <VStack space="sm" className="h-full pb-[60px]">
+          <Button>
             <ButtonIcon as={AddIcon} />
             <ButtonText>{t("Create new expense")}</ButtonText>
           </Button>
-          <ScrollView className="px-3">
-            <VStack space="md" className="pb-14">
-              <If condition={!isEmpty(goalsData)}>
-                <Then>
-                  {map(goalsData, (goal) => (
-                    <GoalCard key={goal.id} goal={goal} />
-                  ))}
-                </Then>
-                <Else>
-                  <Text>Empty</Text>
-                </Else>
-              </If>
-            </VStack>
-          </ScrollView>
+          <VStack space="md">
+            <If condition={!isEmpty(goalsData)}>
+              <Then>
+                {map(goalsData, (goal) => (
+                  <GoalCard key={goal.id} goal={goal} />
+                ))}
+              </Then>
+              <Else>
+                <Text>Empty</Text>
+              </Else>
+            </If>
+          </VStack>
         </VStack>
-      </Box>
+      </ScrollView>
     </SafeAreaView>
   );
 }

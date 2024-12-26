@@ -1,7 +1,6 @@
 import ExpenseCard from "@/components/expenses/expense-card";
 import Amount from "@/components/ui/amount";
-import { Box } from "@/components/ui/box";
-import { Button, ButtonIcon } from "@/components/ui/button";
+import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
@@ -58,38 +57,137 @@ export default function Expenses() {
       standingOrder: false,
       standingOrderDate: null,
     },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
+    {
+      id: "5",
+      title: "Internet and TV",
+      amount: 90,
+      dueDate: "2025-01-25",
+      paid: true,
+      standingOrder: false,
+      standingOrderDate: null,
+    },
   ]);
 
   return (
     <SafeAreaView className="h-full bg-background-0">
-      <Box className="px-3 py-2">
-        <VStack space="sm">
-          {/* <HStack space="sm" className="items-center">
+      <ScrollView className="px-3 py-2">
+        <VStack space="sm" className="h-full pb-[60px]">
+          <VStack space="sm">
+            {/* <HStack space="sm" className="items-center">
             <Button>
-              <FontAwesome name="left" color="white" />
+            <FontAwesome name="left" color="white" />
             </Button>
             <Text bold>December 2024</Text>
             <Button>
-              <FontAwesome name="right" color="white" />
+            <FontAwesome name="right" color="white" />
             </Button>
-          </HStack> */}
-          <Button>
-            <ButtonIcon as={AddIcon} />
-            <Text>{t("Create new expense")}</Text>
-          </Button>
-          <Text>
-            {t("Left to pay")}:{" "}
-            <Amount bold className="text-error-500" amount={40} />
-          </Text>
-        </VStack>
-        <ScrollView className="h-full">
+            </HStack> */}
+            <Button>
+              <ButtonIcon as={AddIcon} />
+              <ButtonText>{t("Create new expense")}</ButtonText>
+            </Button>
+            <Text>
+              {t("Left to pay")}:{" "}
+              <Amount bold className="text-error-500" amount={40} />
+            </Text>
+          </VStack>
           <VStack space="md">
             {map(expensesData, (expense) => (
               <ExpenseCard key={expense.id} expense={expense} />
             ))}
           </VStack>
-        </ScrollView>
-      </Box>
+        </VStack>
+      </ScrollView>
     </SafeAreaView>
   );
 }
