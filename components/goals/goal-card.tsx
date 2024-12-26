@@ -1,3 +1,4 @@
+import { Goal } from "@/types/types";
 import calculateGoalProgress from "@/utils/calculate-goal-progress";
 import toLower from "lodash/toLower";
 import React, { useState } from "react";
@@ -13,19 +14,16 @@ import { Pressable } from "../ui/pressable";
 import { Progress, ProgressFilledTrack } from "../ui/progress";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
+import AddFundsModal from "./add-funds-modal";
 
 interface GoalCardProps {
-  goal: {
-    id: string;
-    title: string;
-    amount: number;
-    goalAmout: number;
-  };
+  goal: Goal;
 }
 
 export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
+  const [showFundsModal, setShowFundsModal] = useState(false);
 
   const { title, amount, goalAmout } = goal;
 
@@ -54,13 +52,18 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
             <Text className="text-center" bold>
               {goalProgress}% {toLower(t("Completed"))}
             </Text>
-            <Button>
+            <Button onPress={() => setShowFundsModal(true)}>
               <ButtonIcon as={AddIcon} />
               <ButtonText>{t("Add funds")}</ButtonText>
             </Button>
           </VStack>
         </Card>
       </Pressable>
+      <AddFundsModal
+        goal={goal}
+        showModal={showFundsModal}
+        setShowModal={setShowFundsModal}
+      />
       <GlobalModal
         title={t("Goal options")}
         description={`${t("Manage payment of")} ${title}`}
