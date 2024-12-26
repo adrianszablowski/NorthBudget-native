@@ -17,6 +17,15 @@ export default function ProfileLayout() {
           headerBackButtonMenuEnabled: false,
         }}
       />
+      <Stack.Screen
+        name="my-profile"
+        options={{
+          headerShown: true,
+          headerTitle: t("My profile"),
+          headerBackButtonDisplayMode: "minimal",
+          headerBackButtonMenuEnabled: false,
+        }}
+      />
     </Stack>
   );
 }
