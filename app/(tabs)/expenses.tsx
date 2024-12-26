@@ -4,7 +4,7 @@ import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import { map } from "lodash";
+import map from "lodash/map";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView, ScrollView } from "react-native";
