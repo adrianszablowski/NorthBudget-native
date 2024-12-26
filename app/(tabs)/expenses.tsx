@@ -1,12 +1,16 @@
 import ExpenseCard from "@/components/expenses/expense-card";
 import Amount from "@/components/ui/amount";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { Center } from "@/components/ui/center";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { FontAwesome } from "@expo/vector-icons";
+import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Else, If, Then } from "react-if";
 import { SafeAreaView, ScrollView } from "react-native";
 
 export default function Expenses() {
@@ -61,34 +65,43 @@ export default function Expenses() {
 
   return (
     <SafeAreaView className="h-full bg-background-0">
-      <ScrollView className="px-3 py-2">
-        <VStack space="sm" className="h-full pb-[60px]">
-          <VStack space="sm">
-            {/* <HStack space="sm" className="items-center">
-            <Button>
-            <FontAwesome name="left" color="white" />
-            </Button>
-            <Text bold>December 2024</Text>
-            <Button>
-            <FontAwesome name="right" color="white" />
-            </Button>
-            </HStack> */}
-            <Button>
-              <ButtonIcon as={AddIcon} />
-              <ButtonText>{t("Create new expense")}</ButtonText>
-            </Button>
-            <Text>
-              {t("Left to pay")}:{" "}
-              <Amount bold className="text-error-500" amount={40} />
-            </Text>
-          </VStack>
-          <VStack space="md">
-            {map(expensesData, (expense) => (
-              <ExpenseCard key={expense.id} expense={expense} />
-            ))}
-          </VStack>
-        </VStack>
-      </ScrollView>
+      <If condition={!isEmpty(expensesData)}>
+        <Then>
+          <ScrollView className="px-3 py-2">
+            <VStack space="sm" className="h-full pb-[60px]">
+              <VStack space="sm">
+                <Button>
+                  <ButtonIcon as={AddIcon} />
+                  <ButtonText>{t("Create new expense")}</ButtonText>
+                </Button>
+                <Text>
+                  {t("Left to pay")}:{" "}
+                  <Amount bold className="text-error-500" amount={40} />
+                </Text>
+              </VStack>
+              <VStack space="md">
+                {map(expensesData, (expense) => (
+                  <ExpenseCard key={expense.id} expense={expense} />
+                ))}
+              </VStack>
+            </VStack>
+          </ScrollView>
+        </Then>
+        <Else>
+          <Center className="h-full pb-[60px]">
+            <VStack space="md" className="items-center">
+              <FontAwesome name="inbox" size={50} color="#D4D4D4" />
+              <Text size="sm" className="px-20 text-center text-typography-400">
+                {t("Empty expenses")}
+              </Text>
+              <Button>
+                <ButtonIcon as={AddIcon} />
+                <ButtonText>{t("Create new expense")}</ButtonText>
+              </Button>
+            </VStack>
+          </Center>
+        </Else>
+      </If>
     </SafeAreaView>
   );
 }
