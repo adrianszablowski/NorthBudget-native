@@ -1,8 +1,10 @@
 import GoalCard from "@/components/goals/goal-card";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
+import { Center } from "@/components/ui/center";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { FontAwesome } from "@expo/vector-icons";
 import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import React, { useState } from "react";
@@ -53,26 +55,37 @@ export default function Goals() {
 
   return (
     <SafeAreaView className="h-full bg-background-0">
-      <ScrollView className="px-3 py-2">
-        <VStack space="sm" className="h-full pb-[60px]">
-          <Button>
-            <ButtonIcon as={AddIcon} />
-            <ButtonText>{t("Create new expense")}</ButtonText>
-          </Button>
-          <VStack space="md">
-            <If condition={!isEmpty(goalsData)}>
-              <Then>
+      <If condition={!isEmpty(goalsData)}>
+        <Then>
+          <ScrollView className="px-3 py-2">
+            <VStack space="sm" className="h-full pb-[60px]">
+              <Button>
+                <ButtonIcon as={AddIcon} />
+                <ButtonText>{t("Create new goal")}</ButtonText>
+              </Button>
+              <VStack space="md">
                 {map(goalsData, (goal) => (
                   <GoalCard key={goal.id} goal={goal} />
                 ))}
-              </Then>
-              <Else>
-                <Text>Empty</Text>
-              </Else>
-            </If>
-          </VStack>
-        </VStack>
-      </ScrollView>
+              </VStack>
+            </VStack>
+          </ScrollView>
+        </Then>
+        <Else>
+          <Center className="h-full pb-[60px]">
+            <VStack space="md" className="items-center">
+              <FontAwesome name="inbox" size={50} color="#D4D4D4" />
+              <Text size="sm" className="px-20 text-center text-typography-400">
+                {t("Empty goals")}
+              </Text>
+              <Button>
+                <ButtonIcon as={AddIcon} />
+                <ButtonText>{t("Create new goal")}</ButtonText>
+              </Button>
+            </VStack>
+          </Center>
+        </Else>
+      </If>
     </SafeAreaView>
   );
 }
