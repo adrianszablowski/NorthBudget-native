@@ -1,6 +1,7 @@
 import { Badge, BadgeIcon, BadgeText } from "@/components/ui/badge";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { Expense } from "@/types/types";
 import trim from "lodash/trim";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,16 +20,7 @@ import {
 import { Pressable } from "../ui/pressable";
 
 interface ExpenseProps {
-  expense: {
-    id: string;
-    title: string;
-    amount: number;
-    category: string;
-    dueDate: string;
-    paid: boolean;
-    standingOrder: boolean;
-    standingOrderDate: string | null;
-  };
+  expense: Expense;
 }
 
 export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {

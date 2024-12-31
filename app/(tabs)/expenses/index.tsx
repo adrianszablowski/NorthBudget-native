@@ -5,6 +5,7 @@ import { Center } from "@/components/ui/center";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { Expense } from "@/types/types";
 import { FontAwesome } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import isEmpty from "lodash/isEmpty";
@@ -17,7 +18,7 @@ import { SafeAreaView, ScrollView } from "react-native";
 export default function Expenses() {
   const { t } = useTranslation();
   const { push } = useRouter();
-  const [expensesData] = useState([
+  const [expensesData] = useState<Expense[]>([
     {
       id: "1",
       title: "Monthly Rent",
