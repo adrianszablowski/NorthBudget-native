@@ -1,4 +1,3 @@
-import { useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button, ButtonText } from "../ui/button";
@@ -6,9 +5,8 @@ import { Input, InputField } from "../ui/input";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
 
-export default function SignInForm() {
+export default function SignUpForm() {
   const { t } = useTranslation();
-  const { push } = useRouter();
 
   return (
     <VStack space="md" className="w-full max-w-[500px]">
@@ -24,8 +22,14 @@ export default function SignInForm() {
           <InputField type="password" />
         </Input>
       </VStack>
-      <Button onPress={() => push("/dashboard")}>
-        <ButtonText>{t("Sign in")}</ButtonText>
+      <VStack space="xs">
+        <Text className="text-typography-500">{t("Repeat password")}</Text>
+        <Input>
+          <InputField type="password" />
+        </Input>
+      </VStack>
+      <Button>
+        <ButtonText>{t("Sign up")}</ButtonText>
       </Button>
     </VStack>
   );

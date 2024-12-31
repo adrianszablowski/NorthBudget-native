@@ -5,12 +5,14 @@ import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
 
 export default function Settings() {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const [showActionsheet, setShowActionsheet] = useState(false);
 
   const handleClose = () => setShowActionsheet(false);
@@ -33,7 +35,7 @@ export default function Settings() {
             </HStack>
           )}
         </Pressable>
-        <Pressable className="w-full">
+        <Pressable className="w-full" onPress={() => push("/")}>
           {({ pressed }) => (
             <HStack
               className={`${pressed && "bg-error-50"} rounded-md px-4 py-4`}
