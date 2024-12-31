@@ -6,7 +6,7 @@ import { Image } from "@/components/ui/image";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { FontAwesome } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
@@ -53,11 +53,12 @@ export default function Index() {
           <Text className="text-primary-600">
             {t("Already have an account")}?{" "}
           </Text>
-          <Button onPress={() => push("/sign-in")} variant="link">
-            <ButtonText className="uppercase text-primary-600">
-              {t("Sign in")}
-            </ButtonText>
-          </Button>
+          <Link
+            href="/(auth)/sign-in"
+            className="pr-2 uppercase text-primary-600"
+          >
+            {t("Sign in")}
+          </Link>
         </HStack>
       </VStack>
     </SafeAreaView>
