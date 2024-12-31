@@ -8,9 +8,11 @@ import { VStack } from "@/components/ui/vstack";
 import { FontAwesome } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
 
 export default function Index() {
+  const { t } = useTranslation();
   const { push } = useRouter();
 
   return (
@@ -20,38 +22,40 @@ export default function Index() {
           source={require("/assets/images/logo-blue.png")}
           size="lg"
           className="mb-5 rounded-2xl"
+          alt="northbudget logo"
         />
         <Heading size="3xl" className="text-primary-600">
-          Welcome to NorthBudget
+          {t("Welcome to")} NorthBudget
         </Heading>
         <Text className="text-center text-primary-600">
-          Your personal finance companion for tracking expenses, saving money,
-          and achieving your financial goals.
+          {t("Manage your finances with ease")}
         </Text>
         <VStack space="md" className="w-96">
           <Button>
             <FontAwesome name="google" size={18} color="white" />
-            <ButtonText>Continue with Google</ButtonText>
+            <ButtonText>{t("Continue with")} Google</ButtonText>
           </Button>
           <Button>
             <FontAwesome name="facebook" size={18} color="white" />
-            <ButtonText>Continue with Facebook</ButtonText>
+            <ButtonText>{t("Continue with")} Facebook</ButtonText>
           </Button>
           <Button>
             <FontAwesome name="apple" size={18} color="white" />
-            <ButtonText>Continue with Apple</ButtonText>
+            <ButtonText>{t("Continue with")} Apple</ButtonText>
           </Button>
           <Divider className="my-2 bg-primary-600" />
-          <Button>
+          <Button onPress={() => push("/sign-up")}>
             <FontAwesome name="envelope" size={18} color="white" />
-            <ButtonText>Sign Up with Email</ButtonText>
+            <ButtonText>{t("Sign up with email")}</ButtonText>
           </Button>
         </VStack>
         <HStack className="items-center">
-          <Text className="text-primary-600">Already have an account? </Text>
-          <Button onPress={() => push("/login")} variant="link">
+          <Text className="text-primary-600">
+            {t("Already have an account")}?{" "}
+          </Text>
+          <Button onPress={() => push("/sign-in")} variant="link">
             <ButtonText className="uppercase text-primary-600">
-              log in
+              {t("Sign in")}
             </ButtonText>
           </Button>
         </HStack>
