@@ -23,6 +23,7 @@ interface ExpenseProps {
     id: string;
     title: string;
     amount: number;
+    category: string;
     dueDate: string;
     paid: boolean;
     standingOrder: boolean;
@@ -34,16 +35,24 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
 
-  const { title, amount, dueDate, paid, standingOrder, standingOrderDate } =
-    expense;
+  const {
+    title,
+    amount,
+    category,
+    dueDate,
+    paid,
+    standingOrder,
+    standingOrderDate,
+  } = expense;
 
   return (
     <>
       <Pressable onPress={() => setShowModal(true)}>
         <Card variant="filled">
-          <HStack className="items-end justify-between">
+          <HStack className="items-center justify-between">
             <VStack space="xs">
               <Text size="lg">{trim(title)}</Text>
+              <Text>{category}</Text>
               <Text className="text-background-500" size="sm">
                 {t("Due date")}: {dueDate}
               </Text>
