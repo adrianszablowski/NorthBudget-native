@@ -30,7 +30,7 @@ export default function Settings() {
               className={`${pressed && "bg-primary-50"} rounded-md px-4 py-4`}
               space="lg"
             >
-              <FontAwesome name="flag" size={24} />
+              <FontAwesome name="language" size={24} />
               <Text>{t("Change language")}</Text>
             </HStack>
           )}

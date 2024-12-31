@@ -40,8 +40,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="credit-card" color={color} size={22} />
           ),
-          headerShown: true,
-          headerTitle: t("Current expenses"),
         }}
       />
       <Tabs.Screen

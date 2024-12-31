@@ -11,8 +11,8 @@ export default function RootLayout() {
 
   return (
     <GluestackUIProvider>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
         <Stack.Screen
           name="(auth)/sign-in"
           options={{
@@ -29,8 +29,8 @@ export default function RootLayout() {
             headerBackButtonDisplayMode: "minimal",
           }}
         />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" options={{ headerShown: false }} />
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar />
     </GluestackUIProvider>

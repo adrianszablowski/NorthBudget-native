@@ -6,6 +6,7 @@ import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import React, { useState } from "react";
@@ -15,6 +16,7 @@ import { SafeAreaView, ScrollView } from "react-native";
 
 export default function Expenses() {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const [expensesData] = useState([
     {
       id: "1",
@@ -75,7 +77,7 @@ export default function Expenses() {
           <ScrollView className="px-3 py-2">
             <VStack space="sm" className="h-full pb-[60px]">
               <VStack space="sm">
-                <Button>
+                <Button onPress={() => push("/expenses/create")}>
                   <ButtonIcon as={AddIcon} />
                   <ButtonText>{t("Create new expense")}</ButtonText>
                 </Button>
@@ -99,7 +101,7 @@ export default function Expenses() {
               <Text size="sm" className="px-20 text-center text-typography-400">
                 {t("Empty expenses")}
               </Text>
-              <Button>
+              <Button onPress={() => push("/expenses/create")}>
                 <ButtonIcon as={AddIcon} />
                 <ButtonText>{t("Create new expense")}</ButtonText>
               </Button>
