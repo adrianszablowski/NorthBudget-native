@@ -55,7 +55,7 @@ export default function Index() {
           </Text>
           <Link
             href="/(auth)/sign-in"
-            className="pr-2 uppercase text-primary-600"
+            className="pr-2 font-bold uppercase text-primary-600"
           >
             {t("Sign in")}
           </Link>

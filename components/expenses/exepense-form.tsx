@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { When } from "react-if";
 import { View } from "react-native";
 import colors from "tailwindcss/colors";
+import CreateCategoryModal from "../categories/create-category-modal";
 import { Button, ButtonIcon, ButtonText } from "../ui/button";
 import { HStack } from "../ui/hstack";
 import { AddIcon } from "../ui/icon";
@@ -32,80 +33,84 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   const { t } = useTranslation();
   const { push } = useRouter();
   const [isStandingOrder, setIsStandingOrder] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
-    <VStack space="md" className="w-full max-w-[500px]">
-      <VStack space="xs">
-        <Text className="text-typography-500">{t("Title")}</Text>
-        <Input>
-          <InputField type="text" />
-        </Input>
-      </VStack>
-      <VStack space="xs">
-        <Text className="text-typography-500">{t("Amount")}</Text>
-        <Input>
-          <InputField type="text" keyboardType="numeric" />
-        </Input>
-      </VStack>
-      <VStack space="xs">
-        <HStack space="sm">
-          <Text className="text-typography-500">{t("Category")}</Text>
-          <Button size="xs">
-            <ButtonIcon as={AddIcon} />
-            <ButtonText>{t("Create category")}</ButtonText>
-          </Button>
-        </HStack>
-        <Select>
-          <SelectTrigger variant="outline" size="md">
-            <SelectInput placeholder={t("Select category")} />
-          </SelectTrigger>
-          <SelectPortal>
-            <SelectBackdrop />
-            <SelectContent className="pb-10">
-              <SelectDragIndicatorWrapper>
-                <SelectDragIndicator />
-              </SelectDragIndicatorWrapper>
-              <SelectItem label="Car" value="1" />
-              <SelectItem label="Home" value="2" />
-            </SelectContent>
-          </SelectPortal>
-        </Select>
-      </VStack>
-      <VStack space="xs">
-        <Text className="text-typography-500">{t("Due date")}</Text>
-        <View className="w-full">
-          <RNDateTimePicker mode="date" value={new Date()} />
-        </View>
-      </VStack>
-      <HStack space="md">
-        <Switch
-          trackColor={{ false: colors.gray[300], true: colors.blue[500] }}
-          ios_backgroundColor={colors.gray[300]}
-        />
-        <Text size="sm">{t("Paid")}</Text>
-      </HStack>
-      <HStack space="md">
-        <Switch
-          trackColor={{ false: colors.gray[300], true: colors.blue[500] }}
-          ios_backgroundColor={colors.gray[300]}
-          value={isStandingOrder}
-          onToggle={(value) => setIsStandingOrder(value)}
-        />
-        <Text size="sm">{t("Standing order")}</Text>
-      </HStack>
-      <When condition={isStandingOrder}>
+    <>
+      <VStack space="md" className="w-full max-w-[500px]">
         <VStack space="xs">
-          <Text className="text-typography-500">
-            {t("Standing order date")}
-          </Text>
+          <Text className="text-typography-500">{t("Title")}</Text>
+          <Input>
+            <InputField type="text" />
+          </Input>
+        </VStack>
+        <VStack space="xs">
+          <Text className="text-typography-500">{t("Amount")}</Text>
+          <Input>
+            <InputField type="text" keyboardType="numeric" />
+          </Input>
+        </VStack>
+        <VStack space="xs">
+          <HStack space="sm">
+            <Text className="text-typography-500">{t("Category")}</Text>
+            <Button size="xs" onPress={() => setShowModal(true)}>
+              <ButtonIcon as={AddIcon} />
+              <ButtonText>{t("Create category")}</ButtonText>
+            </Button>
+          </HStack>
+          <Select>
+            <SelectTrigger variant="outline" size="md">
+              <SelectInput placeholder={t("Select category")} />
+            </SelectTrigger>
+            <SelectPortal>
+              <SelectBackdrop />
+              <SelectContent className="pb-10">
+                <SelectDragIndicatorWrapper>
+                  <SelectDragIndicator />
+                </SelectDragIndicatorWrapper>
+                <SelectItem label="Car" value="1" />
+                <SelectItem label="Home" value="2" />
+              </SelectContent>
+            </SelectPortal>
+          </Select>
+        </VStack>
+        <VStack space="xs">
+          <Text className="text-typography-500">{t("Due date")}</Text>
           <View className="w-full">
             <RNDateTimePicker mode="date" value={new Date()} />
           </View>
         </VStack>
-      </When>
-      <Button onPress={() => push("/expenses")}>
-        <ButtonText>{t("Submit")}</ButtonText>
-      </Button>
-    </VStack>
+        <HStack space="md">
+          <Switch
+            trackColor={{ false: colors.gray[300], true: colors.blue[500] }}
+            ios_backgroundColor={colors.gray[300]}
+          />
+          <Text size="sm">{t("Paid")}</Text>
+        </HStack>
+        <HStack space="md">
+          <Switch
+            trackColor={{ false: colors.gray[300], true: colors.blue[500] }}
+            ios_backgroundColor={colors.gray[300]}
+            value={isStandingOrder}
+            onToggle={(value) => setIsStandingOrder(value)}
+          />
+          <Text size="sm">{t("Standing order")}</Text>
+        </HStack>
+        <When condition={isStandingOrder}>
+          <VStack space="xs">
+            <Text className="text-typography-500">
+              {t("Standing order date")}
+            </Text>
+            <View className="w-full">
+              <RNDateTimePicker mode="date" value={new Date()} />
+            </View>
+          </VStack>
+        </When>
+        <Button onPress={() => push("/expenses")}>
+          <ButtonText>{t("Submit")}</ButtonText>
+        </Button>
+      </VStack>
+      <CreateCategoryModal showModal={showModal} setShowModal={setShowModal} />
+    </>
   );
 }
