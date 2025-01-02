@@ -1,10 +1,13 @@
+import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { When } from "react-if";
+import { View } from "react-native";
 import colors from "tailwindcss/colors";
-import { Button, ButtonText } from "../ui/button";
+import { Button, ButtonIcon, ButtonText } from "../ui/button";
 import { HStack } from "../ui/hstack";
-import { ChevronDownIcon } from "../ui/icon";
+import { AddIcon } from "../ui/icon";
 import { Input, InputField } from "../ui/input";
 import {
   Select,
@@ -12,7 +15,6 @@ import {
   SelectContent,
   SelectDragIndicator,
   SelectDragIndicatorWrapper,
-  SelectIcon,
   SelectInput,
   SelectItem,
   SelectPortal,
@@ -25,6 +27,7 @@ import { VStack } from "../ui/vstack";
 export default function ExpenseForm() {
   const { t } = useTranslation();
   const { push } = useRouter();
+  const [isStandingOrder, setIsStandingOrder] = useState<boolean>(false);
 
   return (
     <VStack space="md" className="w-full max-w-[500px]">
@@ -41,11 +44,16 @@ export default function ExpenseForm() {
         </Input>
       </VStack>
       <VStack space="xs">
-        <Text className="text-typography-500">{t("Category")}</Text>
+        <HStack space="sm">
+          <Text className="text-typography-500">{t("Category")}</Text>
+          <Button size="xs">
+            <ButtonIcon as={AddIcon} />
+            <ButtonText>{t("Create category")}</ButtonText>
+          </Button>
+        </HStack>
         <Select>
           <SelectTrigger variant="outline" size="md">
             <SelectInput placeholder={t("Select category")} />
-            <SelectIcon className="mr-3" as={ChevronDownIcon} />
           </SelectTrigger>
           <SelectPortal>
             <SelectBackdrop />
@@ -59,6 +67,12 @@ export default function ExpenseForm() {
           </SelectPortal>
         </Select>
       </VStack>
+      <VStack space="xs">
+        <Text className="text-typography-500">{t("Due date")}</Text>
+        <View className="w-full">
+          <RNDateTimePicker mode="date" value={new Date()} />
+        </View>
+      </VStack>
       <HStack space="md">
         <Switch
           trackColor={{ false: colors.gray[300], true: colors.blue[500] }}
@@ -70,10 +84,22 @@ export default function ExpenseForm() {
         <Switch
           trackColor={{ false: colors.gray[300], true: colors.blue[500] }}
           ios_backgroundColor={colors.gray[300]}
+          value={isStandingOrder}
+          onToggle={(value) => setIsStandingOrder(value)}
         />
         <Text size="sm">{t("Standing order")}</Text>
       </HStack>
-      <Button onPress={() => push("/dashboard")}>
+      <When condition={isStandingOrder}>
+        <VStack space="xs">
+          <Text className="text-typography-500">
+            {t("Standing order date")}
+          </Text>
+          <View className="w-full">
+            <RNDateTimePicker mode="date" value={new Date()} />
+          </View>
+        </VStack>
+      </When>
+      <Button onPress={() => push("/expenses")}>
         <ButtonText>{t("Submit")}</ButtonText>
       </Button>
     </VStack>
