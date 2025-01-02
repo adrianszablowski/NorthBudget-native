@@ -19,6 +19,14 @@ export default function ExpensesLayout() {
           headerBackButtonDisplayMode: "minimal",
         }}
       />
+      <Stack.Screen
+        name="edit/[expenseId]"
+        options={{
+          headerShown: true,
+          headerTitle: t("Edit expense"),
+          headerBackButtonDisplayMode: "minimal",
+        }}
+      />
     </Stack>
   );
 }

@@ -2,6 +2,7 @@ import { Badge, BadgeIcon, BadgeText } from "@/components/ui/badge";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { Expense } from "@/types/types";
+import { useRouter } from "expo-router";
 import trim from "lodash/trim";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,9 +26,11 @@ interface ExpenseProps {
 
 export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const [showModal, setShowModal] = useState(false);
 
   const {
+    id,
     title,
     amount,
     category,
@@ -77,6 +80,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               variant="outline"
               onPress={() => {
                 setShowModal(false);
+                push(`/expenses/edit/${id}`);
               }}
             >
               <ButtonIcon as={EditIcon} />
