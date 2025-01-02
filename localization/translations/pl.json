@@ -53,5 +53,10 @@
   "Sign in": "Zaloguj się",
   "Sign up": "Zarejestruj się",
   "Email": "Email",
-  "Create expense": "Utwórz wydatek"
+  "Create expense": "Utwórz wydatek",
+  "Standing order": "Zlecenie stałe",
+  "Category": "Kategoria",
+  "Select category": "Wybierz kategorię",
+  "Standing order date": "Data zlecenia stałego",
+  "Title": "Tytuł"
 }

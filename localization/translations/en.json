@@ -53,5 +53,10 @@
   "Sign in": "Sign in",
   "Sign up": "Sign up",
   "Email": "Email",
-  "Create expense": "Create expense"
+  "Create expense": "Create expense",
+  "Standing order": "Standing order",
+  "Category": "Category",
+  "Select category": "Select category",
+  "Standing order date": "Standing order date",
+  "Title": "Title"
 }
