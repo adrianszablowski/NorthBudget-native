@@ -24,7 +24,11 @@ import { Switch } from "../ui/switch";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
 
-export default function ExpenseForm() {
+interface ExpenseFormProps {
+  expenseId?: string;
+}
+
+export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   const { t } = useTranslation();
   const { push } = useRouter();
   const [isStandingOrder, setIsStandingOrder] = useState<boolean>(false);
