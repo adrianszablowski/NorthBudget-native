@@ -31,13 +31,13 @@ interface ExpenseFormProps {
 
 export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   const { t } = useTranslation();
-  const { push } = useRouter();
+  const { back } = useRouter();
   const [isStandingOrder, setIsStandingOrder] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
     <>
-      <VStack space="md" className="w-full max-w-[500px]">
+      <VStack space="lg" className="w-full max-w-[500px]">
         <VStack space="xs">
           <Text className="text-typography-500">{t("Title")}</Text>
           <Input>
@@ -106,7 +106,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
             </View>
           </VStack>
         </When>
-        <Button onPress={() => push("/expenses")}>
+        <Button onPress={() => back()}>
           <ButtonText>{t("Submit")}</ButtonText>
         </Button>
       </VStack>

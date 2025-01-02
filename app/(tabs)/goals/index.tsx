@@ -5,6 +5,7 @@ import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { FontAwesome } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import React, { useState } from "react";
@@ -15,6 +16,7 @@ import colors from "tailwindcss/colors";
 
 export default function Goals() {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const [goalsData] = useState([
     {
       id: "1",
@@ -60,7 +62,7 @@ export default function Goals() {
         <Then>
           <ScrollView className="px-3 py-2">
             <VStack space="sm" className="h-full pb-[60px]">
-              <Button>
+              <Button onPress={() => push("/goals/create")}>
                 <ButtonIcon as={AddIcon} />
                 <ButtonText>{t("Create new goal")}</ButtonText>
               </Button>
@@ -79,7 +81,7 @@ export default function Goals() {
               <Text size="sm" className="px-20 text-center text-typography-400">
                 {t("Empty goals")}
               </Text>
-              <Button>
+              <Button onPress={() => push("/goals/create")}>
                 <ButtonIcon as={AddIcon} />
                 <ButtonText>{t("Create new goal")}</ButtonText>
               </Button>

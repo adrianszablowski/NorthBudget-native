@@ -62,5 +62,9 @@
   "Edit expense": "Edytuj wydatek",
   "Category name": "Nazwa kategorii",
   "Create category": "Utwórz kategorię",
-  "You are creating a new category": "Tworzysz nową kategorię"
+  "You are creating a new category": "Tworzysz nową kategorię",
+  "Create goal": "Utwórz cel",
+  "Edit goal": "Edytuj cel",
+  "Amount to collect": "Kwota do zebrania",
+  "Amount currently collected": "Kwota aktualnie zebrana"
 }

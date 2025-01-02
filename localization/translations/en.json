@@ -62,5 +62,9 @@
   "Edit expense": "Edit expense",
   "Category name": "Category name",
   "Create category": "Create category",
-  "You are creating a new category": "You are creating a new category"
+  "You are creating a new category": "You are creating a new category",
+  "Create goal": "Create goal",
+  "Edit goal": "Edit goal",
+  "Amount to collect": "Amount to collect",
+  "Amount currently collected": "Amount currently collected"
 }

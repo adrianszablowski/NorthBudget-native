@@ -50,8 +50,6 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="trophy" color={color} size={22} />
           ),
-          headerShown: true,
-          headerTitle: t("Goals"),
         }}
       />
       <Tabs.Screen

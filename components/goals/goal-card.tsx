@@ -1,5 +1,6 @@
 import { Goal } from "@/types/types";
 import calculateGoalProgress from "@/utils/calculate-goal-progress";
+import { useRouter } from "expo-router";
 import toLower from "lodash/toLower";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,10 +23,11 @@ interface GoalCardProps {
 
 export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
   const { t } = useTranslation();
+  const { push } = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [showFundsModal, setShowFundsModal] = useState(false);
 
-  const { title, amount, goalAmout } = goal;
+  const { id, title, amount, goalAmout } = goal;
 
   const goalProgress = calculateGoalProgress(amount, goalAmout);
 
@@ -75,6 +77,7 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
               variant="outline"
               onPress={() => {
                 setShowModal(false);
+                push(`/goals/edit/${id}`);
               }}
             >
               <ButtonIcon as={EditIcon} />
