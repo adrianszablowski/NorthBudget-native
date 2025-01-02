@@ -4,6 +4,7 @@ import { Tabs } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
+import colors from "tailwindcss/colors";
 
 export default function TabLayout() {
   const { t } = useTranslation();
@@ -11,15 +12,15 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#fff",
-        tabBarInactiveTintColor: "#cbd5e1",
+        tabBarActiveTintColor: colors.white,
+        tabBarInactiveTintColor: colors.slate[300],
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: {
           height: 80,
           ...Platform.select({
-            ios: { position: "absolute", backgroundColor: "#2563eb" },
-            default: { backgroundColor: "#2563eb" },
+            ios: { position: "absolute", backgroundColor: colors.blue[600] },
+            default: { backgroundColor: colors.blue[600] },
           }),
         },
       }}

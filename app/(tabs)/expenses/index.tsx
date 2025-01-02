@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Else, If, Then } from "react-if";
 import { SafeAreaView, ScrollView } from "react-native";
+import colors from "tailwindcss/colors";
 
 export default function Expenses() {
   const { t } = useTranslation();
@@ -98,7 +99,7 @@ export default function Expenses() {
         <Else>
           <Center className="h-full pb-[60px]">
             <VStack space="md" className="items-center">
-              <FontAwesome name="inbox" size={50} color="#D4D4D4" />
+              <FontAwesome name="inbox" size={50} color={colors.neutral[300]} />
               <Text size="sm" className="px-20 text-center text-typography-400">
                 {t("Empty expenses")}
               </Text>

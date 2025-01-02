@@ -9,6 +9,7 @@ import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
+import colors from "tailwindcss/colors";
 
 export default function Settings() {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ export default function Settings() {
               className={`${pressed && "bg-error-50"} rounded-md px-4 py-4`}
               space="lg"
             >
-              <FontAwesome name="sign-out" size={24} color="#e63535" />
+              <FontAwesome name="sign-out" size={24} color={colors.red[600]} />
               <Text className="text-error-500">{t("Log out")}</Text>
             </HStack>
           )}
