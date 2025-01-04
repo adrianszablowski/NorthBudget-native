@@ -1,10 +1,6 @@
 import React, { createContext, ReactNode, useMemo, useState } from "react";
 
-enum Currency {
-  PLN = "PLN",
-  EUR = "EUR",
-  USD = "USD",
-}
+export type Currency = "USD" | "EUR" | "PLN";
 
 interface CurrencyContextProviderProps {
   children: ReactNode;
@@ -20,12 +16,9 @@ export const CurrencyContext = createContext<ICurrencyContext | null>(null);
 export default function CurrencyContextProvider({
   children,
 }: CurrencyContextProviderProps) {
-  const [currency, setCurrency] = useState(Currency.EUR);
-
-  console.log({ currency });
+  const [currency, setCurrency] = useState<Currency>("EUR");
 
   const handleSetCurrency = (currency: Currency) => {
-    console.log({ currency });
     setCurrency(currency);
   };
 
