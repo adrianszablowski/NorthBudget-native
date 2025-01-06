@@ -32,6 +32,8 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" color={color} size={22} />
           ),
+          headerShown: true,
+          headerTitle: t("Dashboard"),
         }}
       />
       <Tabs.Screen

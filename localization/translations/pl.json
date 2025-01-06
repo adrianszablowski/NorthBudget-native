@@ -66,5 +66,11 @@
   "Create goal": "Utwórz cel",
   "Edit goal": "Edytuj cel",
   "Amount to collect": "Kwota do zebrania",
-  "Amount currently collected": "Kwota aktualnie zebrana"
+  "Amount currently collected": "Kwota aktualnie zebrana",
+  "Total expenses this month": "Całkowite wydatki w tym miesiącu",
+  "From last month": "W porównaniu z poprzednim miesiącem",
+  "Active goals": "Aktywne cele",
+  "Goals near completion": "Cele bliskie ukończenia",
+  "Upcoming expenses": "Nadchodzące wydatki",
+  "Due within 7 days": "W ciągu 7 dni"
 }

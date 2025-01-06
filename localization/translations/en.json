@@ -66,5 +66,11 @@
   "Create goal": "Create goal",
   "Edit goal": "Edit goal",
   "Amount to collect": "Amount to collect",
-  "Amount currently collected": "Amount currently collected"
+  "Amount currently collected": "Amount currently collected",
+  "Total expenses this month": "Total expenses this month",
+  "From last month": "From last month",
+  "Active goals": "Active goals",
+  "Goals near completion": "Goals near completion",
+  "Upcoming expenses": "Upcoming expenses",
+  "Due within 7 days": "Due within 7 days"
 }

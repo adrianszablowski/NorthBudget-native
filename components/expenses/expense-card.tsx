@@ -50,11 +50,11 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
             <VStack space="xs">
               <Text size="lg">{trim(title)}</Text>
               <Text>{category}</Text>
-              <Text className="text-background-500" size="sm">
+              <Text className="text-typography-500" size="sm">
                 {t("Due date")}: {dueDate}
               </Text>
               {standingOrder && (
-                <Text className="text-background-500" size="sm">
+                <Text className="text-typography-500" size="sm">
                   {t("Standing order to")}: {standingOrderDate}
                 </Text>
               )}
