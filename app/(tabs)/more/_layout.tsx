@@ -7,14 +7,24 @@ export default function ProfileLayout() {
 
   return (
     <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
+      <Stack.Screen
+        name="index"
+        options={{ headerShown: true, headerTitle: t("More") }}
+      />
       <Stack.Screen
         name="settings"
         options={{
           headerShown: true,
           headerTitle: t("Settings"),
           headerBackButtonDisplayMode: "minimal",
-          headerBackButtonMenuEnabled: false,
+        }}
+      />
+      <Stack.Screen
+        name="privacy"
+        options={{
+          headerShown: true,
+          headerTitle: t("Privacy and security"),
+          headerBackButtonDisplayMode: "minimal",
         }}
       />
       <Stack.Screen
@@ -23,7 +33,6 @@ export default function ProfileLayout() {
           headerShown: true,
           headerTitle: t("My profile"),
           headerBackButtonDisplayMode: "minimal",
-          headerBackButtonMenuEnabled: false,
         }}
       />
     </Stack>

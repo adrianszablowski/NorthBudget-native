@@ -1,4 +1,3 @@
-import ChangePasswordForm from "@/components/my-profile/change-password-form";
 import UserDetailsForm from "@/components/my-profile/user-details-form";
 import { Box } from "@/components/ui/box";
 import { Divider } from "@/components/ui/divider";
@@ -16,11 +15,6 @@ export default function MyProfile() {
         <Heading size="md">{t("User details")}</Heading>
         <Divider className="mb-2" />
         <UserDetailsForm />
-        <Heading className="mt-4" size="md">
-          {t("Change password")}
-        </Heading>
-        <Divider className="mb-2" />
-        <ChangePasswordForm />
       </Box>
     </SafeAreaView>
   );
