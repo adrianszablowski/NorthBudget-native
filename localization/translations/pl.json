@@ -75,5 +75,17 @@
   "Due within 7 days": "W ciągu 7 dni",
   "Expenses by category": "Wydatki według kategorii",
   "More": "Więcej",
-  "Privacy and security": "Prywatność i bezpieczeństwo"
+  "Privacy and security": "Prywatność i bezpieczeństwo",
+  "Jan": "Sty",
+  "Feb": "Lut",
+  "Mar": "Mar",
+  "Apr": "Kwi",
+  "May": "Maj",
+  "Jun": "Cze",
+  "Jul": "Lip",
+  "Aug": "Sie",
+  "Sep": "Wrz",
+  "Oct": "Paź",
+  "Nov": "Lis",
+  "Dec": "Gru"
 }

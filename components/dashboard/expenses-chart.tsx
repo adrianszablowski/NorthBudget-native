@@ -1,26 +1,29 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Dimensions, View } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import colors from "tailwindcss/colors";
 
 export default function ExpensesChart() {
+  const { t } = useTranslation();
+
   return (
     <View>
       <LineChart
         data={{
           labels: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
+            t("Jan"),
+            t("Feb"),
+            t("Mar"),
+            t("Apr"),
+            t("May"),
+            t("Jun"),
+            t("Jul"),
+            t("Aug"),
+            t("Sep"),
+            t("Oct"),
+            t("Nov"),
+            t("Dec"),
           ],
           datasets: [
             {
