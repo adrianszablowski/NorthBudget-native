@@ -10,6 +10,7 @@ import { Link, useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
+import "react-native-url-polyfill/auto";
 
 export default function Index() {
   const { t } = useTranslation();
