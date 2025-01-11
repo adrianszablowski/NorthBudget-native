@@ -17,6 +17,12 @@ export default function SignUpForm() {
         </Input>
       </VStack>
       <VStack space="xs">
+        <Text className="text-typography-500">{t("Username")}</Text>
+        <Input>
+          <InputField type="text" />
+        </Input>
+      </VStack>
+      <VStack space="xs">
         <Text className="text-typography-500">{t("Password")}</Text>
         <Input>
           <InputField type="password" />
