@@ -1,7 +1,7 @@
 import { ID } from "react-native-appwrite";
 import { account, avatars, config, databases } from "../appwrite";
 
-export const createUser = async (
+export const signUp = async (
   email: string,
   password: string,
   username: string,
