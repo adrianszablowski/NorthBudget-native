@@ -87,5 +87,10 @@
   "Sep": "Sep",
   "Oct": "Oct",
   "Nov": "Nov",
-  "Dec": "Dec"
+  "Dec": "Dec",
+  "Email is invalid": "Email is invalid",
+  "Email is required": "Email is required",
+  "Username is required": "Username is required",
+  "Password must have at least 6 letters": "Password must have at least 6 letters",
+  "Passwords must be the same": "Passwords must be the same"
 }
