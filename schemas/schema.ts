@@ -24,3 +24,13 @@ export const signUpFormSchema = z
       });
     }
   });
+
+export const signInFormSchema = z.object({
+  email: z
+    .string()
+    .email({ message: i18next.t("Email is invalid") })
+    .min(1, { message: i18next.t("Email is required") }),
+  password: z
+    .string()
+    .min(6, { message: i18next.t("Password must have at least 6 letters") }),
+});
