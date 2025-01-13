@@ -1,3 +1,4 @@
+import { toastConfig } from "@/components/toast/toast-config";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import CurrencyContextProvider from "@/contexts/currency-context";
 import UserContextProvider from "@/contexts/user-context";
@@ -7,6 +8,7 @@ import { Stack } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StatusBar } from "react-native";
+import Toast from "react-native-toast-message";
 
 export default function RootLayout() {
   const { t } = useTranslation();
@@ -37,6 +39,7 @@ export default function RootLayout() {
             <Stack.Screen name="+not-found" />
           </Stack>
           <StatusBar />
+          <Toast config={toastConfig} />
         </CurrencyContextProvider>
       </UserContextProvider>
     </GluestackUIProvider>

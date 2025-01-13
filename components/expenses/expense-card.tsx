@@ -112,7 +112,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
               {t("Current status")}:{" "}
               <Text
                 size="sm"
-                className={paid ? "text-success-500" : "text-error-500"}
+                className={paid ? "text-success-600" : "text-error-600"}
               >
                 {paid ? t("Paid") : t("Unpaid")}
               </Text>

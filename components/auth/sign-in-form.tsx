@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { When } from "react-if";
 import colors from "tailwindcss/colors";
 import { z } from "zod";
+import { showToast } from "../toast/show-toast";
 import { Button, ButtonSpinner, ButtonText } from "../ui/button";
 import {
   FormControl,
@@ -38,9 +39,14 @@ export default function SignInForm() {
   });
 
   const onSubmit = async (formData: z.output<typeof signInFormSchema>) => {
-    const action = await signIn(formData);
-    console.log({ action });
-    push("/dashboard");
+    const { success, message } = await signIn(formData);
+
+    if (!success) {
+      showToast("error", message);
+    } else {
+      showToast("success", message);
+      push("/dashboard");
+    }
   };
 
   useEffect(() => {

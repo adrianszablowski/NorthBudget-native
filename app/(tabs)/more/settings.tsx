@@ -43,7 +43,7 @@ export default function Settings() {
               space="lg"
             >
               <FontAwesome name="sign-out" size={24} color={colors.red[600]} />
-              <Text className="text-error-500">{t("Log out")}</Text>
+              <Text className="text-error-600">{t("Log out")}</Text>
             </HStack>
           )}
         </Pressable>

@@ -97,5 +97,7 @@
   "Invalid data": "Nieprawidłowe dane",
   "Failed to create account": "Nie udało się utworzyć konta",
   "Account successfully created": "Konto pomyślnie utworzone",
-  "You have been correctly logged in": "Zotałeś poprawnie zalogowany"
+  "You have been correctly logged in": "Zotałeś poprawnie zalogowany",
+  "Success": "Sukces",
+  "Error": "Błąd"
 }

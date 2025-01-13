@@ -85,7 +85,7 @@ export default function Expenses() {
                 </Button>
                 <Text>
                   {t("Left to pay")}:{" "}
-                  <Amount bold className="text-error-500" amount={40} />
+                  <Amount bold className="text-error-600" amount={40} />
                 </Text>
               </VStack>
               <VStack space="md">

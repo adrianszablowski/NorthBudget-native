@@ -97,5 +97,7 @@
   "Invalid data": "Invalid data",
   "Failed to create account": "Failed to create account",
   "Account successfully created": "Account successfully created",
-  "You have been correctly logged in": "You have been correctly logged in"
+  "You have been correctly logged in": "You have been correctly logged in",
+  "Success": "Success",
+  "Error": "Error"
 }
