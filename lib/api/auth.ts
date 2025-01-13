@@ -80,3 +80,16 @@ export const signIn = async (
     return { success: false, message: error.message };
   }
 };
+
+export const signOut = async (): Promise<Result<Models.Session>> => {
+  try {
+    await account.deleteSession("current");
+
+    return {
+      success: true,
+      message: i18next.t("You have been correctly logged out"),
+    };
+  } catch (error: any) {
+    return { success: false, message: error.message };
+  }
+};

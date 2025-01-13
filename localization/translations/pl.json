@@ -99,5 +99,6 @@
   "Account successfully created": "Konto pomyślnie utworzone",
   "You have been correctly logged in": "Zotałeś poprawnie zalogowany",
   "Success": "Sukces",
-  "Error": "Błąd"
+  "Error": "Błąd",
+  "You have been correctly logged out": "Zostałeś poprawnie wylogowany"
 }

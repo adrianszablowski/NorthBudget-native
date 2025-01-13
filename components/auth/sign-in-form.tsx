@@ -24,7 +24,7 @@ import { VStack } from "../ui/vstack";
 
 export default function SignInForm() {
   const { t } = useTranslation();
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const {
     control,
     handleSubmit,
@@ -45,7 +45,7 @@ export default function SignInForm() {
       showToast("error", message);
     } else {
       showToast("success", message);
-      push("/dashboard");
+      replace("/dashboard");
     }
   };
 

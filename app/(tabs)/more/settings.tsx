@@ -1,9 +1,11 @@
 import LanguageActionsheet from "@/components/profile/language-actionsheet";
 import SelectCurrency from "@/components/profile/select-currency";
+import { showToast } from "@/components/toast/show-toast";
 import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { signOut } from "@/lib/api/auth";
 import { FontAwesome } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -13,10 +15,21 @@ import colors from "tailwindcss/colors";
 
 export default function Settings() {
   const { t } = useTranslation();
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const [showActionsheet, setShowActionsheet] = useState(false);
 
   const handleClose = () => setShowActionsheet(false);
+
+  const handleSignOut = async () => {
+    const { success, message } = await signOut();
+
+    if (!success) {
+      showToast("error", message);
+    } else {
+      showToast("success", message);
+      replace("/");
+    }
+  };
 
   return (
     <SafeAreaView className="h-full bg-background-0">
@@ -36,7 +49,7 @@ export default function Settings() {
             </HStack>
           )}
         </Pressable>
-        <Pressable className="w-full" onPress={() => push("/")}>
+        <Pressable className="w-full" onPress={handleSignOut}>
           {({ pressed }) => (
             <HStack
               className={`${pressed && "bg-error-50"} rounded-md px-4 py-4`}
