@@ -1,3 +1,4 @@
+import { signIn } from "@/lib/api/auth";
 import { signInFormSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
@@ -36,8 +37,9 @@ export default function SignInForm() {
     },
   });
 
-  const onSubmit = (formData: z.output<typeof signInFormSchema>) => {
-    console.log(formData);
+  const onSubmit = async (formData: z.output<typeof signInFormSchema>) => {
+    const action = await signIn(formData);
+    console.log({ action });
     push("/dashboard");
   };
 

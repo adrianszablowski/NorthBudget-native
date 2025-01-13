@@ -1,4 +1,4 @@
-import { signUpFormSchema } from "@/schemas/schema";
+import { signInFormSchema, signUpFormSchema } from "@/schemas/schema";
 import { Result } from "@/types/types";
 import i18next from "i18next";
 import { ID, Models } from "react-native-appwrite";
@@ -31,7 +31,7 @@ export const signUp = async (
 
     const avatarUrl = avatars.getInitials(username);
 
-    await signIn(email, password);
+    await signIn({ email, password });
 
     const newUser = await databases.createDocument(
       config.databaseId,
@@ -55,13 +55,28 @@ export const signUp = async (
   }
 };
 
-export const signIn = async (email: string, password: string) => {
+export const signIn = async (
+  formData: z.output<typeof signInFormSchema>,
+): Promise<Result<Models.Session>> => {
   try {
+    const parsedData = signInFormSchema.safeParse(formData);
+
+    if (!parsedData.success)
+      return {
+        success: false,
+        message: parsedData.error.message || i18next.t("Invalid data"),
+      };
+
+    const { email, password } = parsedData.data;
+
     const session = await account.createEmailPasswordSession(email, password);
 
-    return session;
+    return {
+      data: session,
+      success: true,
+      message: i18next.t("You have been correctly logged in"),
+    };
   } catch (error: any) {
-    console.log(error);
-    throw new Error(error);
+    return { success: false, message: error.message };
   }
 };
