@@ -1,12 +1,24 @@
-import { ID } from "react-native-appwrite";
+import { signUpFormSchema } from "@/schemas/schema";
+import { Result } from "@/types/types";
+import i18next from "i18next";
+import { ID, Models } from "react-native-appwrite";
+import { z } from "zod";
 import { account, avatars, config, databases } from "../appwrite";
 
 export const signUp = async (
-  email: string,
-  password: string,
-  username: string,
-) => {
+  formData: z.output<typeof signUpFormSchema>,
+): Promise<Result<Models.Document>> => {
   try {
+    const parsedData = signUpFormSchema.safeParse(formData);
+
+    if (!parsedData.success)
+      return {
+        success: false,
+        message: parsedData.error.message || i18next.t("Invalid data"),
+      };
+
+    const { email, password, username } = parsedData.data;
+
     const newAccount = await account.create(
       ID.unique(),
       email,
@@ -14,7 +26,8 @@ export const signUp = async (
       username,
     );
 
-    if (!newAccount) throw Error;
+    if (!newAccount)
+      return { success: false, message: i18next.t("Failed to create account") };
 
     const avatarUrl = avatars.getInitials(username);
 
@@ -32,10 +45,13 @@ export const signUp = async (
       },
     );
 
-    return newUser;
+    return {
+      data: newUser,
+      success: true,
+      message: i18next.t("Account successfully created"),
+    };
   } catch (error: any) {
-    console.log(error);
-    throw new Error(error);
+    return { success: false, message: error.message };
   }
 };
 

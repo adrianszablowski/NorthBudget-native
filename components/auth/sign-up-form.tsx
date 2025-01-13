@@ -1,3 +1,4 @@
+import { signUp } from "@/lib/api/auth";
 import { signUpFormSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect } from "react";
@@ -36,8 +37,11 @@ export default function SignUpForm() {
     },
   });
 
-  const onSubmit = (formData: z.output<typeof signUpFormSchema>) =>
-    console.log(formData);
+  const onSubmit = async (formData: z.output<typeof signUpFormSchema>) => {
+    const action = await signUp(formData);
+
+    console.log(action.message);
+  };
 
   useEffect(() => {
     if (isSubmitSuccessful) reset();

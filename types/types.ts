@@ -1,3 +1,9 @@
+export interface Result<T> {
+  data?: T;
+  success: boolean;
+  message: string;
+}
+
 export interface Goal {
   id: string;
   title: string;

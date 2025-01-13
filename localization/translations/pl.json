@@ -93,5 +93,8 @@
   "Username is required": "Nazwa użytkownika jest wymagana",
   "Password must have at least 6 letters": "Hasło musi składać się z co najmniej 6 liter",
   "Passwords must be the same": "Hasła muszą być takie same",
-  "Password is invalid": "Hasło jest wymagane"
+  "Password is invalid": "Hasło jest wymagane",
+  "Invalid data": "Nieprawidłowe dane",
+  "Failed to create account": "Nie udało się utworzyć konta",
+  "Account successfully created": "Konto pomyślnie utworzone"
 }

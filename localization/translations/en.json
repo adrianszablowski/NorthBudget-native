@@ -93,5 +93,8 @@
   "Username is required": "Username is required",
   "Password must have at least 6 letters": "Password must have at least 6 letters",
   "Passwords must be the same": "Passwords must be the same",
-  "Password is invalid": "Password is invalid"
+  "Password is invalid": "Password is invalid",
+  "Invalid data": "Invalid data",
+  "Failed to create account": "Failed to create account",
+  "Account successfully created": "Account successfully created"
 }
