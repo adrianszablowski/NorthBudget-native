@@ -10,7 +10,7 @@ export const signUpFormSchema = z
     username: z.string().min(1, { message: i18next.t("Username is required") }),
     password: z
       .string()
-      .min(6, { message: i18next.t("Password must have at least 6 letters") }),
+      .min(8, { message: i18next.t("Password must have at least 8 letters") }),
     repeatPassword: z
       .string()
       .min(1, { message: i18next.t("Passwords must be the same") }),

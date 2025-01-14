@@ -91,7 +91,7 @@
   "Email is invalid": "Email is invalid",
   "Email is required": "Email is required",
   "Username is required": "Username is required",
-  "Password must have at least 6 letters": "Password must have at least 6 letters",
+  "Password must have at least 8 letters": "Password must have at least 8 letters",
   "Passwords must be the same": "Passwords must be the same",
   "Password is invalid": "Password is invalid",
   "Invalid data": "Invalid data",

@@ -31,8 +31,6 @@ export default function UserContextProvider({
   const init = async () => {
     try {
       const loggedIn = await account.get();
-      console.log("siemaa");
-
       setUser(loggedIn);
     } catch {
       setUser(null);
