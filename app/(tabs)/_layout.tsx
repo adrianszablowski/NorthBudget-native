@@ -1,6 +1,7 @@
 import { HapticTab } from "@/components/ui/HapticTab";
+import useUserContext from "@/hooks/user-user-context";
 import { FontAwesome } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Platform } from "react-native";
@@ -8,6 +9,9 @@ import colors from "tailwindcss/colors";
 
 export default function TabLayout() {
   const { t } = useTranslation();
+  const { user } = useUserContext();
+
+  if (!user) return <Redirect href="/" />;
 
   return (
     <Tabs

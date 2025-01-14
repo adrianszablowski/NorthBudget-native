@@ -1,16 +1,20 @@
-import React, { createContext, ReactNode, useMemo, useState } from "react";
-
-interface User {
-  name: string;
-}
+import { account } from "@/lib/appwrite";
+import React, {
+  createContext,
+  ReactNode,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { Models } from "react-native-appwrite";
 
 interface UserContextProviderProps {
   children: ReactNode;
 }
 
 interface IUserContext {
-  user: User | null;
-  handleSetUser: (user: User) => void;
+  user: Models.User<Models.Preferences> | null;
+  handleRemoveUser: () => void;
 }
 
 export const UserContext = createContext<IUserContext | null>(null);
@@ -18,13 +22,28 @@ export const UserContext = createContext<IUserContext | null>(null);
 export default function UserContextProvider({
   children,
 }: UserContextProviderProps) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<Models.User<Models.Preferences> | null>(
+    null,
+  );
 
-  const handleSetUser = (currency: User) => {
-    setUser(currency);
+  const handleRemoveUser = () => setUser(null);
+
+  const init = async () => {
+    try {
+      const loggedIn = await account.get();
+      console.log("siemaa");
+
+      setUser(loggedIn);
+    } catch {
+      setUser(null);
+    }
   };
 
-  const value = useMemo(() => ({ user, handleSetUser }), [user]);
+  useEffect(() => {
+    init();
+  }, []);
+
+  const value = useMemo(() => ({ user, handleRemoveUser }), [user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
