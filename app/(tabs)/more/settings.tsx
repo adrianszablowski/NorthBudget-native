@@ -8,7 +8,7 @@ import { VStack } from "@/components/ui/vstack";
 import useUserContext from "@/hooks/user-user-context";
 import { signOut } from "@/lib/api/auth";
 import { FontAwesome } from "@expo/vector-icons";
-import { Redirect } from "expo-router";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
@@ -16,6 +16,7 @@ import colors from "tailwindcss/colors";
 
 export default function Settings() {
   const { t } = useTranslation();
+  const { replace } = useRouter();
   const { handleRemoveUser } = useUserContext();
   const [showActionsheet, setShowActionsheet] = useState(false);
 
@@ -29,7 +30,7 @@ export default function Settings() {
     } else {
       handleRemoveUser();
       showToast("success", message);
-      return <Redirect href="/sign-in" />;
+      replace("/");
     }
   };
 

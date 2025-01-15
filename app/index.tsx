@@ -5,8 +5,9 @@ import { HStack } from "@/components/ui/hstack";
 import { Image } from "@/components/ui/image";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import useUserContext from "@/hooks/user-user-context";
 import { FontAwesome } from "@expo/vector-icons";
-import { Link, useRouter } from "expo-router";
+import { Link, Redirect, useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { SafeAreaView } from "react-native";
@@ -15,6 +16,9 @@ import "react-native-url-polyfill/auto";
 export default function Index() {
   const { t } = useTranslation();
   const { push } = useRouter();
+  const { user } = useUserContext();
+
+  if (user) return <Redirect href="/dashboard" />;
 
   return (
     <SafeAreaView className="h-screen bg-background-0">
