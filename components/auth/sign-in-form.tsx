@@ -1,3 +1,4 @@
+import useUserContext from "@/hooks/user-user-context";
 import { signIn } from "@/lib/api/auth";
 import { signInFormSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,6 +25,7 @@ import { VStack } from "../ui/vstack";
 
 export default function SignInForm() {
   const { t } = useTranslation();
+  const { init } = useUserContext();
   const { replace } = useRouter();
   const {
     control,
@@ -44,6 +46,7 @@ export default function SignInForm() {
     if (!success) {
       showToast("error", message);
     } else {
+      init();
       showToast("success", message);
       replace("/dashboard");
     }

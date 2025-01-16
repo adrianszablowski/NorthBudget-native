@@ -1,7 +1,7 @@
 import { signInFormSchema, signUpFormSchema } from "@/schemas/schema";
 import { Result } from "@/types/types";
 import i18next from "i18next";
-import { ID, Models } from "react-native-appwrite";
+import { ID, Models, Query } from "react-native-appwrite";
 import { z } from "zod";
 import { account, avatars, config, databases } from "../appwrite";
 
@@ -91,5 +91,25 @@ export const signOut = async (): Promise<Result<Models.Session>> => {
     };
   } catch (error: any) {
     return { success: false, message: error.message };
+  }
+};
+
+export const getCurrentUser = async (): Promise<Models.Document> => {
+  try {
+    const currentAccount = account.get();
+
+    if (!currentAccount) throw Error;
+
+    const currentUser = await databases.listDocuments(
+      config.databaseId,
+      config.userCollectionId,
+      [Query.equal("accountId", (await currentAccount).$id)],
+    );
+
+    if (!currentUser) throw Error;
+
+    return currentUser.documents[0];
+  } catch (error: any) {
+    throw new Error(error.message);
   }
 };

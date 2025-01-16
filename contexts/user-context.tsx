@@ -1,4 +1,4 @@
-import { account } from "@/lib/appwrite";
+import { getCurrentUser } from "@/lib/api/auth";
 import React, {
   createContext,
   ReactNode,
@@ -13,8 +13,9 @@ interface UserContextProviderProps {
 }
 
 interface IUserContext {
-  user: Models.User<Models.Preferences> | null;
+  user: Models.Document | null;
   handleRemoveUser: () => void;
+  init: () => Promise<void>;
 }
 
 export const UserContext = createContext<IUserContext | null>(null);
@@ -22,16 +23,14 @@ export const UserContext = createContext<IUserContext | null>(null);
 export default function UserContextProvider({
   children,
 }: UserContextProviderProps) {
-  const [user, setUser] = useState<Models.User<Models.Preferences> | null>(
-    null,
-  );
+  const [user, setUser] = useState<Models.Document | null>(null);
 
   const handleRemoveUser = () => setUser(null);
 
   const init = async () => {
     try {
-      const loggedIn = await account.get();
-      setUser(loggedIn);
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
     } catch {
       setUser(null);
     }
@@ -41,7 +40,7 @@ export default function UserContextProvider({
     init();
   }, []);
 
-  const value = useMemo(() => ({ user, handleRemoveUser }), [user]);
+  const value = useMemo(() => ({ user, handleRemoveUser, init }), [user]);
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
