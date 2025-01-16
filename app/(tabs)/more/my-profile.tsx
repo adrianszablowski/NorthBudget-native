@@ -23,6 +23,7 @@ export default function MyProfile() {
               source={{
                 uri: user?.avatar,
               }}
+              className="bg-white"
             />
             <AvatarBadge />
           </Avatar>
