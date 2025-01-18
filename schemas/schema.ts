@@ -32,3 +32,7 @@ export const signInFormSchema = z.object({
     .min(1, { message: i18next.t("Email is required") }),
   password: z.string().min(1, { message: i18next.t("Password is required") }),
 });
+
+export const changeUserDetailsSchema = z.object({
+  username: z.string().min(1, { message: i18next.t("Username is required") }),
+});

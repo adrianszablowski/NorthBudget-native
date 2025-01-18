@@ -100,5 +100,9 @@
   "You have been correctly logged in": "You have been correctly logged in",
   "Success": "Success",
   "Error": "Error",
-  "You have been correctly logged out": "You have been correctly logged out"
+  "You have been correctly logged out": "You have been correctly logged out",
+  "Username changed failed": "Username changed failed",
+  "Username was changed successfully": "Username was changed successfully",
+  "User Id is missing": "User Id is missing",
+  "An unexpected error occurred": "Wystąpił nieoczekiwany błąd"
 }
