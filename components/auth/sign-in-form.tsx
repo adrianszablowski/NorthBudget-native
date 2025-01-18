@@ -31,7 +31,7 @@ export default function SignInForm() {
     control,
     handleSubmit,
     reset,
-    formState: { isSubmitting, isSubmitSuccessful, isValidating, errors },
+    formState: { isSubmitting, isSubmitSuccessful, errors },
   } = useForm({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
@@ -115,7 +115,7 @@ export default function SignInForm() {
         )}
       />
       <Button onPress={handleSubmit(onSubmit)}>
-        <When condition={isSubmitting || isValidating}>
+        <When condition={isSubmitting}>
           <ButtonSpinner color={colors.white} />
         </When>
         <ButtonText>{t("Sign in")}</ButtonText>

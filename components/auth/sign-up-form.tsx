@@ -27,7 +27,7 @@ export default function SignUpForm() {
     control,
     handleSubmit,
     reset,
-    formState: { isSubmitting, isSubmitSuccessful, isValidating, errors },
+    formState: { isSubmitting, isSubmitSuccessful, errors },
   } = useForm({
     resolver: zodResolver(signUpFormSchema),
     defaultValues: {
@@ -169,7 +169,7 @@ export default function SignUpForm() {
         )}
       />
       <Button onPress={handleSubmit(onSubmit)}>
-        <When condition={isSubmitting || isValidating}>
+        <When condition={isSubmitting}>
           <ButtonSpinner color={colors.white} />
         </When>
         <ButtonText>{t("Sign up")}</ButtonText>
