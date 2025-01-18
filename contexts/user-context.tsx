@@ -1,4 +1,4 @@
-import { getCurrentUser } from "@/lib/api/auth";
+import { getCurrentUser } from "@/lib/api/user";
 import React, {
   createContext,
   ReactNode,

@@ -1,5 +1,5 @@
 import useUserContext from "@/hooks/user-user-context";
-import { setUserDetails } from "@/lib/api/auth";
+import { setUserDetails } from "@/lib/api/user";
 import { changeUserDetailsSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect } from "react";
