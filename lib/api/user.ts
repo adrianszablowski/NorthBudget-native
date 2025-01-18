@@ -10,14 +10,14 @@ import { account, config, databases } from "../appwrite";
 
 export const getCurrentUser = async (): Promise<Models.Document> => {
   try {
-    const currentAccount = account.get();
+    const currentAccount = await account.get();
 
     if (!currentAccount) throw Error;
 
     const currentUser = await databases.listDocuments(
       config.databaseId,
       config.userCollectionId,
-      [Query.equal("accountId", (await currentAccount).$id)],
+      [Query.equal("accountId", currentAccount.$id)],
     );
 
     if (!currentUser) throw Error;
@@ -30,14 +30,7 @@ export const getCurrentUser = async (): Promise<Models.Document> => {
 
 export const setUserDetails = async (
   formData: z.output<typeof changeUserDetailsSchema>,
-  userId: string | undefined,
 ): Promise<Result<Models.Document>> => {
-  if (!userId)
-    return {
-      success: false,
-      message: i18next.t("User Id is missing"),
-    };
-
   try {
     const parsedData = changeUserDetailsSchema.safeParse(formData);
 
@@ -47,6 +40,10 @@ export const setUserDetails = async (
         message: parsedData.error.message || i18next.t("Invalid data"),
       };
 
+    const currentAccount = account.get();
+
+    if (!currentAccount) throw Error;
+
     const newAccountName = await account.updateName(parsedData.data.username);
 
     if (!newAccountName)
@@ -55,7 +52,7 @@ export const setUserDetails = async (
     const newUsername = await databases.updateDocument(
       config.databaseId,
       config.userCollectionId,
-      userId,
+      (await currentAccount).$id,
       {
         username: parsedData.data.username,
       },
@@ -79,15 +76,12 @@ export const setUserDetails = async (
 
 export const setUserCurrency = async (
   currency: z.output<typeof changeCurrencySchema>,
-  userId: string | undefined,
 ): Promise<Result<Models.Document>> => {
-  if (!userId)
-    return {
-      success: false,
-      message: i18next.t("User Id is missing"),
-    };
-
   try {
+    const currentAccount = await account.get();
+
+    if (!currentAccount) throw Error;
+
     const parsedData = changeCurrencySchema.safeParse(currency);
 
     if (!parsedData.success)
@@ -99,7 +93,7 @@ export const setUserCurrency = async (
     const changedCurrency = await databases.updateDocument(
       config.databaseId,
       config.userCollectionId,
-      userId,
+      currentAccount.$id,
       {
         currency: parsedData.data.currency,
       },
