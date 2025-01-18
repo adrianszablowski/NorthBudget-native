@@ -104,5 +104,7 @@
   "Username changed failed": "Username changed failed",
   "Username was changed successfully": "Username was changed successfully",
   "User Id is missing": "User Id is missing",
-  "An unexpected error occurred": "Wystąpił nieoczekiwany błąd"
+  "An unexpected error occurred": "Wystąpił nieoczekiwany błąd",
+  "Currency changed failed": "Currency changed failed",
+  "Currency was changed successfully": "Currency was changed successfully"
 }

@@ -1,6 +1,5 @@
 import { toastConfig } from "@/components/toast/toast-config";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import CurrencyContextProvider from "@/contexts/currency-context";
 import UserContextProvider from "@/contexts/user-context";
 import "@/global.css";
 import "@/localization/i18n";
@@ -16,31 +15,29 @@ export default function RootLayout() {
   return (
     <GluestackUIProvider>
       <UserContextProvider>
-        <CurrencyContextProvider>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
-            <Stack.Screen
-              name="(auth)/sign-in"
-              options={{
-                headerShown: true,
-                headerTitle: t("Sign in"),
-                headerBackButtonDisplayMode: "minimal",
-              }}
-            />
-            <Stack.Screen
-              name="(auth)/sign-up"
-              options={{
-                headerShown: true,
-                headerTitle: t("Sign up"),
-                headerBackButtonDisplayMode: "minimal",
-              }}
-            />
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar />
-          <Toast config={toastConfig} />
-        </CurrencyContextProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen
+            name="(auth)/sign-in"
+            options={{
+              headerShown: true,
+              headerTitle: t("Sign in"),
+              headerBackButtonDisplayMode: "minimal",
+            }}
+          />
+          <Stack.Screen
+            name="(auth)/sign-up"
+            options={{
+              headerShown: true,
+              headerTitle: t("Sign up"),
+              headerBackButtonDisplayMode: "minimal",
+            }}
+          />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar />
+        <Toast config={toastConfig} />
       </UserContextProvider>
     </GluestackUIProvider>
   );

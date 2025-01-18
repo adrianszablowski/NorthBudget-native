@@ -11,16 +11,29 @@ import {
   SelectPortal,
   SelectTrigger,
 } from "@/components/ui/select";
-import { Currency } from "@/contexts/currency-context";
-import useCurrencyContext from "@/hooks/use-currency-context";
+import useUserContext from "@/hooks/user-user-context";
+import { setUserCurrency } from "@/lib/api/user";
+import { Currency } from "@/types/types";
 import React from "react";
+import { showToast } from "../toast/show-toast";
 
 export default function SelectCurrency() {
-  const { currency, handleSetCurrency } = useCurrencyContext();
+  const { user, init } = useUserContext();
+
+  const handleSetCurrency = async (currency: Currency) => {
+    const { success, message } = await setUserCurrency({ currency }, user?.$id);
+
+    if (!success) {
+      showToast("error", message);
+    } else {
+      init();
+      showToast("success", message);
+    }
+  };
 
   return (
     <Select
-      defaultValue={currency}
+      defaultValue={user?.currency}
       onValueChange={(value) => handleSetCurrency(value as Currency)}
     >
       <SelectTrigger>

@@ -1,7 +1,7 @@
 import { Badge, BadgeIcon, BadgeText } from "@/components/ui/badge";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import useCurrencyContext from "@/hooks/use-currency-context";
+import useUserContext from "@/hooks/user-user-context";
 import { Expense } from "@/types/types";
 import { useRouter } from "expo-router";
 import trim from "lodash/trim";
@@ -28,7 +28,7 @@ interface ExpenseProps {
 export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
   const { t } = useTranslation();
   const { push } = useRouter();
-  const { currency } = useCurrencyContext();
+  const { user } = useUserContext();
   const [showModal, setShowModal] = useState(false);
 
   const {
@@ -75,7 +75,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
         showModal={showModal}
         setShowModal={setShowModal}
         title={t("Payment options")}
-        description={`${t("Manage payment of")} ${amount} ${currency} ${t("For")} ${title}`}
+        description={`${t("Manage payment of")} ${amount} ${user?.currency} ${t("For")} ${title}`}
         actions={
           <>
             <Button

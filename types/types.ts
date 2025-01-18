@@ -4,6 +4,8 @@ export interface Result<T> {
   message: string;
 }
 
+export type Currency = "USD" | "EUR" | "PLN";
+
 export interface Goal {
   id: string;
   title: string;

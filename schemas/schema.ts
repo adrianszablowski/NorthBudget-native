@@ -36,3 +36,7 @@ export const signInFormSchema = z.object({
 export const changeUserDetailsSchema = z.object({
   username: z.string().min(1, { message: i18next.t("Username is required") }),
 });
+
+export const changeCurrencySchema = z.object({
+  currency: z.enum(["EUR", "USD", "PLN"]),
+});

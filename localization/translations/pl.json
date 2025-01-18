@@ -104,5 +104,7 @@
   "Username changed failed": "Zmiana nazwy użytkownika nie powiodła się",
   "Username was changed successfully": "Zmiana nazwy użytkownika powiodła się",
   "User Id is missing": "Brak identyfikatora użytkownika",
-  "An unexpected error occurred": "An unexpected error occurred"
+  "An unexpected error occurred": "An unexpected error occurred",
+  "Currency changed failed": "Zmiana waluty nie powiodła się",
+  "Currency was changed successfully": "Waluta została pomyślnie zmieniona"
 }

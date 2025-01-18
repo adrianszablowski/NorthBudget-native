@@ -1,4 +1,7 @@
-import { changeUserDetailsSchema } from "@/schemas/schema";
+import {
+  changeCurrencySchema,
+  changeUserDetailsSchema,
+} from "@/schemas/schema";
 import { Result } from "@/types/types";
 import i18next from "i18next";
 import { Models, Query } from "react-native-appwrite";
@@ -65,6 +68,50 @@ export const setUserDetails = async (
       success: true,
       message: i18next.t("Username was changed successfully"),
       data: newUsername,
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};
+
+export const setUserCurrency = async (
+  currency: z.output<typeof changeCurrencySchema>,
+  userId: string | undefined,
+): Promise<Result<Models.Document>> => {
+  if (!userId)
+    return {
+      success: false,
+      message: i18next.t("User Id is missing"),
+    };
+
+  try {
+    const parsedData = changeCurrencySchema.safeParse(currency);
+
+    if (!parsedData.success)
+      return {
+        success: false,
+        message: parsedData.error.message || i18next.t("Invalid data"),
+      };
+
+    const changedCurrency = await databases.updateDocument(
+      config.databaseId,
+      config.userCollectionId,
+      userId,
+      {
+        currency: parsedData.data.currency,
+      },
+    );
+
+    if (!changedCurrency)
+      return { success: false, message: i18next.t("Currency changed failed") };
+
+    return {
+      success: true,
+      message: i18next.t("Currency was changed successfully"),
+      data: changedCurrency,
     };
   } catch (error: any) {
     return {
