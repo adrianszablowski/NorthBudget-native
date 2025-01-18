@@ -5,5 +5,6 @@ declare namespace NodeJS {
     readonly EXPO_PUBLIC_APPWRITE_PLATFORM: string;
     readonly EXPO_PUBLIC_APPWRITE_DATABASE_ID: string;
     readonly EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID: string;
+    readonly EXPO_PUBLIC_APPWRITE_GOAL_COLLECTION_ID: string;
   }
 }

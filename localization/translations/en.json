@@ -106,5 +106,14 @@
   "User Id is missing": "User Id is missing",
   "An unexpected error occurred": "Wystąpił nieoczekiwany błąd",
   "Currency changed failed": "Currency changed failed",
-  "Currency was changed successfully": "Currency was changed successfully"
+  "Currency was changed successfully": "Currency was changed successfully",
+  "Goal was deleted successfully": "Goal was deleted successfully",
+  "Goal deletion failed": "Goal deletion failed",
+  "Goal update failed": "Goal update failed",
+  "Goal was updated successfully": "Goal was updated successfully",
+  "Goal creation failed": "Goal creation failed",
+  "Goal was created successfully": "Goal was created successfully",
+  "Title is required": "Title is required",
+  "Amount collected cannot be less than 0": "Amount collected cannot be less than 0",
+  "Amount collected cannot be less than 1": "Amount collected cannot be less than 1"
 }

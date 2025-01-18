@@ -40,3 +40,13 @@ export const changeUserDetailsSchema = z.object({
 export const changeCurrencySchema = z.object({
   currency: z.enum(["EUR", "USD", "PLN"]),
 });
+
+export const createGoalSchema = z.object({
+  title: z.string().min(1, { message: i18next.t("Title is required") }),
+  amountCollected: z
+    .number()
+    .min(0, { message: i18next.t("Amount collected cannot be less than 0") }),
+  amountToCollect: z
+    .number()
+    .min(1, { message: i18next.t("Amount collected cannot be less than 1") }),
+});

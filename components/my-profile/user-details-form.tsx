@@ -1,4 +1,3 @@
-import useUserContext from "@/hooks/user-user-context";
 import { setUserDetails } from "@/lib/api/user";
 import { changeUserDetailsSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +23,6 @@ import { VStack } from "../ui/vstack";
 
 export default function UserDetailsForm() {
   const { t } = useTranslation();
-  const { user } = useUserContext();
   const {
     control,
     handleSubmit,
@@ -40,7 +38,7 @@ export default function UserDetailsForm() {
   const onSubmit = async (
     formData: z.output<typeof changeUserDetailsSchema>,
   ) => {
-    const { success, message } = await setUserDetails(formData, user?.$id);
+    const { success, message } = await setUserDetails(formData);
 
     if (!success) {
       showToast("error", message);

@@ -106,5 +106,14 @@
   "User Id is missing": "Brak identyfikatora użytkownika",
   "An unexpected error occurred": "An unexpected error occurred",
   "Currency changed failed": "Zmiana waluty nie powiodła się",
-  "Currency was changed successfully": "Waluta została pomyślnie zmieniona"
+  "Currency was changed successfully": "Waluta została pomyślnie zmieniona",
+  "Goal was deleted successfully": "Cel został pomyślnie usunięty",
+  "Goal deletion failed": "Usunięcie goal nie powiodło się",
+  "Goal update failed": "Edycja celu nie powiodła się",
+  "Goal was updated successfully": "Cel został pomyślnie zaktualizowany",
+  "Goal creation failed": "Tworzenie celu nie powiodło się",
+  "Goal was created successfully": "Cel został pomyślnie utworzony",
+  "Title is required": "Tytuł jest wymagany",
+  "Amount collected cannot be less than 0": "Kwota zebrana nie może być niższa niż 0",
+  "Amount collected cannot be less than 1": "Amount collected cannot be less than 1"
 }
