@@ -1,3 +1,5 @@
+import { Models } from "react-native-appwrite";
+
 export interface Result<T> {
   data?: T;
   success: boolean;
@@ -6,14 +8,20 @@ export interface Result<T> {
 
 export type Currency = "USD" | "EUR" | "PLN";
 
-export interface Goal {
-  id: string;
+export interface User extends Models.Document {
+  avatar: string;
+  currency: Currency;
+  email: string;
+  username: string;
+}
+export interface Goal extends Models.Document {
   title: string;
-  amount: number;
-  goalAmout: number;
+  amountCollected: number;
+  amountToCollect: number;
+  userId: string;
 }
 
-export interface Expense {
+export interface Expense extends Models.Document {
   id: string;
   title: string;
   amount: number;

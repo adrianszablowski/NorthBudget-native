@@ -1,6 +1,7 @@
-import { createGoal } from "@/lib/api/goals";
+import { createGoal, getGoal, updateGoal } from "@/lib/api/goals";
 import { createGoalSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import toNumber from "lodash/toNumber";
 import toString from "lodash/toString";
@@ -31,6 +32,14 @@ interface ExpenseFormProps {
 export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   const { t } = useTranslation();
   const { back } = useRouter();
+  const queryClient = useQueryClient();
+
+  const { data: goalData } = useQuery({
+    queryKey: ["getGoal"],
+    queryFn: () => getGoal(goalId!),
+    enabled: !!goalId,
+  });
+
   const {
     control,
     handleSubmit,
@@ -39,20 +48,57 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   } = useForm({
     resolver: zodResolver(createGoalSchema),
     defaultValues: {
-      title: "",
-      amountCollected: 0,
-      amountToCollect: 0,
+      title: !!goalId ? (goalData?.data?.title ?? "") : "",
+      amountCollected: !!goalId ? (goalData?.data?.amountCollected ?? 0) : 0,
+      amountToCollect: !!goalId ? (goalData?.data?.amountToCollect ?? 0) : 0,
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: createGoal,
+    onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
+      back();
+
+      if (success) {
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: ({
+      formData,
+      id,
+    }: {
+      formData: z.output<typeof createGoalSchema>;
+      id: string;
+    }) => updateGoal(formData, id),
+    onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
+      back();
+
+      if (success) {
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
     },
   });
 
   const onSubmit = async (formData: z.output<typeof createGoalSchema>) => {
-    const { success, message } = await createGoal(formData);
-
-    if (!success) {
-      showToast("error", message);
+    if (!goalId) {
+      createMutation.mutate(formData);
     } else {
-      showToast("success", message);
-      back();
+      updateMutation.mutate({ formData, id: goalId });
     }
   };
 

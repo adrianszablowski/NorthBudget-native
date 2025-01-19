@@ -1,9 +1,12 @@
+import { deleteGoal } from "@/lib/api/goals";
 import { Goal } from "@/types/types";
 import calculateGoalProgress from "@/utils/calculate-goal-progress";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import toLower from "lodash/toLower";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { showToast } from "../toast/show-toast";
 import Amount from "../ui/amount";
 import { Button, ButtonIcon, ButtonText } from "../ui/button";
 import { Card } from "../ui/card";
@@ -24,12 +27,29 @@ interface GoalCardProps {
 export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
   const { t } = useTranslation();
   const { push } = useRouter();
+  const queryClient = useQueryClient();
   const [showModal, setShowModal] = useState(false);
   const [showFundsModal, setShowFundsModal] = useState(false);
 
-  const { id, title, amount, goalAmout } = goal;
+  const deleteMutation = useMutation({
+    mutationFn: deleteGoal,
+    onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
 
-  const goalProgress = calculateGoalProgress(amount, goalAmout);
+      if (success) {
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
+    },
+  });
+
+  const { $id, title, amountCollected, amountToCollect } = goal;
+
+  const goalProgress = calculateGoalProgress(amountCollected, amountToCollect);
 
   return (
     <>
@@ -38,11 +58,11 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
           <VStack space="lg">
             <Heading size="xl">{title}</Heading>
             <HStack className="justify-between">
-              <Amount amount={amount} bold size="xl" />
+              <Amount amount={amountCollected} bold size="xl" />
               <HStack space="xs">
                 <Text className="text-typography-700">{t("Of")}</Text>
                 <Amount
-                  amount={goalAmout}
+                  amount={amountToCollect}
                   size="sm"
                   className="text-typography-700"
                 />
@@ -77,7 +97,7 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
               variant="outline"
               onPress={() => {
                 setShowModal(false);
-                push(`/goals/edit/${id}`);
+                push(`/goals/edit/${$id}`);
               }}
             >
               <ButtonIcon as={EditIcon} />
@@ -86,6 +106,7 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
             <Button
               action="negative"
               onPress={() => {
+                deleteMutation.mutate($id);
                 setShowModal(false);
               }}
             >

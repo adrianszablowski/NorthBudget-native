@@ -1,4 +1,5 @@
 import { createGoalSchema } from "@/schemas/schema";
+import { Goal } from "@/types/types";
 import i18next from "i18next";
 import { ID, Query } from "react-native-appwrite";
 import { z } from "zod";
@@ -10,7 +11,7 @@ export const getAllGoals = async () => {
 
     if (!currentAccount) throw Error;
 
-    const goals = await databases.listDocuments(
+    const goals = await databases.listDocuments<Goal>(
       config.databaseId,
       config.goalCollectionId,
       [Query.equal("userId", currentAccount.$id)],
@@ -25,17 +26,38 @@ export const getAllGoals = async () => {
   }
 };
 
+export const getGoal = async (goalId: string) => {
+  try {
+    const goal = await databases.getDocument<Goal>(
+      config.databaseId,
+      config.goalCollectionId,
+      goalId,
+    );
+
+    return {
+      success: true,
+      message: "",
+      data: goal,
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};
+
 export const createGoal = async (
   formData: z.output<typeof createGoalSchema>,
 ) => {
   try {
     const parsedData = createGoalSchema.safeParse(formData);
 
-    if (!parsedData.success)
-      return {
-        success: false,
-        message: parsedData.error.message || i18next.t("Invalid data"),
-      };
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
+
+    const currentAccount = await account.get();
+
+    if (!currentAccount) throw Error;
 
     const { title, amountCollected, amountToCollect } = parsedData.data;
 
@@ -47,14 +69,11 @@ export const createGoal = async (
         title,
         amountCollected,
         amountToCollect,
+        userId: currentAccount.$id,
       },
     );
 
-    if (!createdGoal)
-      return {
-        success: true,
-        message: i18next.t("Goal creation failed"),
-      };
+    if (!createdGoal) throw new Error(i18next.t("Goal creation failed"));
 
     return {
       success: true,
@@ -75,11 +94,7 @@ export const updateGoal = async (
   try {
     const parsedData = createGoalSchema.safeParse(formData);
 
-    if (!parsedData.success)
-      return {
-        success: false,
-        message: parsedData.error.message || i18next.t("Invalid data"),
-      };
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
 
     const { title, amountCollected, amountToCollect } = parsedData.data;
 
@@ -94,11 +109,7 @@ export const updateGoal = async (
       },
     );
 
-    if (!updatedGoal)
-      return {
-        success: true,
-        message: i18next.t("Goal update failed"),
-      };
+    if (!updatedGoal) throw new Error(i18next.t("Goal update failed"));
 
     return {
       success: true,
@@ -120,11 +131,7 @@ export const deleteGoal = async (goalId: string) => {
       goalId,
     );
 
-    if (!deletedGoal)
-      return {
-        success: true,
-        message: i18next.t("Goal deletion failed"),
-      };
+    if (!deletedGoal) throw new Error(i18next.t("Goal deletion failed"));
 
     return {
       success: true,
