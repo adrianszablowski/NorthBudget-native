@@ -1,12 +1,12 @@
 import GoalCard from "@/components/goals/goal-card";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { Center } from "@/components/ui/center";
-import { AddIcon, Icon, LoaderIcon } from "@/components/ui/icon";
+import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { getAllGoals } from "@/lib/api/goals";
 import { Goal } from "@/types/types";
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import isEmpty from "lodash/isEmpty";
@@ -29,7 +29,12 @@ export default function Goals() {
     return (
       <SafeAreaView className="h-full bg-background-0">
         <Center className="h-full pb-[60px]">
-          <Icon as={LoaderIcon} color={colors.blue[600]} />
+          <AntDesign
+            name="loading1"
+            size={50}
+            color={colors.blue[600]}
+            className="animate-spin"
+          />
         </Center>
       </SafeAreaView>
     );
