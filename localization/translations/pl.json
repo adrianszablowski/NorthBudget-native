@@ -115,5 +115,8 @@
   "Goal was created successfully": "Cel został pomyślnie utworzony",
   "Title is required": "Tytuł jest wymagany",
   "Amount collected cannot be less than 0": "Kwota zebrana nie może być niższa niż 0",
-  "Amount collected cannot be less than 1": "Kwota zebrana nie może być niższa niż 1"
+  "Amount collected cannot be less than 1": "Kwota zebrana nie może być niższa niż 1",
+  "Amount cannot be less than 1": "Kwota nie może być mniejsza niż 1",
+  "Adding funds failed": "Dodanie środków nie powiodło się",
+  "Funds have been added successfully": "Środki zostały dodane pomyślnie"
 }

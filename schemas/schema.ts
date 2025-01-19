@@ -50,3 +50,9 @@ export const createGoalSchema = z.object({
     .number()
     .min(1, { message: i18next.t("Amount collected cannot be less than 1") }),
 });
+
+export const addFundsSchema = z.object({
+  amount: z
+    .number()
+    .min(1, { message: i18next.t("Amount cannot be less than 1") }),
+});

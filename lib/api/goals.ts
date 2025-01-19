@@ -1,4 +1,4 @@
-import { createGoalSchema } from "@/schemas/schema";
+import { addFundsSchema, createGoalSchema } from "@/schemas/schema";
 import { Goal } from "@/types/types";
 import i18next from "i18next";
 import { ID, Query } from "react-native-appwrite";
@@ -114,6 +114,41 @@ export const updateGoal = async (
     return {
       success: true,
       message: i18next.t("Goal was updated successfully"),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};
+
+export const addFunds = async (
+  formData: z.output<typeof addFundsSchema>,
+  amountCollected: number,
+  goalId: string,
+) => {
+  try {
+    const parsedData = addFundsSchema.safeParse(formData);
+
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
+
+    const { amount } = parsedData.data;
+
+    const updatedGoal = await databases.updateDocument(
+      config.databaseId,
+      config.goalCollectionId,
+      goalId,
+      {
+        amountCollected: amountCollected + amount,
+      },
+    );
+
+    if (!updatedGoal) throw new Error(i18next.t("Adding funds failed"));
+
+    return {
+      success: true,
+      message: i18next.t("Funds have been added successfully"),
     };
   } catch (error: any) {
     return {

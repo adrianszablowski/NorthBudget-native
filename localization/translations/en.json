@@ -115,5 +115,8 @@
   "Goal was created successfully": "Goal was created successfully",
   "Title is required": "Title is required",
   "Amount collected cannot be less than 0": "Amount collected cannot be less than 0",
-  "Amount collected cannot be less than 1": "Amount collected cannot be less than 1"
+  "Amount collected cannot be less than 1": "Amount collected cannot be less than 1",
+  "Amount cannot be less than 1": "Amount cannot be less than 1",
+  "Adding funds failed": "Adding funds failed",
+  "Funds have been added successfully": "Funds have been added successfully"
 }

@@ -7,12 +7,31 @@ import {
   ModalContent,
   ModalHeader,
 } from "@/components/ui/modal";
+import { addFunds } from "@/lib/api/goals";
+import { addFundsSchema } from "@/schemas/schema";
 import { Goal } from "@/types/types";
-import React, { Dispatch, SetStateAction } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import toNumber from "lodash/toNumber";
+import toString from "lodash/toString";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonText } from "../ui/button";
+import { When } from "react-if";
+import colors from "tailwindcss/colors";
+import { z } from "zod";
+import { showToast } from "../toast/show-toast";
+import { Button, ButtonSpinner, ButtonText } from "../ui/button";
+import {
+  FormControl,
+  FormControlError,
+  FormControlErrorIcon,
+  FormControlErrorText,
+  FormControlLabel,
+  FormControlLabelText,
+} from "../ui/form-control";
 import { Heading } from "../ui/heading";
-import { CloseIcon, Icon } from "../ui/icon";
+import { AlertCircleIcon, CloseIcon, Icon } from "../ui/icon";
 import { Input, InputField } from "../ui/input";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
@@ -27,11 +46,58 @@ type AddFundsModalProps = AdditionalProps & IModalProps;
 
 export default function AddFundsModal(props: AddFundsModalProps) {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+
   const {
-    goal: { title },
+    control,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, isSubmitSuccessful, errors },
+  } = useForm({
+    resolver: zodResolver(addFundsSchema),
+    defaultValues: {
+      amount: 0,
+    },
+  });
+
+  const addFundsMutation = useMutation({
+    mutationFn: ({
+      formData,
+      amountCollected,
+      id,
+    }: {
+      formData: z.output<typeof addFundsSchema>;
+      amountCollected: number;
+      id: string;
+    }) => addFunds(formData, amountCollected, id),
+    onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
+
+      if (success) {
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
+    },
+  });
+
+  const {
+    goal: { title, $id: goalId, amountCollected },
     showModal,
     setShowModal,
   } = props;
+
+  const onSubmit = async (formData: z.output<typeof addFundsSchema>) => {
+    addFundsMutation.mutate({ formData, amountCollected, id: goalId });
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset();
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <Modal
@@ -61,13 +127,41 @@ export default function AddFundsModal(props: AddFundsModalProps) {
             <Text size="sm" className="text-typography-500">
               {t("Add funds fo goal")}: {title}
             </Text>
-            <VStack space="xs">
-              <Text className="text-typography-500">{t("Amount")}</Text>
-              <Input>
-                <InputField type="text" keyboardType="numeric" />
-              </Input>
-            </VStack>
-            <Button>
+            <Controller
+              name="amount"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { value, onChange, onBlur } }) => (
+                <VStack space="xs">
+                  <FormControl isInvalid={!!errors.amount}>
+                    <FormControlLabel>
+                      <FormControlLabelText>{t("Amount")}</FormControlLabelText>
+                    </FormControlLabel>
+                    <Input>
+                      <InputField
+                        type="text"
+                        keyboardType="numeric"
+                        value={toString(value)}
+                        onChangeText={(value) =>
+                          onChange(value ? toNumber(value) : 0)
+                        }
+                        onBlur={onBlur}
+                      />
+                    </Input>
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        {errors.amount?.message}
+                      </FormControlErrorText>
+                    </FormControlError>
+                  </FormControl>
+                </VStack>
+              )}
+            />
+            <Button onPress={handleSubmit(onSubmit)}>
+              <When condition={isSubmitting}>
+                <ButtonSpinner color={colors.white} />
+              </When>
               <ButtonText>{t("Submit")}</ButtonText>
             </Button>
           </VStack>
