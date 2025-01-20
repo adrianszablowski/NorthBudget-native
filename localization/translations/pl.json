@@ -118,5 +118,6 @@
   "Amount collected cannot be less than 1": "Kwota zebrana nie może być niższa niż 1",
   "Amount cannot be less than 1": "Kwota nie może być mniejsza niż 1",
   "Adding funds failed": "Dodanie środków nie powiodło się",
-  "Funds have been added successfully": "Środki zostały dodane pomyślnie"
+  "Funds have been added successfully": "Środki zostały dodane pomyślnie",
+  "There has been a problem logging in": "Wystąpił problem z zalogowaniem"
 }

@@ -11,11 +11,7 @@ export const signUp = async (
   try {
     const parsedData = signUpFormSchema.safeParse(formData);
 
-    if (!parsedData.success)
-      return {
-        success: false,
-        message: parsedData.error.message || i18next.t("Invalid data"),
-      };
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
 
     const { email, password, username } = parsedData.data;
 
@@ -26,8 +22,7 @@ export const signUp = async (
       username,
     );
 
-    if (!newAccount)
-      return { success: false, message: i18next.t("Failed to create account") };
+    if (!newAccount) throw new Error(i18next.t("Failed to create account"));
 
     const avatarUrl = avatars.getInitials(username);
 
@@ -64,15 +59,14 @@ export const signIn = async (
   try {
     const parsedData = signInFormSchema.safeParse(formData);
 
-    if (!parsedData.success)
-      return {
-        success: false,
-        message: parsedData.error.message || i18next.t("Invalid data"),
-      };
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
 
     const { email, password } = parsedData.data;
 
     const session = await account.createEmailPasswordSession(email, password);
+
+    if (!session)
+      throw new Error(i18next.t("There has been a problem logging in"));
 
     return {
       data: session,

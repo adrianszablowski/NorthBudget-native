@@ -1,6 +1,7 @@
 import { signUp } from "@/lib/api/auth";
 import { signUpFormSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -38,14 +39,22 @@ export default function SignUpForm() {
     },
   });
 
-  const onSubmit = async (formData: z.output<typeof signUpFormSchema>) => {
-    const { success, message } = await signUp(formData);
-
-    if (!success) {
+  const signUpMutation = useMutation({
+    mutationFn: signUp,
+    onSuccess: ({ success, message }) => {
+      if (success) {
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
       showToast("error", message);
-    } else {
-      showToast("success", message);
-    }
+    },
+  });
+
+  const onSubmit = async (formData: z.output<typeof signUpFormSchema>) => {
+    signUpMutation.mutate(formData);
   };
 
   useEffect(() => {

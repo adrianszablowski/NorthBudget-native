@@ -118,5 +118,6 @@
   "Amount collected cannot be less than 1": "Amount collected cannot be less than 1",
   "Amount cannot be less than 1": "Amount cannot be less than 1",
   "Adding funds failed": "Adding funds failed",
-  "Funds have been added successfully": "Funds have been added successfully"
+  "Funds have been added successfully": "Funds have been added successfully",
+  "There has been a problem logging in": "There has been a problem logging in"
 }
