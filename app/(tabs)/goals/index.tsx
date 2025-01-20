@@ -14,13 +14,17 @@ import map from "lodash/map";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Else, If, Then } from "react-if";
-import { SafeAreaView, ScrollView } from "react-native";
+import { RefreshControl, SafeAreaView, ScrollView } from "react-native";
 import colors from "tailwindcss/colors";
 
 export default function Goals() {
   const { t } = useTranslation();
   const { push } = useRouter();
-  const { data: goalsData, isLoading: goalsDataIsLoading } = useQuery({
+  const {
+    data: goalsData,
+    isLoading: goalsDataIsLoading,
+    refetch: refetchGoalsData,
+  } = useQuery({
     queryKey: ["getGoals"],
     queryFn: getAllGoals,
   });
@@ -44,7 +48,15 @@ export default function Goals() {
     <SafeAreaView className="h-full bg-background-0">
       <If condition={!isEmpty(goalsData)}>
         <Then>
-          <ScrollView className="px-3 py-2">
+          <ScrollView
+            className="px-3 py-2"
+            refreshControl={
+              <RefreshControl
+                refreshing={goalsDataIsLoading}
+                onRefresh={refetchGoalsData}
+              />
+            }
+          >
             <VStack space="sm" className="h-full pb-[60px]">
               <Button onPress={() => push("/goals/create")}>
                 <ButtonIcon as={AddIcon} />
