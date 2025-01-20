@@ -2,19 +2,19 @@ import {
   changeCurrencySchema,
   changeUserDetailsSchema,
 } from "@/schemas/schema";
-import { Result } from "@/types/types";
+import { Result, User } from "@/types/types";
 import i18next from "i18next";
-import { Models, Query } from "react-native-appwrite";
+import { Query } from "react-native-appwrite";
 import { z } from "zod";
 import { account, config, databases } from "../appwrite";
 
-export const getCurrentUser = async (): Promise<Models.Document> => {
+export const getCurrentUser = async (): Promise<User> => {
   try {
     const currentAccount = await account.get();
 
     if (!currentAccount) throw Error;
 
-    const currentUser = await databases.listDocuments(
+    const currentUser = await databases.listDocuments<User>(
       config.databaseId,
       config.userCollectionId,
       [Query.equal("accountId", currentAccount.$id)],
@@ -30,7 +30,7 @@ export const getCurrentUser = async (): Promise<Models.Document> => {
 
 export const setUserDetails = async (
   formData: z.output<typeof changeUserDetailsSchema>,
-): Promise<Result<Models.Document>> => {
+): Promise<Result<User>> => {
   try {
     const parsedData = changeUserDetailsSchema.safeParse(formData);
 
@@ -49,7 +49,7 @@ export const setUserDetails = async (
     if (!newAccountName)
       return { success: false, message: i18next.t("Username changed failed") };
 
-    const newUsername = await databases.updateDocument(
+    const newUsername = await databases.updateDocument<User>(
       config.databaseId,
       config.userCollectionId,
       (await currentAccount).$id,
@@ -76,7 +76,7 @@ export const setUserDetails = async (
 
 export const setUserCurrency = async (
   currency: z.output<typeof changeCurrencySchema>,
-): Promise<Result<Models.Document>> => {
+): Promise<Result<User>> => {
   try {
     const currentAccount = await account.get();
 
@@ -90,7 +90,7 @@ export const setUserCurrency = async (
         message: parsedData.error.message || i18next.t("Invalid data"),
       };
 
-    const changedCurrency = await databases.updateDocument(
+    const changedCurrency = await databases.updateDocument<User>(
       config.databaseId,
       config.userCollectionId,
       currentAccount.$id,

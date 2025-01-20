@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/lib/api/user";
+import { User } from "@/types/types";
 import React, {
   createContext,
   ReactNode,
@@ -6,14 +7,13 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Models } from "react-native-appwrite";
 
 interface UserContextProviderProps {
   children: ReactNode;
 }
 
 interface IUserContext {
-  user: Models.Document | null;
+  user: User | null;
   handleRemoveUser: () => void;
   init: () => Promise<void>;
 }
@@ -23,7 +23,7 @@ export const UserContext = createContext<IUserContext | null>(null);
 export default function UserContextProvider({
   children,
 }: UserContextProviderProps) {
-  const [user, setUser] = useState<Models.Document | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   const handleRemoveUser = () => setUser(null);
 

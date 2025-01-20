@@ -21,7 +21,7 @@ export default function SelectCurrency() {
   const { user, init } = useUserContext();
 
   const handleSetCurrency = async (currency: Currency) => {
-    const { success, message } = await setUserCurrency({ currency }, user?.$id);
+    const { success, message } = await setUserCurrency({ currency });
 
     if (!success) {
       showToast("error", message);
