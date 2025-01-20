@@ -3,18 +3,19 @@ import { Goal } from "@/types/types";
 import i18next from "i18next";
 import { ID, Query } from "react-native-appwrite";
 import { z } from "zod";
-import { account, config, databases } from "../appwrite";
+import { config, databases } from "../appwrite";
+import { getCurrentUser } from "./user";
 
 export const getAllGoals = async () => {
   try {
-    const currentAccount = await account.get();
+    const user = await getCurrentUser();
 
-    if (!currentAccount) throw Error;
+    if (!user) throw Error;
 
     const goals = await databases.listDocuments<Goal>(
       config.databaseId,
       config.goalCollectionId,
-      [Query.equal("userId", currentAccount.$id)],
+      [Query.equal("userId", user.$id)],
     );
 
     return goals.documents;
@@ -55,9 +56,9 @@ export const createGoal = async (
 
     if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
 
-    const currentAccount = await account.get();
+    const user = await getCurrentUser();
 
-    if (!currentAccount) throw Error;
+    if (!user) throw Error;
 
     const { title, amountCollected, amountToCollect } = parsedData.data;
 
@@ -69,7 +70,7 @@ export const createGoal = async (
         title,
         amountCollected,
         amountToCollect,
-        userId: currentAccount.$id,
+        userId: user.$id,
       },
     );
 
