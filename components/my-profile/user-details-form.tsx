@@ -1,6 +1,7 @@
 import { setUserDetails } from "@/lib/api/user";
 import { changeUserDetailsSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -35,16 +36,24 @@ export default function UserDetailsForm() {
     },
   });
 
+  const changeUserDetailsMutation = useMutation({
+    mutationFn: setUserDetails,
+    onSuccess: ({ success, message }) => {
+      if (success) {
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
+    },
+  });
+
   const onSubmit = async (
     formData: z.output<typeof changeUserDetailsSchema>,
   ) => {
-    const { success, message } = await setUserDetails(formData);
-
-    if (!success) {
-      showToast("error", message);
-    } else {
-      showToast("success", message);
-    }
+    changeUserDetailsMutation.mutate(formData);
   };
 
   useEffect(() => {
