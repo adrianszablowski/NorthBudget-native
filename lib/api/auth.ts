@@ -1,5 +1,5 @@
 import { signInFormSchema, signUpFormSchema } from "@/schemas/schema";
-import { Result } from "@/types/types";
+import { Result, User } from "@/types/types";
 import i18next from "i18next";
 import { ID, Models } from "react-native-appwrite";
 import { z } from "zod";
@@ -7,7 +7,7 @@ import { account, avatars, config, databases } from "../appwrite";
 
 export const signUp = async (
   formData: z.output<typeof signUpFormSchema>,
-): Promise<Result<Models.Document>> => {
+): Promise<Result<User>> => {
   try {
     const parsedData = signUpFormSchema.safeParse(formData);
 
@@ -33,7 +33,7 @@ export const signUp = async (
 
     await signIn({ email, password });
 
-    const newUser = await databases.createDocument(
+    const newUser = await databases.createDocument<User>(
       config.databaseId,
       config.userCollectionId,
       ID.unique(),
