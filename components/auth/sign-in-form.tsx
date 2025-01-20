@@ -2,6 +2,7 @@ import useUserContext from "@/hooks/user-user-context";
 import { signIn } from "@/lib/api/auth";
 import { signInFormSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -40,16 +41,24 @@ export default function SignInForm() {
     },
   });
 
-  const onSubmit = async (formData: z.output<typeof signInFormSchema>) => {
-    const { success, message } = await signIn(formData);
-
-    if (!success) {
+  const signInMutation = useMutation({
+    mutationFn: signIn,
+    onSuccess: ({ success, message }) => {
+      if (success) {
+        init();
+        showToast("success", message);
+        replace("/dashboard");
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
       showToast("error", message);
-    } else {
-      init();
-      showToast("success", message);
-      replace("/dashboard");
-    }
+    },
+  });
+
+  const onSubmit = async (formData: z.output<typeof signInFormSchema>) => {
+    signInMutation.mutate(formData);
   };
 
   useEffect(() => {
