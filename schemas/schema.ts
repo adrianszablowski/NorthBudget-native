@@ -8,9 +8,9 @@ export const signUpFormSchema = z
       .email({ message: i18next.t("Email is invalid") })
       .min(1, { message: i18next.t("Email is required") }),
     username: z.string().min(1, { message: i18next.t("Username is required") }),
-    password: z
-      .string()
-      .min(8, { message: i18next.t("Password must have at least 8 letters") }),
+    password: z.string().min(8, {
+      message: i18next.t("Password must have at least 8 characters"),
+    }),
     repeatPassword: z
       .string()
       .min(1, { message: i18next.t("Passwords must be the same") }),
@@ -32,6 +32,28 @@ export const signInFormSchema = z.object({
     .min(1, { message: i18next.t("Email is required") }),
   password: z.string().min(1, { message: i18next.t("Password is required") }),
 });
+
+export const changePasswordSchema = z
+  .object({
+    oldPassword: z
+      .string()
+      .min(1, { message: i18next.t("Password is required") }),
+    newPassword: z.string().min(8, {
+      message: i18next.t("Password must have at least 8 characters"),
+    }),
+    repeatNewPassword: z
+      .string()
+      .min(1, { message: i18next.t("Passwords must be the same") }),
+  })
+  .superRefine(({ newPassword, repeatNewPassword }, ctx) => {
+    if (repeatNewPassword !== newPassword) {
+      ctx.addIssue({
+        code: "custom",
+        message: i18next.t("Passwords must be the same"),
+        path: ["repeatNewPassword"],
+      });
+    }
+  });
 
 export const changeUserDetailsSchema = z.object({
   username: z.string().min(1, { message: i18next.t("Username is required") }),

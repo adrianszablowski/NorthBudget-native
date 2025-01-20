@@ -5,11 +5,8 @@ import { useMutation } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { When } from "react-if";
-import colors from "tailwindcss/colors";
 import { z } from "zod";
 import { showToast } from "../toast/show-toast";
-import { Button, ButtonSpinner, ButtonText } from "../ui/button";
 import {
   FormControl,
   FormControlError,
@@ -18,8 +15,9 @@ import {
   FormControlLabel,
   FormControlLabelText,
 } from "../ui/form-control";
-import { AlertCircleIcon } from "../ui/icon";
+import { AlertCircleIcon, EditIcon } from "../ui/icon";
 import { Input, InputField } from "../ui/input";
+import SubmitFormButton from "../ui/submit-form-button";
 import { VStack } from "../ui/vstack";
 
 export default function UserDetailsForm() {
@@ -90,12 +88,14 @@ export default function UserDetailsForm() {
           </VStack>
         )}
       />
-      <Button onPress={handleSubmit(onSubmit)}>
-        <When condition={isSubmitting}>
-          <ButtonSpinner color={colors.white} />
-        </When>
-        <ButtonText>{t("Save")}</ButtonText>
-      </Button>
+      <SubmitFormButton
+        onPress={handleSubmit(onSubmit)}
+        title={t("Save")}
+        buttonIcon={EditIcon}
+        showButtonSpinnerCondition={
+          isSubmitting || changeUserDetailsMutation.isPending
+        }
+      />
     </VStack>
   );
 }

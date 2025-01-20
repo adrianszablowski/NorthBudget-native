@@ -91,7 +91,7 @@
   "Email is invalid": "Email jest nieprawidłowy",
   "Email is required": "Email jest wymagany",
   "Username is required": "Nazwa użytkownika jest wymagana",
-  "Password must have at least 8 letters": "Hasło musi składać się z co najmniej 8 liter",
+  "Password must have at least 8 characters": "Hasło musi składać się z co najmniej 8 znaków",
   "Passwords must be the same": "Hasła muszą być takie same",
   "Password is invalid": "Hasło jest wymagane",
   "Invalid data": "Nieprawidłowe dane",
@@ -119,5 +119,8 @@
   "Amount cannot be less than 1": "Kwota nie może być mniejsza niż 1",
   "Adding funds failed": "Dodanie środków nie powiodło się",
   "Funds have been added successfully": "Środki zostały dodane pomyślnie",
-  "There has been a problem logging in": "Wystąpił problem z zalogowaniem"
+  "There has been a problem logging in": "Wystąpił problem z zalogowaniem",
+  "Password change failed": "Zmiana hasła nie powiodła się",
+  "Password has been successfully changed": "Hasło zostało pomyślnie zmienione",
+  "Password is required": "Hasło jest wymagane"
 }

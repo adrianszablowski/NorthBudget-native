@@ -91,7 +91,7 @@
   "Email is invalid": "Email is invalid",
   "Email is required": "Email is required",
   "Username is required": "Username is required",
-  "Password must have at least 8 letters": "Password must have at least 8 letters",
+  "Password must have at least 8 characters": "Password must have at least 8 characters",
   "Passwords must be the same": "Passwords must be the same",
   "Password is invalid": "Password is invalid",
   "Invalid data": "Invalid data",
@@ -119,5 +119,8 @@
   "Amount cannot be less than 1": "Amount cannot be less than 1",
   "Adding funds failed": "Adding funds failed",
   "Funds have been added successfully": "Funds have been added successfully",
-  "There has been a problem logging in": "There has been a problem logging in"
+  "There has been a problem logging in": "There has been a problem logging in",
+  "Password change failed": "Password change failed",
+  "Password has been successfully changed": "Password has been successfully changed",
+  "Password is required": "Password is required"
 }

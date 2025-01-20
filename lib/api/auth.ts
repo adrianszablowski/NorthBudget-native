@@ -1,4 +1,8 @@
-import { signInFormSchema, signUpFormSchema } from "@/schemas/schema";
+import {
+  changePasswordSchema,
+  signInFormSchema,
+  signUpFormSchema,
+} from "@/schemas/schema";
 import { Result, User } from "@/types/types";
 import i18next from "i18next";
 import { ID, Models } from "react-native-appwrite";
@@ -88,6 +92,35 @@ export const signOut = async (): Promise<Result<Models.Session>> => {
     return {
       success: true,
       message: i18next.t("You have been correctly logged out"),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};
+
+export const changePassword = async (
+  formData: z.output<typeof changePasswordSchema>,
+): Promise<Result<Models.Preferences>> => {
+  try {
+    const parsedData = changePasswordSchema.safeParse(formData);
+
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
+
+    const { newPassword, oldPassword } = parsedData.data;
+
+    const changedPassword = await account.updatePassword(
+      newPassword,
+      oldPassword,
+    );
+
+    if (!changedPassword) throw new Error(i18next.t("Password change failed"));
+
+    return {
+      success: true,
+      message: i18next.t("Password has been successfully changed"),
     };
   } catch (error: any) {
     return {

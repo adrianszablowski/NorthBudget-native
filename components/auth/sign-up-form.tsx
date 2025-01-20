@@ -5,11 +5,8 @@ import { useMutation } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { When } from "react-if";
-import colors from "tailwindcss/colors";
 import { z } from "zod";
 import { showToast } from "../toast/show-toast";
-import { Button, ButtonSpinner, ButtonText } from "../ui/button";
 import {
   FormControl,
   FormControlError,
@@ -20,6 +17,7 @@ import {
 } from "../ui/form-control";
 import { AlertCircleIcon } from "../ui/icon";
 import { Input, InputField } from "../ui/input";
+import SubmitFormButton from "../ui/submit-form-button";
 import { VStack } from "../ui/vstack";
 
 export default function SignUpForm() {
@@ -177,12 +175,11 @@ export default function SignUpForm() {
           </VStack>
         )}
       />
-      <Button onPress={handleSubmit(onSubmit)}>
-        <When condition={isSubmitting}>
-          <ButtonSpinner color={colors.white} />
-        </When>
-        <ButtonText>{t("Sign up")}</ButtonText>
-      </Button>
+      <SubmitFormButton
+        onPress={handleSubmit(onSubmit)}
+        title={t("Sign up")}
+        showButtonSpinnerCondition={isSubmitting || signUpMutation.isPending}
+      />
     </VStack>
   );
 }
