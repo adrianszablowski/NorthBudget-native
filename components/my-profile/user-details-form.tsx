@@ -1,8 +1,9 @@
+import useUserContext from "@/hooks/user-user-context";
 import { setUserDetails } from "@/lib/api/user";
 import { changeUserDetailsSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import React, { useEffect } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
@@ -22,15 +23,15 @@ import { VStack } from "../ui/vstack";
 
 export default function UserDetailsForm() {
   const { t } = useTranslation();
+  const { init, user } = useUserContext();
   const {
     control,
     handleSubmit,
-    reset,
-    formState: { isSubmitting, isSubmitSuccessful, errors },
+    formState: { isSubmitting, errors },
   } = useForm({
     resolver: zodResolver(changeUserDetailsSchema),
     defaultValues: {
-      username: "",
+      username: user ? user.username : "",
     },
   });
 
@@ -39,6 +40,7 @@ export default function UserDetailsForm() {
     onSuccess: ({ success, message }) => {
       if (success) {
         showToast("success", message);
+        init();
       } else {
         showToast("error", message);
       }
@@ -53,10 +55,6 @@ export default function UserDetailsForm() {
   ) => {
     changeUserDetailsMutation.mutate(formData);
   };
-
-  useEffect(() => {
-    if (isSubmitSuccessful) reset();
-  }, [isSubmitSuccessful, reset]);
 
   return (
     <VStack space="sm">

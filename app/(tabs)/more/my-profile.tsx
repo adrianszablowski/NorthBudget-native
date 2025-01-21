@@ -8,38 +8,44 @@ import { VStack } from "@/components/ui/vstack";
 import useUserContext from "@/hooks/user-user-context";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SafeAreaView } from "react-native";
+import { RefreshControl, SafeAreaView, ScrollView } from "react-native";
 
 export default function MyProfile() {
   const { t } = useTranslation();
-  const { user } = useUserContext();
+  const { user, init, isLoading } = useUserContext();
 
   return (
     <SafeAreaView className="h-full bg-background-0">
-      <VStack space="lg" className="px-3 py-2">
-        <HStack space="md">
-          <Avatar size="xl">
-            <AvatarImage
-              source={{
-                uri: user?.avatar,
-              }}
-              className="bg-white"
-            />
-            <AvatarBadge />
-          </Avatar>
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={init} />
+        }
+      >
+        <VStack space="lg" className="px-3 py-2">
+          <HStack space="md">
+            <Avatar size="xl">
+              <AvatarImage
+                source={{
+                  uri: user?.avatar,
+                }}
+                className="bg-white"
+              />
+              <AvatarBadge />
+            </Avatar>
+            <VStack>
+              <Text size="2xl" bold>
+                {user?.username}
+              </Text>
+              <Text className="text-typography-500">{user?.email}</Text>
+            </VStack>
+          </HStack>
           <VStack>
-            <Text size="2xl" bold>
-              {user?.username}
-            </Text>
-            <Text className="text-typography-500">{user?.email}</Text>
+            <Heading size="md">{t("User details")}</Heading>
+            <Divider className="mb-2" />
+            <UserDetailsForm />
           </VStack>
-        </HStack>
-        <VStack>
-          <Heading size="md">{t("User details")}</Heading>
-          <Divider className="mb-2" />
-          <UserDetailsForm />
         </VStack>
-      </VStack>
+      </ScrollView>
     </SafeAreaView>
   );
 }

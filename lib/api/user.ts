@@ -40,26 +40,24 @@ export const setUserDetails = async (
         message: parsedData.error.message || i18next.t("Invalid data"),
       };
 
-    const currentAccount = account.get();
+    const user = await getCurrentUser();
 
-    if (!currentAccount) throw Error;
+    if (!user) throw Error;
 
     const newAccountName = await account.updateName(parsedData.data.username);
 
-    if (!newAccountName)
-      return { success: false, message: i18next.t("Username changed failed") };
+    if (!newAccountName) throw new Error(i18next.t("Username changed failed"));
 
     const newUsername = await databases.updateDocument<User>(
       config.databaseId,
       config.userCollectionId,
-      (await currentAccount).$id,
+      user.$id,
       {
         username: parsedData.data.username,
       },
     );
 
-    if (!newUsername)
-      return { success: false, message: i18next.t("Username changed failed") };
+    if (!newUsername) throw new Error(i18next.t("Username changed failed"));
 
     return {
       success: true,
@@ -84,11 +82,7 @@ export const setUserCurrency = async (
 
     const parsedData = changeCurrencySchema.safeParse(currency);
 
-    if (!parsedData.success)
-      return {
-        success: false,
-        message: parsedData.error.message || i18next.t("Invalid data"),
-      };
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
 
     const changedCurrency = await databases.updateDocument<User>(
       config.databaseId,
@@ -99,8 +93,7 @@ export const setUserCurrency = async (
       },
     );
 
-    if (!changedCurrency)
-      return { success: false, message: i18next.t("Currency changed failed") };
+    if (!changedCurrency) throw new Error(i18next.t("Currency changed failed"));
 
     return {
       success: true,

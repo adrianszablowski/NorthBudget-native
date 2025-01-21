@@ -16,6 +16,7 @@ interface IUserContext {
   user: User | null;
   handleRemoveUser: () => void;
   init: () => Promise<void>;
+  isLoading: boolean;
 }
 
 export const UserContext = createContext<IUserContext | null>(null);
@@ -24,15 +25,20 @@ export default function UserContextProvider({
   children,
 }: UserContextProviderProps) {
   const [user, setUser] = useState<User | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleRemoveUser = () => setUser(null);
 
   const init = async () => {
+    setIsLoading(true);
+
     try {
       const currentUser = await getCurrentUser();
       setUser(currentUser);
     } catch {
       setUser(null);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -40,7 +46,10 @@ export default function UserContextProvider({
     init();
   }, []);
 
-  const value = useMemo(() => ({ user, handleRemoveUser, init }), [user]);
+  const value = useMemo(
+    () => ({ user, handleRemoveUser, init, isLoading }),
+    [user, isLoading],
+  );
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
