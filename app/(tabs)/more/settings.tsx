@@ -2,12 +2,14 @@ import LanguageActionsheet from "@/components/profile/language-actionsheet";
 import SelectCurrency from "@/components/profile/select-currency";
 import { showToast } from "@/components/toast/show-toast";
 import { HStack } from "@/components/ui/hstack";
+import { Modal, ModalBackdrop } from "@/components/ui/modal";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import useUserContext from "@/hooks/user-user-context";
 import { signOut } from "@/lib/api/auth";
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -22,17 +24,21 @@ export default function Settings() {
 
   const handleClose = () => setShowActionsheet(false);
 
-  const handleSignOut = async () => {
-    const { success, message } = await signOut();
-
-    if (!success) {
+  const signOutMutation = useMutation({
+    mutationFn: signOut,
+    onSuccess: ({ success, message }) => {
+      if (success) {
+        handleRemoveUser();
+        showToast("success", message);
+        replace("/");
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
       showToast("error", message);
-    } else {
-      handleRemoveUser();
-      showToast("success", message);
-      replace("/");
-    }
-  };
+    },
+  });
 
   return (
     <SafeAreaView className="h-full bg-background-0">
@@ -52,7 +58,7 @@ export default function Settings() {
             </HStack>
           )}
         </Pressable>
-        <Pressable className="w-full" onPress={handleSignOut}>
+        <Pressable className="w-full" onPress={() => signOutMutation.mutate()}>
           {({ pressed }) => (
             <HStack
               className={`${pressed && "bg-error-50"} rounded-md px-4 py-4`}
@@ -68,6 +74,15 @@ export default function Settings() {
           handleClose={handleClose}
         />
       </VStack>
+      <Modal isOpen={signOutMutation.isPending}>
+        <ModalBackdrop />
+        <AntDesign
+          name="loading1"
+          size={50}
+          color={colors.blue[600]}
+          className="animate-spin"
+        />
+      </Modal>
     </SafeAreaView>
   );
 }
