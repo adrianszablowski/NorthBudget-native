@@ -76,9 +76,9 @@ export const setUserCurrency = async (
   currency: z.output<typeof changeCurrencySchema>,
 ): Promise<Result<User>> => {
   try {
-    const currentAccount = await account.get();
+    const user = await getCurrentUser();
 
-    if (!currentAccount) throw Error;
+    if (!user) throw Error;
 
     const parsedData = changeCurrencySchema.safeParse(currency);
 
@@ -87,7 +87,7 @@ export const setUserCurrency = async (
     const changedCurrency = await databases.updateDocument<User>(
       config.databaseId,
       config.userCollectionId,
-      currentAccount.$id,
+      user.$id,
       {
         currency: parsedData.data.currency,
       },
