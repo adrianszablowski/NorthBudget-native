@@ -122,5 +122,6 @@
   "There has been a problem logging in": "Wystąpił problem z zalogowaniem",
   "Password change failed": "Zmiana hasła nie powiodła się",
   "Password has been successfully changed": "Hasło zostało pomyślnie zmienione",
-  "Password is required": "Hasło jest wymagane"
+  "Password is required": "Hasło jest wymagane",
+  "Data download error": "Błąd pobierania danych"
 }

@@ -122,5 +122,6 @@
   "There has been a problem logging in": "There has been a problem logging in",
   "Password change failed": "Password change failed",
   "Password has been successfully changed": "Password has been successfully changed",
-  "Password is required": "Password is required"
+  "Password is required": "Password is required",
+  "Data download error": "Data download error"
 }
