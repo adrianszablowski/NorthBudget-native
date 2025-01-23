@@ -78,3 +78,17 @@ export const addFundsSchema = z.object({
     .number()
     .min(1, { message: i18next.t("Amount cannot be less than 1") }),
 });
+
+export const createExpenseSchema = z.object({
+  title: z.string().min(1, { message: i18next.t("Title is required") }),
+  amount: z.number().min(1, { message: i18next.t("Amount is required") }),
+  category: z.string().min(1, { message: i18next.t("Category is required") }),
+  dueDate: z.coerce.date(),
+  paid: z.boolean(),
+  standingOrder: z.boolean(),
+  standingOrderDate: z.coerce.date(),
+});
+
+export const createCategorySchema = z.object({
+  title: z.string().min(1, { message: i18next.t("Category name is required") }),
+});

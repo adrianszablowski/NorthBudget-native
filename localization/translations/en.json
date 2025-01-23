@@ -123,5 +123,8 @@
   "Password change failed": "Password change failed",
   "Password has been successfully changed": "Password has been successfully changed",
   "Password is required": "Password is required",
-  "Data download error": "Data download error"
+  "Data download error": "Data download error",
+  "Category name is required": "Category name is required",
+  "Amount is required": "Amount is required",
+  "Category is required": "Category is required"
 }

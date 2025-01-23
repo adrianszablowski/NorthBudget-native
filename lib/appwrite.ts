@@ -7,6 +7,8 @@ export const config = {
   databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID,
   userCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_COLLECTION_ID,
   goalCollectionId: process.env.EXPO_PUBLIC_APPWRITE_GOAL_COLLECTION_ID,
+  categoryCollectionId: process.env.EXPO_PUBLIC_APPWRITE_CATEGORY_COLLECTION_ID,
+  expenseCollectionId: process.env.EXPO_PUBLIC_APPWRITE_EXPENSE_COLLECTION_ID,
 };
 
 const client = new Client()
