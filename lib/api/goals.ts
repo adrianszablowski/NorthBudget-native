@@ -34,16 +34,11 @@ export const getGoal = async (goalId: string) => {
       goalId,
     );
 
-    return {
-      success: true,
-      message: "",
-      data: goal,
-    };
+    return goal;
   } catch (error: any) {
-    return {
-      success: false,
-      message: error?.message || i18next.t("An unexpected error occurred"),
-    };
+    throw new Error(
+      error?.message || i18next.t("An unexpected error occurred"),
+    );
   }
 };
 

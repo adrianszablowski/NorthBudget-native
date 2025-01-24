@@ -46,9 +46,9 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   } = useForm({
     resolver: zodResolver(createGoalSchema),
     defaultValues: {
-      title: !!goalId ? (goalData?.data?.title ?? "") : "",
-      amountCollected: !!goalId ? (goalData?.data?.amountCollected ?? 0) : 0,
-      amountToCollect: !!goalId ? (goalData?.data?.amountToCollect ?? 0) : 0,
+      title: !!goalId ? (goalData?.title ?? "") : "",
+      amountCollected: !!goalId ? (goalData?.amountCollected ?? 0) : 0,
+      amountToCollect: !!goalId ? (goalData?.amountToCollect ?? 0) : 0,
     },
   });
 
