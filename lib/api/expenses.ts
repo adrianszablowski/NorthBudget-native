@@ -94,6 +94,54 @@ export const createExpense = async (
   }
 };
 
+export const updateExpense = async (
+  formData: z.output<typeof createExpenseSchema>,
+  expenseId: string,
+) => {
+  try {
+    const parsedData = createExpenseSchema.safeParse(formData);
+
+    if (!parsedData.success) throw new Error(i18next.t("Invalid data"));
+
+    const {
+      title,
+      amount,
+      category,
+      dueDate,
+      paid,
+      standingOrder,
+      standingOrderDate,
+    } = parsedData.data;
+
+    const updatedExpense = await databases.updateDocument(
+      config.databaseId,
+      config.goalCollectionId,
+      expenseId,
+      {
+        title,
+        amount,
+        category,
+        dueDate,
+        paid,
+        standingOrder,
+        standingOrderDate,
+      },
+    );
+
+    if (!updatedExpense) throw new Error(i18next.t("Expense update failed"));
+
+    return {
+      success: true,
+      message: i18next.t("Expense was updated successfully"),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};
+
 export const setPaidExpenseStatus = async (
   paid: boolean,
   expenseId: string,

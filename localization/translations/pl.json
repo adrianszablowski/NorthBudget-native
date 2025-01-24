@@ -132,5 +132,7 @@
   "Expense status has been successfully changed": "Status wydatku został pomyślnie zmieniony",
   "Payment status change failed": "Zmiana statusu płatności nie powiodła się",
   "Expense deletion failed": "Usunięcie wydatku nie powiodło się",
-  "Expense was deleted successfully": "Wydatek został pomyślnie usunięty"
+  "Expense was deleted successfully": "Wydatek został pomyślnie usunięty",
+  "Expense update failed": "Edycja wydatku nie powiodła się",
+  "Expense was updated successfully": "Wydatek został pomyślnie zaktualizowany"
 }

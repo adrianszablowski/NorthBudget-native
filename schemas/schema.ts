@@ -86,7 +86,7 @@ export const createExpenseSchema = z.object({
   dueDate: z.coerce.date(),
   paid: z.boolean(),
   standingOrder: z.boolean(),
-  standingOrderDate: z.coerce.date(),
+  standingOrderDate: z.coerce.date().optional(),
 });
 
 export const createCategorySchema = z.object({

@@ -132,5 +132,7 @@
   "Expense status has been successfully changed": "Expense status has been successfully changed",
   "Payment status change failed": "Payment status change failed",
   "Expense deletion failed": "Expense deletion failed",
-  "Expense was deleted successfully": "Expense was deleted successfully"
+  "Expense was deleted successfully": "Expense was deleted successfully",
+  "Expense update failed": "Expense update failed",
+  "Expense was updated successfully": "Expense was updated successfully"
 }
