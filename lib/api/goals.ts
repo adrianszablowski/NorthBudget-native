@@ -20,10 +20,9 @@ export const getAllGoals = async () => {
 
     return goals.documents;
   } catch (error: any) {
-    return {
-      success: false,
-      message: error?.message || i18next.t("An unexpected error occurred"),
-    };
+    throw new Error(
+      error?.message || i18next.t("An unexpected error occurred"),
+    );
   }
 };
 

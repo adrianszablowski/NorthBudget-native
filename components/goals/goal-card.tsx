@@ -34,7 +34,7 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
   const deleteMutation = useMutation({
     mutationFn: deleteGoal,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
+      queryClient.invalidateQueries({ queryKey: ["getGoals", "goals"] });
 
       if (success) {
         showToast("success", message);

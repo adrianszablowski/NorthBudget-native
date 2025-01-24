@@ -3,6 +3,7 @@ import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import useUserContext from "@/hooks/user-user-context";
 import { Expense } from "@/types/types";
+import { format } from "date-fns";
 import { useRouter } from "expo-router";
 import trim from "lodash/trim";
 import React, { useState } from "react";
@@ -49,13 +50,14 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
           <HStack className="items-center justify-between">
             <VStack space="xs">
               <Text size="lg">{trim(title)}</Text>
-              <Text>{category}</Text>
+              <Text>{category.title}</Text>
               <Text className="text-typography-500" size="sm">
-                {t("Due date")}: {dueDate}
+                {t("Due date")}: {format(dueDate, "yyyy-MM-dd")}
               </Text>
-              {standingOrder && (
+              {standingOrder && standingOrderDate && (
                 <Text className="text-typography-500" size="sm">
-                  {t("Standing order to")}: {standingOrderDate}
+                  {t("Standing order to")}:{" "}
+                  {format(standingOrderDate, "yyyy-MM-dd")}
                 </Text>
               )}
             </VStack>

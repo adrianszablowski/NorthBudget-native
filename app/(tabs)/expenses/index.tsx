@@ -5,78 +5,68 @@ import { Center } from "@/components/ui/center";
 import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { getAllExpenses } from "@/lib/api/expenses";
 import { Expense } from "@/types/types";
-import { FontAwesome } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
-import React, { useState } from "react";
+import sumBy from "lodash/sumBy";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Else, If, Then } from "react-if";
-import { SafeAreaView, ScrollView } from "react-native";
+import { RefreshControl, SafeAreaView, ScrollView } from "react-native";
 import colors from "tailwindcss/colors";
 
 export default function Expenses() {
   const { t } = useTranslation();
   const { push } = useRouter();
-  const [expensesData] = useState<Expense[]>([
-    {
-      id: "1",
-      title: "Monthly Rent",
-      amount: 1800,
-      category: "House",
-      dueDate: "2025-01-05",
-      paid: false,
-      standingOrder: false,
-      standingOrderDate: null,
-    },
-    {
-      id: "2",
-      title: "Electricity Bill",
-      amount: 225.5,
-      category: "House",
-      dueDate: "2025-01-10",
-      paid: true,
-      standingOrder: false,
-      standingOrderDate: null,
-    },
-    {
-      id: "3",
-      title: "Car Loan Installment",
-      amount: 980,
-      category: "Car",
-      dueDate: "2025-01-15",
-      paid: false,
-      standingOrder: true,
-      standingOrderDate: "2025-01-15",
-    },
-    {
-      id: "4",
-      title: "Phone Subscription",
-      amount: 60,
-      category: "Private",
-      dueDate: "2025-01-20",
-      paid: false,
-      standingOrder: true,
-      standingOrderDate: "2025-01-20",
-    },
-    {
-      id: "5",
-      title: "Internet and TV",
-      amount: 90,
-      category: "House",
-      dueDate: "2025-01-25",
-      paid: true,
-      standingOrder: false,
-      standingOrderDate: null,
-    },
-  ]);
+  const {
+    data: expensesData,
+    isLoading: isLoadingExpenses,
+    refetch: refetchExpenses,
+  } = useQuery({
+    queryKey: ["expenses"],
+    queryFn: getAllExpenses,
+  });
+
+  if (isLoadingExpenses) {
+    return (
+      <SafeAreaView className="h-full bg-background-0">
+        <Center className="h-full pb-[60px]">
+          <AntDesign
+            name="loading1"
+            size={50}
+            color={colors.blue[600]}
+            className="animate-spin"
+          />
+        </Center>
+      </SafeAreaView>
+    );
+  }
+
+  const leftToPay = sumBy(expensesData, function (expense: Expense) {
+    if (!expense.paid) {
+      return expense.amount;
+    }
+
+    return 0;
+  });
 
   return (
     <SafeAreaView className="h-full bg-background-0">
       <If condition={!isEmpty(expensesData)}>
         <Then>
-          <ScrollView className="px-3 py-2">
+          <ScrollView
+            className="px-3 py-2"
+            refreshControl={
+              <RefreshControl
+                refreshing={isLoadingExpenses}
+                onRefresh={refetchExpenses}
+              />
+            }
+          >
             <VStack space="sm" className="h-full pb-[60px]">
               <VStack space="sm">
                 <Button onPress={() => push("/expenses/create")}>
@@ -85,12 +75,12 @@ export default function Expenses() {
                 </Button>
                 <Text>
                   {t("Left to pay")}:{" "}
-                  <Amount bold className="text-error-600" amount={40} />
+                  <Amount bold className="text-error-600" amount={leftToPay} />
                 </Text>
               </VStack>
               <VStack space="md">
-                {map(expensesData, (expense) => (
-                  <ExpenseCard key={expense.id} expense={expense} />
+                {map(expensesData, (expense: Expense) => (
+                  <ExpenseCard key={expense.$id} expense={expense} />
                 ))}
               </VStack>
             </VStack>

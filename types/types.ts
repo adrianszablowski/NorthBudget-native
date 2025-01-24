@@ -22,12 +22,14 @@ export interface Goal extends Models.Document {
 }
 
 export interface Expense extends Models.Document {
-  id: string;
   title: string;
   amount: number;
-  category: string;
+  category: Category;
   dueDate: string;
   paid: boolean;
   standingOrder: boolean;
   standingOrderDate: string | null;
+}
+export interface Category extends Models.Document {
+  title: string;
 }

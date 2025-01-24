@@ -55,7 +55,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   const createMutation = useMutation({
     mutationFn: createGoal,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
+      queryClient.invalidateQueries({ queryKey: ["getGoals", "goals"] });
       back();
 
       if (success) {
@@ -78,7 +78,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
       id: string;
     }) => updateGoal(formData, id),
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["getGoals"] });
+      queryClient.invalidateQueries({ queryKey: ["getGoals", "goals"] });
       back();
 
       if (success) {

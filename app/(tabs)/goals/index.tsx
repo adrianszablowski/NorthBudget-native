@@ -25,7 +25,7 @@ export default function Goals() {
     isLoading: goalsDataIsLoading,
     refetch: refetchGoalsData,
   } = useQuery({
-    queryKey: ["getAllGoals"],
+    queryKey: ["goals"],
     queryFn: getAllGoals,
   });
 
