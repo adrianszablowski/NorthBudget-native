@@ -126,5 +126,9 @@
   "Data download error": "Data download error",
   "Category name is required": "Category name is required",
   "Amount is required": "Amount is required",
-  "Category is required": "Category is required"
+  "Category is required": "Category is required",
+  "Expense creation failed": "Expense creation failed",
+  "Expense was created successfully": "Expense was created successfully",
+  "Expense status has been successfully changed": "Expense status has been successfully changed",
+  "Payment status change failed": "Payment status change failed"
 }

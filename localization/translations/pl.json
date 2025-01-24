@@ -126,5 +126,9 @@
   "Data download error": "Błąd pobierania danych",
   "Category name is required": "Nazwa kategorii jest wymagana",
   "Amount is required": "Kwota jest wymagana",
-  "Category is required": "Kategoria jest wymagana"
+  "Category is required": "Kategoria jest wymagana",
+  "Expense creation failed": "Tworzenie wydaku nie powiodło się",
+  "Expense was created successfully": "Wydatek został utworzony pomyślnie",
+  "Expense status has been successfully changed": "Status wydatku został pomyślnie zmieniony",
+  "Payment status change failed": "Zmiana statusu płatności nie powiodła się"
 }
