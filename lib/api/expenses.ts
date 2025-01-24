@@ -122,3 +122,25 @@ export const setPaidExpenseStatus = async (
     };
   }
 };
+
+export const deleteExpense = async (expenseId: string) => {
+  try {
+    const deletedExpense = await databases.deleteDocument(
+      config.databaseId,
+      config.expenseCollectionId,
+      expenseId,
+    );
+
+    if (!deletedExpense) throw new Error(i18next.t("Expense deletion failed"));
+
+    return {
+      success: true,
+      message: i18next.t("Expense was deleted successfully"),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};

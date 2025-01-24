@@ -108,7 +108,7 @@
   "Currency changed failed": "Zmiana waluty nie powiodła się",
   "Currency was changed successfully": "Waluta została pomyślnie zmieniona",
   "Goal was deleted successfully": "Cel został pomyślnie usunięty",
-  "Goal deletion failed": "Usunięcie goal nie powiodło się",
+  "Goal deletion failed": "Usunięcie celu nie powiodło się",
   "Goal update failed": "Edycja celu nie powiodła się",
   "Goal was updated successfully": "Cel został pomyślnie zaktualizowany",
   "Goal creation failed": "Tworzenie celu nie powiodło się",
@@ -130,5 +130,7 @@
   "Expense creation failed": "Tworzenie wydaku nie powiodło się",
   "Expense was created successfully": "Wydatek został utworzony pomyślnie",
   "Expense status has been successfully changed": "Status wydatku został pomyślnie zmieniony",
-  "Payment status change failed": "Zmiana statusu płatności nie powiodła się"
+  "Payment status change failed": "Zmiana statusu płatności nie powiodła się",
+  "Expense deletion failed": "Usunięcie wydatku nie powiodło się",
+  "Expense was deleted successfully": "Wydatek został pomyślnie usunięty"
 }

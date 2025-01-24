@@ -2,7 +2,7 @@ import { Badge, BadgeIcon, BadgeText } from "@/components/ui/badge";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import useUserContext from "@/hooks/user-user-context";
-import { setPaidExpenseStatus } from "@/lib/api/expenses";
+import { deleteExpense, setPaidExpenseStatus } from "@/lib/api/expenses";
 import { Expense } from "@/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -40,8 +40,23 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
     mutationFn: ({ paid, id }: { paid: boolean; id: string }) =>
       setPaidExpenseStatus(!paid, id),
     onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["expenses"] });
       if (success) {
-        queryClient.invalidateQueries({ queryKey: ["expenses"] });
+        showToast("success", message);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
+    },
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteExpense,
+    onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      if (success) {
         showToast("success", message);
       } else {
         showToast("error", message);
@@ -125,6 +140,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
             <Button
               action="negative"
               onPress={() => {
+                deleteMutation.mutate($id);
                 setShowModal(false);
               }}
             >
