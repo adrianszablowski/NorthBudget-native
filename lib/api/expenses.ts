@@ -75,7 +75,7 @@ export const createExpense = async (
         dueDate,
         paid,
         standingOrder,
-        standingOrderDate,
+        standingOrderDate: standingOrder ? standingOrderDate : null,
         userId: user.$id,
       },
     );

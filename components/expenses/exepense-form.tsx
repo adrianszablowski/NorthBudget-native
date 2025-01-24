@@ -1,9 +1,12 @@
+import { getAllCategories } from "@/lib/api/categories";
 import { createExpense, getExpense, updateExpense } from "@/lib/api/expenses";
 import { createExpenseSchema } from "@/schemas/schema";
+import { Category } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
+import map from "lodash/map";
 import toNumber from "lodash/toNumber";
 import toString from "lodash/toString";
 import React, { useEffect, useState } from "react";
@@ -58,6 +61,11 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
     enabled: !!expenseId,
   });
 
+  const { data: categoriesData } = useQuery({
+    queryKey: ["categories"],
+    queryFn: getAllCategories,
+  });
+
   const {
     control,
     handleSubmit,
@@ -70,11 +78,15 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
       title: !!expenseId && expenseData ? expenseData.title : "",
       amount: !!expenseId && expenseData ? expenseData.amount : 0,
       category: !!expenseId && expenseData ? expenseData.category.$id : "",
-      dueDate: !!expenseId && expenseData ? new Date() : new Date(),
+      dueDate:
+        !!expenseId && expenseData ? new Date(expenseData.dueDate) : new Date(),
       paid: !!expenseId && expenseData ? expenseData.paid : false,
       standingOrder:
         !!expenseId && expenseData ? expenseData.standingOrder : false,
-      standingOrderDate: !!expenseId && expenseData ? new Date() : new Date(),
+      standingOrderDate:
+        !!expenseId && expenseData?.standingOrderDate
+          ? new Date(expenseData.standingOrderDate)
+          : new Date(),
     },
   });
 
@@ -218,8 +230,13 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
                       <SelectDragIndicatorWrapper>
                         <SelectDragIndicator />
                       </SelectDragIndicatorWrapper>
-                      <SelectItem label="Car" value="1" />
-                      <SelectItem label="Home" value="2" />
+                      {map(categoriesData, (category: Category) => (
+                        <SelectItem
+                          key={category.$id}
+                          label={category.title}
+                          value={category.$id}
+                        />
+                      ))}
                     </SelectContent>
                   </SelectPortal>
                 </Select>
@@ -247,7 +264,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
                   <RNDateTimePicker
                     mode="date"
                     value={value}
-                    onChange={onChange}
+                    onChange={(_event, date) => onChange(date)}
                   />
                 </View>
                 <FormControlError>
@@ -341,7 +358,8 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
                     <RNDateTimePicker
                       mode="date"
                       value={value}
-                      onChange={onChange}
+                      onChange={(_event, date) => onChange(date)}
+                      minimumDate={watch("dueDate")}
                     />
                   </View>
                   <FormControlError>
