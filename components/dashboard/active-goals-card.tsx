@@ -27,7 +27,7 @@ export default function ActiveGoalsCard() {
     isLoading: goalsDataIsLoading,
     isError: goalsDataIsError,
   } = useQuery({
-    queryKey: ["getGoals"],
+    queryKey: ["goals"],
     queryFn: getAllGoals,
   });
 

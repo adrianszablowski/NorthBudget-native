@@ -71,7 +71,7 @@ export default function AddFundsModal(props: AddFundsModalProps) {
       id: string;
     }) => addFunds(formData, amountCollected, id),
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["getGoals", "goals"] });
+      queryClient.invalidateQueries({ queryKey: ["goals"] });
 
       if (success) {
         showToast("success", message);
