@@ -19,27 +19,27 @@ export default function ExpensesByCategoryCard() {
             data={[
               {
                 name: "Food",
-                expenseCount: 100,
+                expenseCount: 65,
                 color: colors.red[500],
               },
               {
                 name: "Rent",
-                expenseCount: 100,
+                expenseCount: 112,
                 color: colors.green[700],
               },
               {
                 name: "Entertainment",
-                expenseCount: 100,
+                expenseCount: 86,
                 color: colors.blue[600],
               },
               {
                 name: "Transportation",
-                expenseCount: 100,
+                expenseCount: 49,
                 color: colors.fuchsia[500],
               },
               {
                 name: "Utilities",
-                expenseCount: 100,
+                expenseCount: 77,
                 color: colors.violet[200],
               },
             ]}

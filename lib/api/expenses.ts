@@ -1,6 +1,8 @@
 import { createExpenseSchema } from "@/schemas/schema";
 import { Expense } from "@/types/types";
+import { formatISO, getDaysInMonth, getMonth, getYear, sub } from "date-fns";
 import i18next from "i18next";
+import sumBy from "lodash/sumBy";
 import { ID, Query } from "react-native-appwrite";
 import { z } from "zod";
 import { config, databases } from "../appwrite";
@@ -35,6 +37,91 @@ export const getExpense = async (expenseId: string) => {
     );
 
     return expense;
+  } catch (error: any) {
+    throw new Error(
+      error?.message || i18next.t("An unexpected error occurred"),
+    );
+  }
+};
+
+export const getCurrentMonthExpenses = async () => {
+  const currentYear = getYear(new Date());
+  const currentMonth = getMonth(new Date());
+  const daysInCurrentMonth = getDaysInMonth(
+    new Date(currentYear, currentMonth),
+  );
+
+  try {
+    const user = await getCurrentUser();
+
+    if (!user) throw Error;
+
+    const expenses = await databases.listDocuments<Expense>(
+      config.databaseId,
+      config.expenseCollectionId,
+      [
+        Query.equal("userId", user.$id),
+        Query.greaterThanEqual(
+          "dueDate",
+          formatISO(new Date(currentYear, currentMonth, 1, 0, 0, 0)),
+        ),
+        Query.lessThanEqual(
+          "dueDate",
+          formatISO(
+            new Date(currentYear, currentMonth, daysInCurrentMonth, 23, 59, 59),
+          ),
+        ),
+      ],
+    );
+
+    const totalExpenses = sumBy(expenses.documents, "amount");
+
+    return totalExpenses;
+  } catch (error: any) {
+    throw new Error(
+      error?.message || i18next.t("An unexpected error occurred"),
+    );
+  }
+};
+
+export const getPrevMonthExpenses = async () => {
+  const currentYear = getYear(new Date());
+  const currentMonth = getMonth(new Date());
+  const daysInCurrentMonth = getDaysInMonth(
+    new Date(currentYear, currentMonth),
+  );
+
+  const startDate = formatISO(
+    sub(new Date(currentYear, currentMonth, 1, 0, 0, 0), {
+      months: 1,
+    }),
+  );
+  const endDate = formatISO(
+    sub(new Date(currentYear, currentMonth, daysInCurrentMonth, 23, 59, 59), {
+      months: 1,
+    }),
+  );
+
+  try {
+    const user = await getCurrentUser();
+
+    if (!user) throw Error;
+
+    const expenses = await databases.listDocuments<Expense>(
+      config.databaseId,
+      config.expenseCollectionId,
+      [
+        Query.equal("userId", user.$id),
+        Query.greaterThanEqual("dueDate", startDate),
+        Query.lessThanEqual("dueDate", endDate),
+      ],
+    );
+
+    const totalExpenses = sumBy(expenses.documents, "amount");
+
+    console.log({ totalExpenses });
+
+    return totalExpenses;
   } catch (error: any) {
     throw new Error(
       error?.message || i18next.t("An unexpected error occurred"),
