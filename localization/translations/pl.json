@@ -134,5 +134,7 @@
   "Expense deletion failed": "Usunięcie wydatku nie powiodło się",
   "Expense was deleted successfully": "Wydatek został pomyślnie usunięty",
   "Expense update failed": "Edycja wydatku nie powiodła się",
-  "Expense was updated successfully": "Wydatek został pomyślnie zaktualizowany"
+  "Expense was updated successfully": "Wydatek został pomyślnie zaktualizowany",
+  "Category creation failed": "Tworzenie kategorii nie powiodło się",
+  "Category was created successfully": "Kategoria została pomyślnie utworzona"
 }

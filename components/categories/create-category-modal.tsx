@@ -7,12 +7,27 @@ import {
   ModalContent,
   ModalHeader,
 } from "@/components/ui/modal";
-import React, { Dispatch, SetStateAction } from "react";
+import { createCategory } from "@/lib/api/categories";
+import { createCategorySchema } from "@/schemas/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { Button, ButtonText } from "../ui/button";
+import { z } from "zod";
+import { showToast } from "../toast/show-toast";
+import {
+  FormControl,
+  FormControlError,
+  FormControlErrorIcon,
+  FormControlErrorText,
+  FormControlLabel,
+  FormControlLabelText,
+} from "../ui/form-control";
 import { Heading } from "../ui/heading";
-import { CloseIcon, Icon } from "../ui/icon";
+import { AlertCircleIcon, CloseIcon, Icon } from "../ui/icon";
 import { Input, InputField } from "../ui/input";
+import SubmitFormButton from "../ui/submit-form-button";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
 
@@ -25,7 +40,45 @@ type CreateCategoryModalProps = AdditionalProps & IModalProps;
 
 export default function CreateCategoryModal(props: CreateCategoryModalProps) {
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
   const { showModal, setShowModal } = props;
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting, isSubmitSuccessful, errors },
+  } = useForm({
+    resolver: zodResolver(createCategorySchema),
+    defaultValues: {
+      title: "",
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: createCategory,
+    onSuccess: ({ success, message }) => {
+      queryClient.invalidateQueries({ queryKey: ["categories"] });
+
+      if (success) {
+        showToast("success", message);
+        setShowModal(false);
+      } else {
+        showToast("error", message);
+      }
+    },
+    onError: ({ message }) => {
+      showToast("error", message);
+    },
+  });
+
+  const onSubmit = async (formData: z.output<typeof createCategorySchema>) => {
+    createMutation.mutate(formData);
+  };
+
+  useEffect(() => {
+    if (isSubmitSuccessful) reset();
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <Modal
@@ -55,15 +108,43 @@ export default function CreateCategoryModal(props: CreateCategoryModalProps) {
             <Text size="sm" className="text-typography-500">
               {t("You are creating a new category")}
             </Text>
-            <VStack space="xs">
-              <Text className="text-typography-500">{t("Category name")}</Text>
-              <Input>
-                <InputField type="text" />
-              </Input>
-            </VStack>
-            <Button>
-              <ButtonText>{t("Submit")}</ButtonText>
-            </Button>
+            <Controller
+              name="title"
+              control={control}
+              rules={{ required: true }}
+              render={({ field: { value, onChange, onBlur } }) => (
+                <VStack space="xs">
+                  <FormControl isInvalid={!!errors.title}>
+                    <FormControlLabel>
+                      <FormControlLabelText>
+                        {t("Category name")}
+                      </FormControlLabelText>
+                    </FormControlLabel>
+                    <Input>
+                      <InputField
+                        type="text"
+                        value={value}
+                        onChangeText={onChange}
+                        onBlur={onBlur}
+                      />
+                    </Input>
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        {errors.title?.message}
+                      </FormControlErrorText>
+                    </FormControlError>
+                  </FormControl>
+                </VStack>
+              )}
+            />
+            <SubmitFormButton
+              onPress={handleSubmit(onSubmit)}
+              title={t("Submit")}
+              showButtonSpinnerCondition={
+                isSubmitting || createMutation.isPending
+              }
+            />
           </VStack>
         </ModalBody>
       </ModalContent>

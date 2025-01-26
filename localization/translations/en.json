@@ -134,5 +134,7 @@
   "Expense deletion failed": "Expense deletion failed",
   "Expense was deleted successfully": "Expense was deleted successfully",
   "Expense update failed": "Expense update failed",
-  "Expense was updated successfully": "Expense was updated successfully"
+  "Expense was updated successfully": "Expense was updated successfully",
+  "Category creation failed": "Category creation failed",
+  "Category was created successfully": "Category was created successfully"
 }
