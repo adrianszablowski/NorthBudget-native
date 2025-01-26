@@ -5,6 +5,7 @@ import {
 import { FontAwesome } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import toLower from "lodash/toLower";
+import toNumber from "lodash/toNumber";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Else, If, Then } from "react-if";
@@ -42,10 +43,12 @@ export default function TotalCurrentExpensesCard() {
   const percentageDifference = (
     currExpenses: number,
     prevExpenses: number,
-  ): string => {
+  ): number => {
+    if (prevExpenses === 0) return 0;
+
     const difference = ((currExpenses - prevExpenses) / prevExpenses) * 100;
 
-    return difference.toFixed(2);
+    return toNumber(difference.toFixed(2));
   };
 
   return (
@@ -70,9 +73,7 @@ export default function TotalCurrentExpensesCard() {
             </Then>
             <Else>
               {totalCurrentMonthExpensesIsError ||
-              totalPrevMonthExpensesIsError ||
-              !totalCurrentMonthExpenses ||
-              !totalPrevMonthExpenses ? (
+              totalPrevMonthExpensesIsError ? (
                 <Alert action="error">
                   <AlertIcon as={InfoIcon} />
                   <AlertText size="sm">{t("Data download error")}</AlertText>
@@ -86,8 +87,8 @@ export default function TotalCurrentExpensesCard() {
                   />
                   <Text size="sm" className="text-typography-500">
                     {percentageDifference(
-                      totalCurrentMonthExpenses,
-                      totalPrevMonthExpenses,
+                      totalCurrentMonthExpenses ?? 0,
+                      totalPrevMonthExpenses ?? 0,
                     )}
                     % {toLower(t("From last month"))}
                   </Text>

@@ -2,6 +2,7 @@ import { createExpenseSchema } from "@/schemas/schema";
 import { Expense } from "@/types/types";
 import { formatISO, getDaysInMonth, getMonth, getYear, sub } from "date-fns";
 import i18next from "i18next";
+import isEmpty from "lodash/isEmpty";
 import sumBy from "lodash/sumBy";
 import { ID, Query } from "react-native-appwrite";
 import { z } from "zod";
@@ -104,7 +105,9 @@ export const getCurrentMonthExpenses = async () => {
       ],
     );
 
-    const totalExpenses = sumBy(expenses.documents, "amount");
+    const totalExpenses = !isEmpty(expenses.documents)
+      ? sumBy(expenses.documents, "amount")
+      : 0;
 
     return totalExpenses;
   } catch (error: any) {
@@ -147,7 +150,9 @@ export const getPrevMonthExpenses = async () => {
       ],
     );
 
-    const totalExpenses = sumBy(expenses.documents, "amount");
+    const totalExpenses = !isEmpty(expenses.documents)
+      ? sumBy(expenses.documents, "amount")
+      : 0;
 
     return totalExpenses;
   } catch (error: any) {
