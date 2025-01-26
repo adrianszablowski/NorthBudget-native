@@ -119,8 +119,6 @@ export const getPrevMonthExpenses = async () => {
 
     const totalExpenses = sumBy(expenses.documents, "amount");
 
-    console.log({ totalExpenses });
-
     return totalExpenses;
   } catch (error: any) {
     throw new Error(
