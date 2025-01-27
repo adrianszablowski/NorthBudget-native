@@ -1,8 +1,7 @@
-import { getAllGoals } from "@/lib/api/goals";
 import { Goal } from "@/types/types";
 import calculateGoalProgress from "@/utils/calculate-goal-progress";
 import { FontAwesome } from "@expo/vector-icons";
-import { useQuery } from "@tanstack/react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 import forEach from "lodash/forEach";
 import size from "lodash/size";
 import toLower from "lodash/toLower";
@@ -18,18 +17,17 @@ import { Skeleton, SkeletonText } from "../ui/skeleton";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
 
-export default function ActiveGoalsCard() {
+interface ActiveGoalsCardProps {
+  goals: UseQueryResult<Goal[], Error>;
+}
+
+export default function ActiveGoalsCard({
+  goals,
+}: Readonly<ActiveGoalsCardProps>) {
   const { t } = useTranslation();
   const [goalsNearCompletion, setGoalsNearCompletion] = useState<number>(0);
 
-  const {
-    data: goalsData,
-    isLoading: goalsDataIsLoading,
-    isError: goalsDataIsError,
-  } = useQuery({
-    queryKey: ["goals"],
-    queryFn: getAllGoals,
-  });
+  const { data: goalsData, isLoading, isError } = goals;
 
   useEffect(() => {
     forEach(goalsData, ({ amountCollected, amountToCollect }: Goal) => {
@@ -52,7 +50,7 @@ export default function ActiveGoalsCard() {
           <FontAwesome name="trophy" size={13} />
         </HStack>
         <VStack>
-          <If condition={goalsDataIsLoading}>
+          <If condition={isLoading}>
             <Then>
               <VStack space="sm">
                 <Skeleton variant="rounded" className="h-8 w-1/4" />
@@ -60,7 +58,7 @@ export default function ActiveGoalsCard() {
               </VStack>
             </Then>
             <Else>
-              <If condition={goalsDataIsError}>
+              <If condition={isError}>
                 <Then>
                   <Alert action="error">
                     <AlertIcon as={InfoIcon} />

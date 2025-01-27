@@ -1,9 +1,5 @@
-import {
-  getCurrentMonthExpenses,
-  getPrevMonthExpenses,
-} from "@/lib/api/expenses";
 import { FontAwesome } from "@expo/vector-icons";
-import { useQuery } from "@tanstack/react-query";
+import { UseQueryResult } from "@tanstack/react-query";
 import toLower from "lodash/toLower";
 import toNumber from "lodash/toNumber";
 import React from "react";
@@ -19,26 +15,27 @@ import { Skeleton, SkeletonText } from "../ui/skeleton";
 import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
 
-export default function TotalCurrentExpensesCard() {
+interface TotalCurrentExpensesCardProps {
+  totalCurrentMonthExpenses: UseQueryResult<number, Error>;
+  totalPrevMonthExpenses: UseQueryResult<number, Error>;
+}
+
+export default function TotalCurrentExpensesCard({
+  totalCurrentMonthExpenses,
+  totalPrevMonthExpenses,
+}: Readonly<TotalCurrentExpensesCardProps>) {
   const { t } = useTranslation();
 
   const {
-    data: totalCurrentMonthExpenses,
-    isLoading: totalCurrentMonthExpensesIsLoading,
-    isError: totalCurrentMonthExpensesIsError,
-  } = useQuery({
-    queryKey: ["getTotalCurrentMonthExpenses"],
-    queryFn: getCurrentMonthExpenses,
-  });
-
+    data: totalCurrentExpensesData,
+    isLoading: totalCurrentExpensesIsLoading,
+    isError: totalCurrentExpensesIsError,
+  } = totalCurrentMonthExpenses;
   const {
-    data: totalPrevMonthExpenses,
-    isLoading: totalPrevMonthExpensesIsLoading,
-    isError: totalPrevMonthExpensesIsError,
-  } = useQuery({
-    queryKey: ["getTotalPrevMonthExpenses"],
-    queryFn: getPrevMonthExpenses,
-  });
+    data: totalPrevExpensesData,
+    isLoading: totalPrevExpensesIsLoading,
+    isError: totalPrevExpensesIsError,
+  } = totalPrevMonthExpenses;
 
   const percentageDifference = (
     currExpenses: number,
@@ -61,8 +58,7 @@ export default function TotalCurrentExpensesCard() {
         <VStack>
           <If
             condition={
-              totalCurrentMonthExpensesIsLoading ||
-              totalPrevMonthExpensesIsLoading
+              totalCurrentExpensesIsLoading || totalPrevExpensesIsLoading
             }
           >
             <Then>
@@ -72,8 +68,7 @@ export default function TotalCurrentExpensesCard() {
               </VStack>
             </Then>
             <Else>
-              {totalCurrentMonthExpensesIsError ||
-              totalPrevMonthExpensesIsError ? (
+              {totalCurrentExpensesIsError || totalPrevExpensesIsError ? (
                 <Alert action="error">
                   <AlertIcon as={InfoIcon} />
                   <AlertText size="sm">{t("Data download error")}</AlertText>
@@ -81,14 +76,14 @@ export default function TotalCurrentExpensesCard() {
               ) : (
                 <>
                   <Amount
-                    amount={totalCurrentMonthExpenses || 0}
+                    amount={totalCurrentExpensesData || 0}
                     bold
                     size="2xl"
                   />
                   <Text size="sm" className="text-typography-500">
                     {percentageDifference(
-                      totalCurrentMonthExpenses ?? 0,
-                      totalPrevMonthExpenses ?? 0,
+                      totalCurrentExpensesData ?? 0,
+                      totalPrevExpensesData ?? 0,
                     )}
                     % {toLower(t("From last month"))}
                   </Text>

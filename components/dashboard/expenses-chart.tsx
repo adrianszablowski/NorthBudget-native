@@ -1,5 +1,5 @@
-import { getExpensesFromLastTwelveMonths } from "@/lib/api/expenses";
-import { useQuery } from "@tanstack/react-query";
+import { Expense } from "@/types/types";
+import { UseQueryResult } from "@tanstack/react-query";
 import { isSameMonth, parseISO, subMonths } from "date-fns";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,13 +8,16 @@ import { LineChart } from "react-native-chart-kit";
 import colors from "tailwindcss/colors";
 import { Skeleton } from "../ui/skeleton";
 
-export default function ExpensesChart() {
+interface ExpensesChartProps {
+  lastTwelveMonthsExpenses: UseQueryResult<Expense[], Error>;
+}
+
+export default function ExpensesChart({
+  lastTwelveMonthsExpenses,
+}: Readonly<ExpensesChartProps>) {
   const { t } = useTranslation();
 
-  const { data: expensesData, isLoading } = useQuery({
-    queryKey: ["lastTwelveExpenses"],
-    queryFn: getExpensesFromLastTwelveMonths,
-  });
+  const { data: expensesData, isLoading } = lastTwelveMonthsExpenses;
 
   const chartDataArray = useMemo((): number[] => {
     if (!expensesData) return Array(12).fill(0);
