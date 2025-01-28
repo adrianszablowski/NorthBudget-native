@@ -8,6 +8,7 @@ import {
   getCurrentMonthExpenses,
   getExpensesFromLastTwelveMonths,
   getPrevMonthExpenses,
+  getUpcomingExpenses,
 } from "@/lib/api/expenses";
 import { getAllGoals } from "@/lib/api/goals";
 import { useQuery } from "@tanstack/react-query";
@@ -34,18 +35,25 @@ export default function DashboardPage() {
     queryFn: getAllGoals,
   });
 
+  const upcomingExpenses = useQuery({
+    queryKey: ["upcomingExpenses"],
+    queryFn: getUpcomingExpenses,
+  });
+
   const handleRefetchQueries = () => {
     totalCurrentMonthExpenses.refetch();
     totalPrevMonthExpenses.refetch();
     lastTwelveMonthsExpenses.refetch();
     goals.refetch();
+    upcomingExpenses.refetch();
   };
 
   const isRefreshing =
     totalCurrentMonthExpenses.isLoading ||
     totalPrevMonthExpenses.isLoading ||
     lastTwelveMonthsExpenses.isLoading ||
-    goals.isLoading;
+    goals.isLoading ||
+    upcomingExpenses.isLoading;
 
   return (
     <SafeAreaView className="h-full bg-background-0">
@@ -65,7 +73,7 @@ export default function DashboardPage() {
               totalPrevMonthExpenses={totalPrevMonthExpenses}
             />
             <ActiveGoalsCard goals={goals} />
-            <UpcomingExpensesCard />
+            <UpcomingExpensesCard upcomingExpenses={upcomingExpenses} />
           </VStack>
           <ExpensesChart lastTwelveMonthsExpenses={lastTwelveMonthsExpenses} />
           <ExpensesByCategoryCard />
