@@ -1,8 +1,17 @@
 import { createExpenseSchema } from "@/schemas/schema";
 import { Expense } from "@/types/types";
-import { formatISO, getDaysInMonth, getMonth, getYear, sub } from "date-fns";
+import {
+  add,
+  formatISO,
+  getDaysInMonth,
+  getMonth,
+  getYear,
+  startOfDay,
+  sub,
+} from "date-fns";
 import i18next from "i18next";
 import isEmpty from "lodash/isEmpty";
+import size from "lodash/size";
 import sumBy from "lodash/sumBy";
 import { ID, Query } from "react-native-appwrite";
 import { z } from "zod";
@@ -107,6 +116,38 @@ export const getCurrentMonthExpenses = async () => {
 
     const totalExpenses = !isEmpty(expenses.documents)
       ? sumBy(expenses.documents, "amount")
+      : 0;
+
+    return totalExpenses;
+  } catch (error: any) {
+    throw new Error(
+      error?.message || i18next.t("An unexpected error occurred"),
+    );
+  }
+};
+
+export const getUpcomingExpenses = async () => {
+  const today = startOfDay(new Date());
+  const sevenDaysFromNow = add(today, { days: 7 });
+
+  try {
+    const user = await getCurrentUser();
+
+    if (!user) throw Error;
+
+    const expenses = await databases.listDocuments<Expense>(
+      config.databaseId,
+      config.expenseCollectionId,
+      [
+        Query.equal("userId", user.$id),
+        Query.equal("paid", false),
+        Query.greaterThanEqual("dueDate", formatISO(today)),
+        Query.lessThanEqual("dueDate", formatISO(sevenDaysFromNow)),
+      ],
+    );
+
+    const totalExpenses = !isEmpty(expenses.documents)
+      ? size(expenses.documents)
       : 0;
 
     return totalExpenses;
