@@ -6,6 +6,7 @@ import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
 import orderBy from "lodash/orderBy";
 import size from "lodash/size";
+import some from "lodash/some";
 import take from "lodash/take";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -86,7 +87,12 @@ export default function ExpensesByCategoryCard({
                   </Alert>
                 </Then>
                 <Else>
-                  <If condition={!isEmpty(fiveMostUsedCategories)}>
+                  <If
+                    condition={
+                      !isEmpty(fiveMostUsedCategories) &&
+                      some(fiveMostUsedCategories, "expenseCount")
+                    }
+                  >
                     <Then>
                       <PieChart
                         data={fiveMostUsedCategories}
