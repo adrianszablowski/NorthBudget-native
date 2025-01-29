@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/modal";
 import { addFunds } from "@/lib/api/goals";
 import { addFundsSchema } from "@/schemas/schema";
+import { queryKeys } from "@/types/query-keys";
 import { Goal } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -71,7 +72,7 @@ export default function AddFundsModal(props: AddFundsModalProps) {
       id: string;
     }) => addFunds(formData, amountCollected, id),
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["goals"] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.goals] });
 
       if (success) {
         showToast("success", message);

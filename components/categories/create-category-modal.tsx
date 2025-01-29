@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/modal";
 import { createCategory } from "@/lib/api/categories";
 import { createCategorySchema } from "@/schemas/schema";
+import { queryKeys } from "@/types/query-keys";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React, { Dispatch, SetStateAction, useEffect } from "react";
@@ -58,7 +59,7 @@ export default function CreateCategoryModal(props: CreateCategoryModalProps) {
   const createMutation = useMutation({
     mutationFn: createCategory,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["categories"] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.categories] });
 
       if (success) {
         showToast("success", message);

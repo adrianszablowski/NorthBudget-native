@@ -1,6 +1,7 @@
 import { getAllCategories } from "@/lib/api/categories";
 import { createExpense, getExpense, updateExpense } from "@/lib/api/expenses";
 import { createExpenseSchema } from "@/schemas/schema";
+import { queryKeys } from "@/types/query-keys";
 import { Category } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
@@ -55,13 +56,13 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const { data: expenseData } = useQuery({
-    queryKey: ["expense"],
+    queryKey: [queryKeys.expenses],
     queryFn: () => getExpense(expenseId!),
     enabled: !!expenseId,
   });
 
   const { data: categoriesData } = useQuery({
-    queryKey: ["categories"],
+    queryKey: [queryKeys.categories],
     queryFn: getAllCategories,
   });
 
@@ -87,7 +88,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   const createMutation = useMutation({
     mutationFn: createExpense,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.expenses] });
       back();
 
       if (success) {
@@ -110,7 +111,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
       id: string;
     }) => updateExpense(formData, id),
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.expenses] });
       back();
 
       if (success) {

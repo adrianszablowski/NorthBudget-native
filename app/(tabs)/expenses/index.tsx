@@ -6,6 +6,7 @@ import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { getAllExpenses } from "@/lib/api/expenses";
+import { queryKeys } from "@/types/query-keys";
 import { Expense } from "@/types/types";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
@@ -27,7 +28,7 @@ export default function Expenses() {
     isLoading: isLoadingExpenses,
     refetch: refetchExpenses,
   } = useQuery({
-    queryKey: ["expenses"],
+    queryKey: [queryKeys.expenses],
     queryFn: getAllExpenses,
   });
 

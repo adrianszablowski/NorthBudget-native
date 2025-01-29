@@ -3,6 +3,7 @@ import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import useUserContext from "@/hooks/user-user-context";
 import { deleteExpense, setPaidExpenseStatus } from "@/lib/api/expenses";
+import { queryKeys } from "@/types/query-keys";
 import { Expense } from "@/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
@@ -40,7 +41,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
     mutationFn: ({ paid, id }: { paid: boolean; id: string }) =>
       setPaidExpenseStatus(!paid, id),
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.expenses] });
       if (success) {
         showToast("success", message);
       } else {
@@ -55,7 +56,7 @@ export default function ExpenseCard({ expense }: Readonly<ExpenseProps>) {
   const deleteMutation = useMutation({
     mutationFn: deleteExpense,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: ["expenses"] });
+      queryClient.invalidateQueries({ queryKey: [queryKeys.expenses] });
       if (success) {
         showToast("success", message);
       } else {
