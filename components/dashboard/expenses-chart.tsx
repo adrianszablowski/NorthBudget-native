@@ -80,7 +80,7 @@ export default function ExpensesChart({
           backgroundColor: colors.blue[600],
           backgroundGradientFrom: colors.blue[600],
           backgroundGradientTo: colors.blue[400],
-          decimalPlaces: 1,
+          decimalPlaces: 0,
           color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
           labelColor: () => colors.white,
           style: {

@@ -24,11 +24,11 @@ import { Text } from "../ui/text";
 import { VStack } from "../ui/vstack";
 
 const COLOR_PALETTE = [
-  colors.red[600],
-  colors.blue[600],
-  colors.green[600],
-  colors.yellow[600],
-  colors.purple[600],
+  colors.red[500],
+  colors.blue[500],
+  colors.lime[500],
+  colors.orange[500],
+  colors.purple[500],
 ];
 
 interface ExpensesByCategoryCardProps {
