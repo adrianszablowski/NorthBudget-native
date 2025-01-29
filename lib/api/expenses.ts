@@ -109,7 +109,7 @@ export const getCurrentMonthExpenses = async () => {
       [
         Query.equal("userId", user.$id),
         Query.greaterThanEqual("dueDate", startDate),
-        Query.lessThanEqual("dueDate", endDate),
+        Query.lessThan("dueDate", endDate),
       ],
     );
 
@@ -189,7 +189,7 @@ export const getPrevMonthExpenses = async () => {
       [
         Query.equal("userId", user.$id),
         Query.greaterThanEqual("dueDate", startDate),
-        Query.lessThanEqual("dueDate", endDate),
+        Query.lessThan("dueDate", endDate),
       ],
     );
 
