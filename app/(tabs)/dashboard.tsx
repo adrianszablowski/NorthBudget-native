@@ -12,38 +12,37 @@ import {
   getUpcomingExpenses,
 } from "@/lib/api/expenses";
 import { getAllGoals } from "@/lib/api/goals";
-import { queryKeys } from "@/types/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import { RefreshControl, SafeAreaView, ScrollView } from "react-native";
 
 export default function DashboardPage() {
   const totalCurrentMonthExpenses = useQuery({
-    queryKey: [queryKeys.getTotalCurrentMonthExpenses],
+    queryKey: ["getTotalCurrentMonthExpenses"],
     queryFn: getCurrentMonthExpenses,
   });
 
   const totalPrevMonthExpenses = useQuery({
-    queryKey: [queryKeys.getTotalPrevMonthExpenses],
+    queryKey: ["getTotalPrevMonthExpenses"],
     queryFn: getPrevMonthExpenses,
   });
 
   const lastTwelveMonthsExpenses = useQuery({
-    queryKey: [queryKeys.lastTwelveExpenses],
+    queryKey: ["lastTwelveExpenses"],
     queryFn: getExpensesFromLastTwelveMonths,
   });
 
   const goals = useQuery({
-    queryKey: [queryKeys.goals],
+    queryKey: ["goals"],
     queryFn: getAllGoals,
   });
 
   const upcomingExpenses = useQuery({
-    queryKey: [queryKeys.upcomingExpenses],
+    queryKey: ["upcomingExpenses"],
     queryFn: getUpcomingExpenses,
   });
 
   const categories = useQuery({
-    queryKey: [queryKeys.categories],
+    queryKey: ["categories"],
     queryFn: getAllCategories,
   });
 

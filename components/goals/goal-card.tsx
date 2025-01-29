@@ -1,5 +1,4 @@
 import { deleteGoal } from "@/lib/api/goals";
-import { queryKeys } from "@/types/query-keys";
 import { Goal } from "@/types/types";
 import calculateGoalProgress from "@/utils/calculate-goal-progress";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -35,7 +34,7 @@ export default function GoalCard({ goal }: Readonly<GoalCardProps>) {
   const deleteMutation = useMutation({
     mutationFn: deleteGoal,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.goals] });
+      queryClient.invalidateQueries({ queryKey: ["goals"] });
 
       if (success) {
         showToast("success", message);

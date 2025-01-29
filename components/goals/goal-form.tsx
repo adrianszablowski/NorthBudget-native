@@ -1,6 +1,5 @@
 import { createGoal, getGoal, updateGoal } from "@/lib/api/goals";
 import { createGoalSchema } from "@/schemas/schema";
-import { queryKeys } from "@/types/query-keys";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
@@ -33,7 +32,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   const queryClient = useQueryClient();
 
   const { data: goalData } = useQuery({
-    queryKey: [queryKeys.goal],
+    queryKey: ["goal"],
     queryFn: () => getGoal(goalId!),
     enabled: !!goalId,
   });
@@ -55,7 +54,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   const createMutation = useMutation({
     mutationFn: createGoal,
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.goals] });
+      queryClient.invalidateQueries({ queryKey: ["goals"] });
       back();
 
       if (success) {
@@ -78,7 +77,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
       id: string;
     }) => updateGoal(formData, id),
     onSuccess: ({ success, message }) => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.goals] });
+      queryClient.invalidateQueries({ queryKey: ["goals"] });
       back();
 
       if (success) {

@@ -5,7 +5,6 @@ import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { getAllGoals } from "@/lib/api/goals";
-import { queryKeys } from "@/types/query-keys";
 import { Goal } from "@/types/types";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +25,7 @@ export default function Goals() {
     isLoading: goalsDataIsLoading,
     refetch: refetchGoalsData,
   } = useQuery({
-    queryKey: [queryKeys.goals],
+    queryKey: ["goals"],
     queryFn: getAllGoals,
   });
 
