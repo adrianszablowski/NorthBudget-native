@@ -36,15 +36,15 @@ export default function Index() {
           {t("Manage your finances with ease")}
         </Text>
         <VStack space="md" className="w-96">
-          <Button>
+          <Button isDisabled>
             <FontAwesome name="google" size={18} color="white" />
             <ButtonText>{t("Continue with")} Google</ButtonText>
           </Button>
-          <Button>
+          <Button isDisabled>
             <FontAwesome name="facebook" size={18} color="white" />
             <ButtonText>{t("Continue with")} Facebook</ButtonText>
           </Button>
-          <Button>
+          <Button isDisabled>
             <FontAwesome name="apple" size={18} color="white" />
             <ButtonText>{t("Continue with")} Apple</ButtonText>
           </Button>
