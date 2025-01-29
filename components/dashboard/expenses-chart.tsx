@@ -1,6 +1,8 @@
 import { Expense } from "@/types/types";
 import { UseQueryResult } from "@tanstack/react-query";
 import { isSameMonth, parseISO, subMonths } from "date-fns";
+import map from "lodash/map";
+import times from "lodash/times";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Dimensions, View } from "react-native";
@@ -45,6 +47,17 @@ export default function ExpensesChart({
     return totals;
   }, [expensesData]);
 
+  const monthLabels = useMemo(() => {
+    const now = new Date();
+
+    const months = times(12, (i) => {
+      const date = subMonths(now, 11 - i);
+      return date.toLocaleString("default", { month: "short" });
+    });
+
+    return map(months, (month) => t(month));
+  }, [t]);
+
   if (isLoading)
     return <Skeleton variant="rounded" className="h-[220px] w-full" />;
 
@@ -52,20 +65,7 @@ export default function ExpensesChart({
     <View>
       <LineChart
         data={{
-          labels: [
-            t("Jan"),
-            t("Feb"),
-            t("Mar"),
-            t("Apr"),
-            t("May"),
-            t("Jun"),
-            t("Jul"),
-            t("Aug"),
-            t("Sep"),
-            t("Oct"),
-            t("Nov"),
-            t("Dec"),
-          ],
+          labels: monthLabels,
           datasets: [
             {
               data: chartDataArray,
