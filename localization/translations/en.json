@@ -137,5 +137,6 @@
   "Expense was updated successfully": "Expense was updated successfully",
   "Category creation failed": "Category creation failed",
   "Category was created successfully": "Category was created successfully",
-  "Five most frequently used categories": "Five most frequently used categories"
+  "Five most frequently used categories": "Five most frequently used categories",
+  "Empty categories": "The most frequently used payment categories will be displayed here. For now, you don't have any expenses or categories yet. Add your first expense to see statistics and better manage your finances!"
 }

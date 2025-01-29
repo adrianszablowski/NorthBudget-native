@@ -137,5 +137,6 @@
   "Expense was updated successfully": "Wydatek został pomyślnie zaktualizowany",
   "Category creation failed": "Tworzenie kategorii nie powiodło się",
   "Category was created successfully": "Kategoria została pomyślnie utworzona",
-  "Five most frequently used categories": "Pięć najczęściej używanych kategorii"
+  "Five most frequently used categories": "Pięć najczęściej używanych kategorii",
+  "Empty categories": "Tutaj będą wyświetlane najczęściej używane kategorie płatności. Na razie nie masz jeszcze żadnych wydatków ani kategorii. Dodaj swój pierwszy wydatek, aby zobaczyć statystyki i lepiej zarządzać swoimi finansami!"
 }
