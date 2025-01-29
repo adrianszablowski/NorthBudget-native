@@ -74,6 +74,7 @@ export default function ExpensesChart({
         }}
         width={Dimensions.get("window").width - 24}
         height={220}
+        yAxisLabel="$"
         yAxisInterval={1}
         chartConfig={{
           backgroundColor: colors.blue[600],
