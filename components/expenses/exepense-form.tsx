@@ -376,7 +376,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
         <SubmitFormButton
           onPress={handleSubmit(onSubmit)}
           title={t("Submit")}
-          buttonIcon={EditIcon}
+          buttonIcon={expenseId ? EditIcon : undefined}
           showButtonSpinnerCondition={
             isSubmitting || createMutation.isPending || updateMutation.isPending
           }

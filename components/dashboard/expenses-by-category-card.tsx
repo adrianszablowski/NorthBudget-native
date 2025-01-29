@@ -116,7 +116,7 @@ export default function ExpensesByCategoryCard({
                           >
                             {t("Empty categories")}
                           </Text>
-                          <Button onPress={() => push("/expenses/create")}>
+                          <Button onPress={() => push("/expenses")}>
                             <ButtonIcon as={AddIcon} />
                             <ButtonText>{t("Create new expense")}</ButtonText>
                           </Button>

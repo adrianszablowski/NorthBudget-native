@@ -204,7 +204,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
         <SubmitFormButton
           onPress={handleSubmit(onSubmit)}
           title={t("Submit")}
-          buttonIcon={EditIcon}
+          buttonIcon={goalId ? EditIcon : undefined}
           showButtonSpinnerCondition={
             isSubmitting || createMutation.isPending || updateMutation.isPending
           }
