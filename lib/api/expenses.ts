@@ -39,6 +39,12 @@ export const getAllExpenses = async () => {
 };
 
 export const getExpensesFromLastTwelveMonths = async () => {
+  const lastTwelveMonthsFromNow = formatISO(
+    sub(new Date(), {
+      months: 12,
+    }),
+  );
+
   try {
     const user = await getCurrentUser();
 
@@ -49,14 +55,7 @@ export const getExpensesFromLastTwelveMonths = async () => {
       config.expenseCollectionId,
       [
         Query.equal("userId", user.$id),
-        Query.greaterThanEqual(
-          "dueDate",
-          formatISO(
-            sub(new Date(), {
-              months: 12,
-            }),
-          ),
-        ),
+        Query.greaterThanEqual("dueDate", lastTwelveMonthsFromNow),
       ],
     );
 
@@ -91,6 +90,13 @@ export const getCurrentMonthExpenses = async () => {
     new Date(currentYear, currentMonth),
   );
 
+  const startDate = formatISO(
+    startOfDay(new Date(currentYear, currentMonth, 1)),
+  );
+  const endDate = formatISO(
+    startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth)),
+  );
+
   try {
     const user = await getCurrentUser();
 
@@ -101,16 +107,8 @@ export const getCurrentMonthExpenses = async () => {
       config.expenseCollectionId,
       [
         Query.equal("userId", user.$id),
-        Query.greaterThanEqual(
-          "dueDate",
-          formatISO(new Date(currentYear, currentMonth, 1, 0, 0, 0)),
-        ),
-        Query.lessThanEqual(
-          "dueDate",
-          formatISO(
-            new Date(currentYear, currentMonth, daysInCurrentMonth, 23, 59, 59),
-          ),
-        ),
+        Query.greaterThanEqual("dueDate", startDate),
+        Query.lessThanEqual("dueDate", endDate),
       ],
     );
 
@@ -127,8 +125,8 @@ export const getCurrentMonthExpenses = async () => {
 };
 
 export const getUpcomingExpenses = async () => {
-  const today = startOfDay(new Date());
-  const sevenDaysFromNow = add(today, { days: 7 });
+  const today = formatISO(startOfDay(new Date()));
+  const sevenDaysFromNow = formatISO(add(today, { days: 7 }));
 
   try {
     const user = await getCurrentUser();
@@ -141,8 +139,8 @@ export const getUpcomingExpenses = async () => {
       [
         Query.equal("userId", user.$id),
         Query.equal("paid", false),
-        Query.greaterThanEqual("dueDate", formatISO(today)),
-        Query.lessThanEqual("dueDate", formatISO(sevenDaysFromNow)),
+        Query.greaterThanEqual("dueDate", today),
+        Query.lessThanEqual("dueDate", sevenDaysFromNow),
       ],
     );
 
@@ -166,12 +164,12 @@ export const getPrevMonthExpenses = async () => {
   );
 
   const startDate = formatISO(
-    sub(new Date(currentYear, currentMonth, 1, 0, 0, 0), {
+    sub(startOfDay(new Date(currentYear, currentMonth, 1)), {
       months: 1,
     }),
   );
   const endDate = formatISO(
-    sub(new Date(currentYear, currentMonth, daysInCurrentMonth, 23, 59, 59), {
+    sub(startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth)), {
       months: 1,
     }),
   );
