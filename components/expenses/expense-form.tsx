@@ -56,7 +56,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const { data: expenseData } = useQuery({
-    queryKey: [queryKeys.expenses],
+    queryKey: [queryKeys.expense],
     queryFn: () => getExpense(expenseId!),
     enabled: !!expenseId,
   });

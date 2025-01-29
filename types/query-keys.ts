@@ -7,4 +7,5 @@ export const queryKeys = {
   getTotalPrevMonthExpenses: "getTotalPrevMonthExpenses",
   lastTwelveExpenses: "lastTwelveExpenses",
   goal: "goal",
+  expense: "expense",
 };
