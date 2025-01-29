@@ -74,18 +74,13 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
   } = useForm({
     resolver: zodResolver(createExpenseSchema),
     defaultValues: {
-      title: !!expenseId && expenseData ? expenseData.title : "",
-      amount: !!expenseId && expenseData ? expenseData.amount : 0,
-      category: !!expenseId && expenseData ? expenseData.category.$id : "",
-      dueDate:
-        !!expenseId && expenseData ? new Date(expenseData.dueDate) : new Date(),
-      paid: !!expenseId && expenseData ? expenseData.paid : false,
-      standingOrder:
-        !!expenseId && expenseData ? expenseData.standingOrder : false,
-      standingOrderDate:
-        !!expenseId && expenseData?.standingOrderDate
-          ? new Date(expenseData.standingOrderDate)
-          : new Date(),
+      title: "",
+      amount: 0,
+      category: "",
+      dueDate: new Date(),
+      paid: false,
+      standingOrder: false,
+      standingOrderDate: new Date(),
     },
   });
 
@@ -139,7 +134,26 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
 
   useEffect(() => {
     if (isSubmitSuccessful) reset();
-  }, [isSubmitSuccessful, reset]);
+
+    if (expenseId) {
+      reset({
+        title: !!expenseId && expenseData ? expenseData.title : "",
+        amount: !!expenseId && expenseData ? expenseData.amount : 0,
+        category: !!expenseId && expenseData ? expenseData.category.$id : "",
+        dueDate:
+          !!expenseId && expenseData
+            ? new Date(expenseData.dueDate)
+            : new Date(),
+        paid: !!expenseId && expenseData ? expenseData.paid : false,
+        standingOrder:
+          !!expenseId && expenseData ? expenseData.standingOrder : false,
+        standingOrderDate:
+          !!expenseId && expenseData?.standingOrderDate
+            ? new Date(expenseData.standingOrderDate)
+            : new Date(),
+      });
+    }
+  }, [expenseData, expenseId, isSubmitSuccessful, reset]);
 
   return (
     <>

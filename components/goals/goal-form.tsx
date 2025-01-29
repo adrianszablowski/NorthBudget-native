@@ -45,9 +45,9 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
   } = useForm({
     resolver: zodResolver(createGoalSchema),
     defaultValues: {
-      title: !!goalId && goalData ? goalData.title : "",
-      amountCollected: !!goalId && goalData ? goalData.amountCollected : 0,
-      amountToCollect: !!goalId && goalData ? goalData.amountToCollect : 0,
+      title: "",
+      amountCollected: 0,
+      amountToCollect: 0,
     },
   });
 
@@ -101,7 +101,15 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
 
   useEffect(() => {
     if (isSubmitSuccessful) reset();
-  }, [isSubmitSuccessful, reset]);
+
+    if (goalId) {
+      reset({
+        title: !!goalId && goalData ? goalData.title : "",
+        amountCollected: !!goalId && goalData ? goalData.amountCollected : 0,
+        amountToCollect: !!goalId && goalData ? goalData.amountToCollect : 0,
+      });
+    }
+  }, [goalData, goalId, isSubmitSuccessful, reset]);
 
   return (
     <>
