@@ -93,8 +93,9 @@ export const getCurrentMonthExpenses = async () => {
   const startDate = formatISO(
     startOfDay(new Date(currentYear, currentMonth, 1)),
   );
+
   const endDate = formatISO(
-    startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth)),
+    startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth + 1)),
   );
 
   try {
@@ -169,9 +170,12 @@ export const getPrevMonthExpenses = async () => {
     }),
   );
   const endDate = formatISO(
-    sub(startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth)), {
-      months: 1,
-    }),
+    sub(
+      startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth + 1)),
+      {
+        months: 1,
+      },
+    ),
   );
 
   try {
