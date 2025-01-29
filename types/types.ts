@@ -32,4 +32,6 @@ export interface Expense extends Models.Document {
 }
 export interface Category extends Models.Document {
   title: string;
+  user: User;
+  expenses: Expense[];
 }

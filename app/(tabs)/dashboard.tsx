@@ -4,6 +4,7 @@ import ExpensesChart from "@/components/dashboard/expenses-chart";
 import TotalCurrentExpensesCard from "@/components/dashboard/total-current-expenses-card";
 import UpcomingExpensesCard from "@/components/dashboard/upcoming-expenses-card";
 import { VStack } from "@/components/ui/vstack";
+import { getAllCategories } from "@/lib/api/categories";
 import {
   getCurrentMonthExpenses,
   getExpensesFromLastTwelveMonths,
@@ -40,12 +41,18 @@ export default function DashboardPage() {
     queryFn: getUpcomingExpenses,
   });
 
+  const categories = useQuery({
+    queryKey: ["categories"],
+    queryFn: getAllCategories,
+  });
+
   const handleRefetchQueries = () => {
     totalCurrentMonthExpenses.refetch();
     totalPrevMonthExpenses.refetch();
     lastTwelveMonthsExpenses.refetch();
     goals.refetch();
     upcomingExpenses.refetch();
+    categories.refetch();
   };
 
   const isRefreshing =
@@ -53,7 +60,8 @@ export default function DashboardPage() {
     totalPrevMonthExpenses.isLoading ||
     lastTwelveMonthsExpenses.isLoading ||
     goals.isLoading ||
-    upcomingExpenses.isLoading;
+    upcomingExpenses.isLoading ||
+    categories.isLoading;
 
   return (
     <SafeAreaView className="h-full bg-background-0">
@@ -76,7 +84,7 @@ export default function DashboardPage() {
             <UpcomingExpensesCard upcomingExpenses={upcomingExpenses} />
           </VStack>
           <ExpensesChart lastTwelveMonthsExpenses={lastTwelveMonthsExpenses} />
-          <ExpensesByCategoryCard />
+          <ExpensesByCategoryCard categories={categories} />
         </VStack>
       </ScrollView>
     </SafeAreaView>
