@@ -1,4 +1,4 @@
-import ExpenseForm from "@/components/expenses/exepense-form";
+import ExpenseForm from "@/components/expenses/expense-form";
 import { Box } from "@/components/ui/box";
 import { useLocalSearchParams } from "expo-router";
 import isArray from "lodash/isArray";
