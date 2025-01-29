@@ -138,5 +138,8 @@
   "Category creation failed": "Tworzenie kategorii nie powiodło się",
   "Category was created successfully": "Kategoria została pomyślnie utworzona",
   "Five most frequently used categories": "Pięć najczęściej używanych kategorii",
-  "Empty categories": "Tutaj będą wyświetlane najczęściej używane kategorie płatności. Na razie nie masz jeszcze żadnych wydatków ani kategorii. Dodaj swój pierwszy wydatek, aby zobaczyć statystyki i lepiej zarządzać swoimi finansami!"
+  "Empty categories": "Tutaj będą wyświetlane najczęściej używane kategorie płatności. Na razie nie masz jeszcze żadnych wydatków ani kategorii. Dodaj swój pierwszy wydatek, aby zobaczyć statystyki i lepiej zarządzać swoimi finansami!",
+  "Amount collected must be a number": "Pobrana kwota musi być liczbą",
+  "Amount to collect must be a number": "Kwota do pobrania musi być liczbą",
+  "Amount must be a valid number": "Kwota musi być prawidłową liczbą"
 }

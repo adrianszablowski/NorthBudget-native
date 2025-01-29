@@ -1,4 +1,5 @@
 import i18next from "i18next";
+import isFinite from "lodash/isFinite";
 import { z } from "zod";
 
 export const signUpFormSchema = z
@@ -65,12 +66,34 @@ export const changeCurrencySchema = z.object({
 
 export const createGoalSchema = z.object({
   title: z.string().min(1, { message: i18next.t("Title is required") }),
-  amountCollected: z
-    .number()
-    .min(0, { message: i18next.t("Amount collected cannot be less than 0") }),
-  amountToCollect: z
-    .number()
-    .min(1, { message: i18next.t("Amount collected cannot be less than 1") }),
+  amountCollected: z.preprocess(
+    (amount) => {
+      if (typeof amount === "string") {
+        return parseFloat(amount.replace(",", "."));
+      }
+      return amount;
+    },
+    z
+      .number()
+      .min(0, { message: i18next.t("Amount collected cannot be less than 0") })
+      .refine((value) => isFinite(value), {
+        message: i18next.t("Amount collected must be a valid number"),
+      }),
+  ),
+  amountToCollect: z.preprocess(
+    (amount) => {
+      if (typeof amount === "string") {
+        return parseFloat(amount.replace(",", "."));
+      }
+      return amount;
+    },
+    z
+      .number()
+      .min(1, { message: i18next.t("Amount to collect cannot be less than 1") })
+      .refine((value) => isFinite(value), {
+        message: i18next.t("Amount to collect must be a valid number"),
+      }),
+  ),
 });
 
 export const addFundsSchema = z.object({
@@ -81,7 +104,20 @@ export const addFundsSchema = z.object({
 
 export const createExpenseSchema = z.object({
   title: z.string().min(1, { message: i18next.t("Title is required") }),
-  amount: z.number().min(1, { message: i18next.t("Amount is required") }),
+  amount: z.preprocess(
+    (amount) => {
+      if (typeof amount === "string") {
+        return parseFloat(amount.replace(",", "."));
+      }
+      return amount;
+    },
+    z
+      .number()
+      .min(1, { message: i18next.t("Amount is required") })
+      .refine((value) => isFinite(value), {
+        message: i18next.t("Amount must be a valid number"),
+      }),
+  ),
   category: z.string().min(1, { message: i18next.t("Category is required") }),
   dueDate: z.coerce.date(),
   paid: z.boolean(),

@@ -3,7 +3,6 @@ import { createGoalSchema } from "@/schemas/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
-import toNumber from "lodash/toNumber";
 import toString from "lodash/toString";
 import React, { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -152,9 +151,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
                     type="text"
                     keyboardType="numeric"
                     value={toString(value)}
-                    onChangeText={(value) =>
-                      onChange(value ? toNumber(value) : 0)
-                    }
+                    onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                   />
                 </Input>
@@ -185,9 +182,7 @@ export default function GoalForm({ goalId }: Readonly<ExpenseFormProps>) {
                     type="text"
                     keyboardType="numeric"
                     value={toString(value)}
-                    onChangeText={(value) =>
-                      onChange(value ? toNumber(value) : 1)
-                    }
+                    onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                   />
                 </Input>

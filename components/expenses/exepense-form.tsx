@@ -7,7 +7,6 @@ import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import map from "lodash/map";
-import toNumber from "lodash/toNumber";
 import toString from "lodash/toString";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -188,9 +187,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
                     type="text"
                     keyboardType="numeric"
                     value={toString(value)}
-                    onChangeText={(value) =>
-                      onChange(value ? toNumber(value) : 0)
-                    }
+                    onChangeText={(value) => onChange(value)}
                     onBlur={onBlur}
                   />
                 </Input>

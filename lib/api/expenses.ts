@@ -274,7 +274,7 @@ export const updateExpense = async (
 
     const updatedExpense = await databases.updateDocument(
       config.databaseId,
-      config.goalCollectionId,
+      config.expenseCollectionId,
       expenseId,
       {
         title,
