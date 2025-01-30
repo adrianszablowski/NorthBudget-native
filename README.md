@@ -10,7 +10,6 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
 - 📈 Visual spending breakdown by category
 - 🌐 Multi-language support
 - 💵 Multiple currency options
-- 📱 Cross-platform compatibility
 
 ## Getting Started 🚀
 
