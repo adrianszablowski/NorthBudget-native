@@ -1,6 +1,6 @@
 # NortBudget - Personal Budget Manager 💸
 
-![NortBudget Banner](./assets/images/logo-blue.png)
+<img src="./assets/images/logo-blue.png" alt="NortBudget Logo" width="200">
 
 A modern mobile app for tracking expenses, setting financial goals, and analyzing spending habits. Built with Expo and React Native.
 
