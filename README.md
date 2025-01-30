@@ -33,10 +33,9 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
 
 ## Screenshots 📱
 
-![NortBudget Screenshot](./assets/images/logo-blue.png)
-![NortBudget Screenshot](./assets/images/logo-blue.png)
-![NortBudget Screenshot](./assets/images/logo-blue.png)
-![NortBudget Screenshot](./assets/images/logo-blue.png)
-![NortBudget Screenshot](./assets/images/logo-blue.png)
-![NortBudget Screenshot](./assets/images/logo-blue.png)
-
+![NortBudget Screenshot](./assets/images/screen1.png)
+![NortBudget Screenshot](./assets/images/screen2.png)
+![NortBudget Screenshot](./assets/images/screen3.png)
+![NortBudget Screenshot](./assets/images/screen4.png)
+![NortBudget Screenshot](./assets/images/screen5.png)
+![NortBudget Screenshot](./assets/images/screen6.png)
