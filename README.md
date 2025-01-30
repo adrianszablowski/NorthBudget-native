@@ -13,12 +13,29 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
 
 ## Getting Started 🚀
 
-### Prerequisites
-- Node.js (v18+)
-- Expo CLI (`npm install -g expo-cli`)
-- Android Studio/Xcode (for emulators) or Expo Go app
-
-### Installation
 1. Clone the repository
    ```bash
    git clone https://github.com/yourusername/NortBudget.git
+
+2. Navigate into the project folder
+   ```bash
+   cd NortBudget
+
+3. Install the dependencies:
+   ```bash
+   npm install
+
+## Screenshots 📱
+
+![NortBudget Screenshot](./assets/images/logo-blue.png)
+![NortBudget Screenshot](./assets/images/logo-blue.png)
+![NortBudget Screenshot](./assets/images/logo-blue.png)
+![NortBudget Screenshot](./assets/images/logo-blue.png)
+![NortBudget Screenshot](./assets/images/logo-blue.png)
+![NortBudget Screenshot](./assets/images/logo-blue.png)
+
+## Running the App 💨
+
+1. Start the development server with Expo:
+   ```bash
+   npx expo start
