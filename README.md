@@ -32,6 +32,7 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
    npx expo start
 
 ## Screenshots 📱
-
-<img src="./assets/images/screen1.png" alt="NortBudget app screenshot" width="300">
-<img src="./assets/images/screen2.png" alt="NortBudget app screenshot" width="300">
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  <img src="./assets/images/screen1.png" alt="NortBudget app screenshot" width="350" />
+  <img src="./assets/images/screen2.png" alt="NortBudget app screenshot" width="350" />
+</div>
