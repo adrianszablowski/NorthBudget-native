@@ -33,10 +33,10 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
 
 ## Screenshots 📱
 <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-  <img src="./assets/images/screen1.png" alt="NortBudget app screenshot" width="350" />
-  <img src="./assets/images/screen2.png" alt="NortBudget app screenshot" width="350" />
-   <img src="./assets/images/screen3.png" alt="NortBudget app screenshot" width="350" />
-   <img src="./assets/images/screen4.png" alt="NortBudget app screenshot" width="350" />
-   <img src="./assets/images/screen5.png" alt="NortBudget app screenshot" width="350" />
-   <img src="./assets/images/screen6.png" alt="NortBudget app screenshot" width="350" />
+  <img src="./assets/images/screen1.png" alt="NortBudget app screenshot" width="300" />
+  <img src="./assets/images/screen2.png" alt="NortBudget app screenshot" width="300" />
+   <img src="./assets/images/screen3.png" alt="NortBudget app screenshot" width="300" />
+   <img src="./assets/images/screen4.png" alt="NortBudget app screenshot" width="300" />
+   <img src="./assets/images/screen5.png" alt="NortBudget app screenshot" width="300" />
+   <img src="./assets/images/screen6.png" alt="NortBudget app screenshot" width="300" />
 </div>
