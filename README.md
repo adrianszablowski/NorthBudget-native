@@ -25,6 +25,12 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
    ```bash
    npm install
 
+## Running the App 💨
+
+1. Start the development server with Expo:
+   ```bash
+   npx expo start
+
 ## Screenshots 📱
 
 ![NortBudget Screenshot](./assets/images/logo-blue.png)
@@ -34,8 +40,3 @@ A modern mobile app for tracking expenses, setting financial goals, and analyzin
 ![NortBudget Screenshot](./assets/images/logo-blue.png)
 ![NortBudget Screenshot](./assets/images/logo-blue.png)
 
-## Running the App 💨
-
-1. Start the development server with Expo:
-   ```bash
-   npx expo start
