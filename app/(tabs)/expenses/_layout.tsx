@@ -9,7 +9,7 @@ export default function ExpensesLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="index"
-        options={{ headerShown: true, headerTitle: t("Current expenses") }}
+        options={{ headerShown: true, headerTitle: t("Expenses") }}
       />
       <Stack.Screen
         name="create"
