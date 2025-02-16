@@ -12,7 +12,6 @@ import toString from "lodash/toString";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { When } from "react-if";
 import { View } from "react-native";
 import colors from "tailwindcss/colors";
 import { z } from "zod";
@@ -70,7 +69,6 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
     control,
     handleSubmit,
     reset,
-    watch,
     formState: { isSubmitting, isSubmitSuccessful, errors },
   } = useForm({
     resolver: zodResolver(createExpenseSchema),
@@ -320,7 +318,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
             </VStack>
           )}
         />
-        <Controller
+        {/* <Controller
           name="standingOrder"
           control={control}
           rules={{ required: true }}
@@ -352,8 +350,8 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
               </FormControl>
             </VStack>
           )}
-        />
-        <When condition={watch("standingOrder")}>
+        /> */}
+        {/* <When condition={watch("standingOrder")}>
           <Controller
             name="standingOrderDate"
             control={control}
@@ -384,7 +382,7 @@ export default function ExpenseForm({ expenseId }: Readonly<ExpenseFormProps>) {
               </VStack>
             )}
           />
-        </When>
+        </When> */}
         <SubmitFormButton
           onPress={handleSubmit(onSubmit)}
           title={t("Submit")}

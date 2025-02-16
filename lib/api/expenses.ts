@@ -217,15 +217,7 @@ export const createExpense = async (
 
     if (!user) throw Error;
 
-    const {
-      title,
-      amount,
-      category,
-      dueDate,
-      paid,
-      standingOrder,
-      standingOrderDate,
-    } = parsedData.data;
+    const { title, amount, category, dueDate, paid } = parsedData.data;
 
     const createdExpense = await databases.createDocument(
       config.databaseId,
@@ -237,8 +229,8 @@ export const createExpense = async (
         category,
         dueDate,
         paid,
-        standingOrder,
-        standingOrderDate: standingOrder ? standingOrderDate : null,
+        standingOrder: false,
+        standingOrderDate: null,
         userId: user.$id,
       },
     );
