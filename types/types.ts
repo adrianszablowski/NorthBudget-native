@@ -18,6 +18,7 @@ export interface Goal extends Models.Document {
   title: string;
   amountCollected: number;
   amountToCollect: number;
+  completed: boolean;
   userId: string;
 }
 

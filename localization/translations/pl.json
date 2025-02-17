@@ -140,5 +140,9 @@
   "Empty categories": "Tutaj będą wyświetlane najczęściej używane kategorie płatności. Na razie nie masz jeszcze żadnych wydatków ani kategorii. Dodaj swój pierwszy wydatek, aby zobaczyć statystyki i lepiej zarządzać swoimi finansami!",
   "Amount collected must be a number": "Pobrana kwota musi być liczbą",
   "Amount to collect must be a number": "Kwota do pobrania musi być liczbą",
-  "Amount must be a valid number": "Kwota musi być prawidłową liczbą"
+  "Amount must be a valid number": "Kwota musi być prawidłową liczbą",
+  "Goal completion failed": "Zakończenie celu nie powiodło się",
+  "Goal was completed successfully": "Cel został pomyślnie zakończony",
+  "Manage goal of": "Zarządzasz celem",
+  "Completed with": "Ukończone z"
 }

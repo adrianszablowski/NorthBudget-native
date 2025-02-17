@@ -15,7 +15,7 @@ export const getAllGoals = async () => {
     const goals = await databases.listDocuments<Goal>(
       config.databaseId,
       config.goalCollectionId,
-      [Query.equal("userId", user.$id)],
+      [Query.equal("userId", user.$id), Query.orderAsc("completed")],
     );
 
     return goals.documents;
@@ -166,6 +166,31 @@ export const deleteGoal = async (goalId: string) => {
     return {
       success: true,
       message: i18next.t("Goal was deleted successfully"),
+    };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error?.message || i18next.t("An unexpected error occurred"),
+    };
+  }
+};
+
+export const completeGoal = async (completed: boolean, goalId: string) => {
+  try {
+    const completedGoal = await databases.updateDocument(
+      config.databaseId,
+      config.goalCollectionId,
+      goalId,
+      {
+        completed,
+      },
+    );
+
+    if (!completedGoal) throw new Error(i18next.t("Goal completion failed"));
+
+    return {
+      success: true,
+      message: i18next.t("Goal was completed successfully"),
     };
   } catch (error: any) {
     return {
