@@ -6,15 +6,15 @@ import { HStack } from "../ui/hstack";
 import { ChevronLeftIcon, ChevronRightIcon } from "../ui/icon";
 import { Text } from "../ui/text";
 
-interface SwitchExpensesProps {
+interface SwitchMonthProps {
   currentDate: Date;
   setCurrentDate: Dispatch<SetStateAction<Date>>;
 }
 
-export default function SwitchExpenses({
+export default function SwitchMonth({
   currentDate,
   setCurrentDate,
-}: Readonly<SwitchExpensesProps>) {
+}: Readonly<SwitchMonthProps>) {
   return (
     <HStack space="sm" className="justify-between">
       <Button

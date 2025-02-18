@@ -1,5 +1,5 @@
 import ExpenseCard from "@/components/expenses/expense-card";
-import SwitchExpenses from "@/components/expenses/switch-expenses";
+import SwitchMonth from "@/components/expenses/switch-month";
 import Amount from "@/components/ui/amount";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
 import { Center } from "@/components/ui/center";
@@ -64,7 +64,7 @@ export default function Expenses() {
               <ButtonIcon as={AddIcon} />
               <ButtonText>{t("Create new expense")}</ButtonText>
             </Button>
-            <SwitchExpenses
+            <SwitchMonth
               currentDate={currentDate}
               setCurrentDate={setCurrentDate}
             />
