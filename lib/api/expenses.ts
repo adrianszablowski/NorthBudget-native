@@ -18,7 +18,21 @@ import { z } from "zod";
 import { config, databases } from "../appwrite";
 import { getCurrentUser } from "./user";
 
-export const getAllExpenses = async () => {
+export const getAllExpenses = async (date: Date) => {
+  const currentYear = getYear(date);
+  const currentMonth = getMonth(date);
+  const daysInCurrentMonth = getDaysInMonth(
+    new Date(currentYear, currentMonth),
+  );
+
+  const startDate = formatISO(
+    startOfDay(new Date(currentYear, currentMonth, 1)),
+  );
+
+  const endDate = formatISO(
+    startOfDay(new Date(currentYear, currentMonth, daysInCurrentMonth + 1)),
+  );
+
   try {
     const user = await getCurrentUser();
 
@@ -27,7 +41,11 @@ export const getAllExpenses = async () => {
     const expenses = await databases.listDocuments<Expense>(
       config.databaseId,
       config.expenseCollectionId,
-      [Query.equal("userId", user.$id)],
+      [
+        Query.equal("userId", user.$id),
+        Query.greaterThanEqual("dueDate", startDate),
+        Query.lessThan("dueDate", endDate),
+      ],
     );
 
     return expenses.documents;
