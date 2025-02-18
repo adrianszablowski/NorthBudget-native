@@ -1,14 +1,9 @@
 import ExpenseCard from "@/components/expenses/expense-card";
+import SwitchExpenses from "@/components/expenses/switch-expenses";
 import Amount from "@/components/ui/amount";
 import { Button, ButtonIcon, ButtonText } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { Center } from "@/components/ui/center";
-import { HStack } from "@/components/ui/hstack";
-import {
-  AddIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-} from "@/components/ui/icon";
+import { AddIcon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { getAllExpenses } from "@/lib/api/expenses";
@@ -16,7 +11,6 @@ import { queryKeys } from "@/types/query-keys";
 import { Expense } from "@/types/types";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
-import { add, format, sub } from "date-fns";
 import { useRouter } from "expo-router";
 import isEmpty from "lodash/isEmpty";
 import map from "lodash/map";
@@ -70,33 +64,10 @@ export default function Expenses() {
               <ButtonIcon as={AddIcon} />
               <ButtonText>{t("Create new expense")}</ButtonText>
             </Button>
-            <HStack space="sm" className="justify-between">
-              <Button
-                onPress={() => {
-                  setCurrentDate(
-                    sub(currentDate, {
-                      months: 1,
-                    }),
-                  );
-                }}
-              >
-                <ButtonIcon as={ChevronLeftIcon} />
-              </Button>
-              <Card variant="filled" className="py-2">
-                <Text>{format(currentDate, "LLLL")}</Text>
-              </Card>
-              <Button
-                onPress={() => {
-                  setCurrentDate(
-                    add(currentDate, {
-                      months: 1,
-                    }),
-                  );
-                }}
-              >
-                <ButtonIcon as={ChevronRightIcon} />
-              </Button>
-            </HStack>
+            <SwitchExpenses
+              currentDate={currentDate}
+              setCurrentDate={setCurrentDate}
+            />
             <Text>
               {t("Left to pay")}:{" "}
               <Amount bold className="text-error-600" amount={leftToPay} />
